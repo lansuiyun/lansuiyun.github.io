@@ -1,0 +1,971 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="algorithm,sort," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="堆排序（Heapsort）是指利用二叉堆这种数据结构所设计的一种排序算法。 二叉堆二叉堆是一种特殊的堆，其有以下特性：  二叉堆是完全二叉树或者是近似完全二叉树 每个节点的左子树和右子树都是一个二叉堆 父节点的键值总是与子节点的键值保持固定的序关系（parent&amp;gt;=son || parent&amp;lt;=son）  当父节点的键值总是大于或等于任何一个子节点的键值时为 最大堆。 当父节点的键值总">
+<meta name="keywords" content="algorithm,sort">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Heap Sort">
+<meta property="og:url" content="http://guangfei.win/2015/11/16/Heap-Sort/index.html">
+<meta property="og:site_name" content="越是憧憬 越要风雨兼程">
+<meta property="og:description" content="堆排序（Heapsort）是指利用二叉堆这种数据结构所设计的一种排序算法。 二叉堆二叉堆是一种特殊的堆，其有以下特性：  二叉堆是完全二叉树或者是近似完全二叉树 每个节点的左子树和右子树都是一个二叉堆 父节点的键值总是与子节点的键值保持固定的序关系（parent&amp;gt;=son || parent&amp;lt;=son）  当父节点的键值总是大于或等于任何一个子节点的键值时为 最大堆。 当父节点的键值总">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://7u2sbw.com1.z0.glb.clouddn.com/heap-sort-init.png">
+<meta property="og:image" content="http://7u2sbw.com1.z0.glb.clouddn.com/heap-sort-shit-up1.png">
+<meta property="og:image" content="http://7u2sbw.com1.z0.glb.clouddn.com/heap-sort-shit-up2.png">
+<meta property="og:image" content="http://7u2sbw.com1.z0.glb.clouddn.com/heap-sort-shit-up3.png">
+<meta property="og:image" content="http://7u2sbw.com1.z0.glb.clouddn.com/heap-sort-sfit-down2.png">
+<meta property="og:image" content="http://7u2sbw.com1.z0.glb.clouddn.com/Sorting_heapsort_anim.gif">
+<meta property="og:updated_time" content="2018-04-02T08:42:29.752Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Heap Sort">
+<meta name="twitter:description" content="堆排序（Heapsort）是指利用二叉堆这种数据结构所设计的一种排序算法。 二叉堆二叉堆是一种特殊的堆，其有以下特性：  二叉堆是完全二叉树或者是近似完全二叉树 每个节点的左子树和右子树都是一个二叉堆 父节点的键值总是与子节点的键值保持固定的序关系（parent&amp;gt;=son || parent&amp;lt;=son）  当父节点的键值总是大于或等于任何一个子节点的键值时为 最大堆。 当父节点的键值总">
+<meta name="twitter:image" content="http://7u2sbw.com1.z0.glb.clouddn.com/heap-sort-init.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://guangfei.win/2015/11/16/Heap-Sort/"/>
+
+
+
+
+
+  <title>Heap Sort | 越是憧憬 越要风雨兼程</title>
+  
+
+
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?add444b58ef1d82ab2d6e5f7d4c9c159";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">越是憧憬 越要风雨兼程</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://guangfei.win/2015/11/16/Heap-Sort/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="sky">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="越是憧憬 越要风雨兼程">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Heap Sort</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2015-11-16T10:22:34+08:00">
+                2015-11-16
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/algorithm/" itemprop="url" rel="index">
+                    <span itemprop="name">algorithm</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2015/11/16/Heap-Sort/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/11/16/Heap-Sort/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+             <span id="/2015/11/16/Heap-Sort/" class="leancloud_visitors" data-flag-title="Heap Sort">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数&#58;</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>堆排序（Heapsort）是指利用二叉堆这种数据结构所设计的一种排序算法。</p>
+<h3 id="二叉堆"><a href="#二叉堆" class="headerlink" title="二叉堆"></a>二叉堆</h3><p>二叉堆是一种特殊的堆，其有以下特性：</p>
+<ol>
+<li>二叉堆是完全二叉树或者是近似完全二叉树</li>
+<li>每个节点的左子树和右子树都是一个二叉堆</li>
+<li>父节点的键值总是与子节点的键值保持固定的序关系（parent&gt;=son || parent&lt;=son）</li>
+</ol>
+<p>当父节点的键值总是大于或等于任何一个子节点的键值时为 <strong>最大堆</strong>。 当父节点的键值总是小于或等于任何一个子节点的键值时为 <strong>最小堆</strong>。<br><a id="more"></a><br>二叉堆一般用数组来表示。如果根节点在数组中的位置是1，则：</p>
+<ul>
+<li>leftSon(n) = 2n</li>
+<li>rightSon(n) = 2n+1</li>
+<li>parent(n) = n/2</li>
+</ul>
+<p>如果存储数组的下标基于0，则：</p>
+<ul>
+<li>leftSon(n) = 2n+1</li>
+<li>rightSon(n) = 2n+2</li>
+<li>parent(n) = (n-1)/2</li>
+</ul>
+<p>以[49，38，65，97，76，13，27，55，04]为例，构建二叉堆初始状态：<br><img src="http://7u2sbw.com1.z0.glb.clouddn.com/heap-sort-init.png" alt=""></p>
+<center><font size="2">图A</font></center>
+
+<p>图A展示的并不是真正的二叉堆，因为它不满足二叉堆的特性： <code>父节点的键值总是与子节点的键值保持固定的序关系</code>。</p>
+<hr>
+<h3 id="二叉堆的操作"><a href="#二叉堆的操作" class="headerlink" title="二叉堆的操作"></a>二叉堆的操作</h3><p><strong>以下说明基于最大堆</strong></p>
+<ol>
+<li><h4 id="从下至上的重新建堆（sift-up）"><a href="#从下至上的重新建堆（sift-up）" class="headerlink" title="从下至上的重新建堆（sift-up）"></a>从下至上的重新建堆（sift-up）</h4><p>在一个 <strong>最大堆</strong> 中，如果一个节点的值大于其父节点的值(son &gt; parent),不满足<code>固定的序关系（parent &gt;= son）</code>，<br>那么该节点就需要上移，直到满足该节点大于其两个子节点，而小于其父节点为止，从而达到使整个堆实现二叉堆的要求。<br>简单的说，比较子节点与父节点，不满足堆性质则交换。从而使得满足二叉堆的性质。</p>
+<p>在二叉堆中插入节点时需要用到此操作，如下：<br><img src="http://7u2sbw.com1.z0.glb.clouddn.com/heap-sort-shit-up1.png" alt=""><br><img src="http://7u2sbw.com1.z0.glb.clouddn.com/heap-sort-shit-up2.png" alt=""><br><img src="http://7u2sbw.com1.z0.glb.clouddn.com/heap-sort-shit-up3.png" alt=""></p>
+<p>代码实现</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 二叉堆从下至上的重新建堆（sift-up）</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param</span> array 堆数组，index前的元素已经构成最大堆</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param</span> index 新插入节点的索引</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param</span> &lt;T&gt;</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">private</span> <span class="keyword">static</span> &lt;T extends Comparable&lt;? <span class="keyword">super</span> T&gt;&gt; <span class="function"><span class="keyword">void</span> <span class="title">siftUp</span><span class="params">(T[] array, <span class="keyword">int</span> index)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> son = index;</span><br><span class="line">    T key = array[son];</span><br><span class="line">    <span class="keyword">while</span> (son &gt; <span class="number">0</span>) &#123;</span><br><span class="line">        <span class="keyword">int</span> parent = getParent(son);</span><br><span class="line">        <span class="keyword">if</span> (key.compareTo(array[parent]) &lt;= <span class="number">0</span>) &#123;</span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        array[son] = array[parent];</span><br><span class="line">        son = parent;</span><br><span class="line">    &#125;</span><br><span class="line">    array[son] = key;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><h4 id="由上至下的重新建堆（sift-down）"><a href="#由上至下的重新建堆（sift-down）" class="headerlink" title="由上至下的重新建堆（sift-down）"></a>由上至下的重新建堆（sift-down）</h4><p>在一个 <strong>最大堆</strong> 中，如果一个节点的值小于其子节点的值（parent &lt; son），不满足<code>固定的序关系(parent &gt;= son)</code>，就违反了二叉堆的定义，那么该节点就需要下移，直到满足该节点大于其两个子节点为止，从而达到使整个堆实现二叉堆的要求。需要注意的是，<code>要与两个子节点中较大的节点进行比较</code>。<br>简单的说，比较父节点与子节点，不满足堆性质则交换。从而使得满足二叉堆的性质。<br>在二叉堆中删除根元素时，会用到此操作。<code>a = 100</code></p>
+<p>删除根元素的步骤：</p>
+<ol>
+<li>删除根元素</li>
+<li>将堆中最后一个元素放到根元素位置</li>
+<li>对新的根元素进行sift-down操作</li>
+</ol>
+</li>
+</ol>
+<p><img src="http://7u2sbw.com1.z0.glb.clouddn.com/heap-sort-sfit-down2.png" alt="二叉堆sift-down"></p>
+<p>代码实现：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 二叉堆从上至下的重新建堆（sift-down）</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param</span> array</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param</span> index    要执行向下操作的父节点id</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param</span> heapSize 堆的节点个数</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param</span> &lt;T&gt;</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">private</span> <span class="keyword">static</span> &lt;T extends Comparable&lt;? <span class="keyword">super</span> T&gt;&gt; <span class="function"><span class="keyword">void</span> <span class="title">siftDown</span><span class="params">(T[] array, <span class="keyword">int</span> index, <span class="keyword">int</span> heapSize)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> parent = index;</span><br><span class="line">    T key = array[parent];</span><br><span class="line">    <span class="keyword">int</span> left;</span><br><span class="line">    <span class="keyword">while</span> ((left = getLeftSon(parent)) &lt; heapSize) &#123;</span><br><span class="line">        <span class="keyword">int</span> right = getRightSon(parent);</span><br><span class="line">        <span class="keyword">int</span> largerSon;</span><br><span class="line">        <span class="keyword">if</span> (right &lt; heapSize &amp;&amp; array[left].compareTo(array[right]) &lt; <span class="number">0</span>) &#123;</span><br><span class="line">            largerSon = right;</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            largerSon = left;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span> (array[largerSon].compareTo(key) &gt; <span class="number">0</span>) &#123;</span><br><span class="line">            array[parent] = array[largerSon];</span><br><span class="line">            parent = largerSon;</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    array[parent] = key;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="堆排序"><a href="#堆排序" class="headerlink" title="堆排序"></a>堆排序</h3><p>利用二叉堆的性质<code>根节点必定是最大值(最大堆)或者最小值(最小堆)</code>可以很容易实现排序。</p>
+<ol>
+<li>将给定元素集合构成一个二叉堆</li>
+<li>将根节点与最后一个节点替换位置，二叉堆的size - 1</li>
+<li>对新的根节点进行sift-down操作</li>
+<li>重复2 3 操作，直到二叉堆内仅剩一个元素</li>
+</ol>
+<p>至此，排序完成</p>
+<p><img src="http://7u2sbw.com1.z0.glb.clouddn.com/Sorting_heapsort_anim.gif" alt=""></p>
+<center><font size="2">图片来源于<a href="https://zh.wikipedia.org/wiki/%E5%A0%86%E6%8E%92%E5%BA%8F" target="_blank" rel="noopener">维基百科</a></font></center>
+
+
+
+
+<h3 id="java实现"><a href="#java实现" class="headerlink" title="java实现"></a>java实现</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">int</span> <span class="title">getParent</span><span class="params">(<span class="keyword">int</span> son)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> (son - <span class="number">1</span>) &gt;&gt;&gt; <span class="number">1</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">int</span> <span class="title">getLeftSon</span><span class="params">(<span class="keyword">int</span> parent)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> (parent &lt;&lt; <span class="number">1</span>) + <span class="number">1</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">int</span> <span class="title">getRightSon</span><span class="params">(<span class="keyword">int</span> parent)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> (parent &lt;&lt; <span class="number">1</span>) + <span class="number">2</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">swap</span><span class="params">(Object[] array, <span class="keyword">int</span> index1, <span class="keyword">int</span> index2)</span> </span>&#123;</span><br><span class="line">    Object temp = array[index1];</span><br><span class="line">    array[index1] = array[index2];</span><br><span class="line">    array[index2] = temp;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 二叉堆从下至上的重新建堆（sift-up）</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param</span> array 堆数组，index前的元素已经构成最大堆</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param</span> index 新插入节点的索引</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param</span> &lt;T&gt;</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">private</span> <span class="keyword">static</span> &lt;T extends Comparable&lt;? <span class="keyword">super</span> T&gt;&gt; <span class="function"><span class="keyword">void</span> <span class="title">siftUp</span><span class="params">(T[] array, <span class="keyword">int</span> index)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> son = index;</span><br><span class="line">    T key = array[son];</span><br><span class="line">    <span class="keyword">while</span> (son &gt; <span class="number">0</span>) &#123;</span><br><span class="line">        <span class="keyword">int</span> parent = getParent(son);</span><br><span class="line">        <span class="keyword">if</span> (key.compareTo(array[parent]) &lt;= <span class="number">0</span>) &#123;</span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        array[son] = array[parent];</span><br><span class="line">        son = parent;</span><br><span class="line">    &#125;</span><br><span class="line">    array[son] = key;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 二叉堆从上至下的重新建堆（sift-down）</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param</span> array</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param</span> index    要执行向下操作的父节点id</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param</span> heapSize 堆的节点个数</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param</span> &lt;T&gt;</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">private</span> <span class="keyword">static</span> &lt;T extends Comparable&lt;T&gt;&gt; <span class="function"><span class="keyword">void</span> <span class="title">siftDown</span><span class="params">(T[] array, <span class="keyword">int</span> index, <span class="keyword">int</span> heapSize)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> parent = index;</span><br><span class="line">    T key = array[parent];</span><br><span class="line">    <span class="keyword">int</span> left;</span><br><span class="line">    <span class="keyword">while</span> ((left = getLeftSon(parent)) &lt; heapSize) &#123;</span><br><span class="line">        <span class="keyword">int</span> right = getRightSon(parent);</span><br><span class="line">        <span class="keyword">int</span> largerSon;</span><br><span class="line">        <span class="keyword">if</span> (right &lt; heapSize &amp;&amp; array[left].compareTo(array[right]) &lt; <span class="number">0</span>) &#123;</span><br><span class="line">            largerSon = right;</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            largerSon = left;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span> (array[largerSon].compareTo(key) &gt; <span class="number">0</span>) &#123;</span><br><span class="line">            array[parent] = array[largerSon];</span><br><span class="line">            parent = largerSon;</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    array[parent] = key;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 构建二叉堆</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param</span> array</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param</span> &lt;T&gt;</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">private</span> <span class="keyword">static</span> &lt;T extends Comparable&lt;? <span class="keyword">super</span> T&gt;&gt; <span class="function"><span class="keyword">void</span> <span class="title">heapify</span><span class="params">(T[] array)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> heapSize = array.length;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = getParent(heapSize - <span class="number">1</span>); i &gt;= <span class="number">0</span>; i--) &#123;</span><br><span class="line">        siftDown(array, i, heapSize);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 对array进行堆排序</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param</span> array</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param</span> &lt;T&gt;</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> &lt;T extends Comparable&lt;? <span class="keyword">super</span> T&gt;&gt; <span class="function"><span class="keyword">void</span> <span class="title">sort</span><span class="params">(T[] array)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> heapSize = array.length;</span><br><span class="line">    heapify(array);</span><br><span class="line">    <span class="keyword">while</span> (heapSize &gt; <span class="number">1</span>) &#123;</span><br><span class="line">        swap(array, <span class="number">0</span>, heapSize - <span class="number">1</span>);</span><br><span class="line">        heapSize--;</span><br><span class="line">        siftDown(array, <span class="number">0</span>, heapSize);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="分析"><a href="#分析" class="headerlink" title="分析"></a>分析</h3><ul>
+<li>最差时间复杂度    O(n log n)</li>
+<li>最优时间复杂度    O(n log n)</li>
+<li>平均时间复杂度    θ(n log n)</li>
+<li>最差空间复杂度    O(n) total, O(1) auxiliary</li>
+<li>堆排序属于就地排序</li>
+<li>堆排序可以在集合中查找最大或者最小的N个值，而不需要对全部数据进行排序</li>
+</ul>
+<h3 id="优先级队列"><a href="#优先级队列" class="headerlink" title="优先级队列"></a>优先级队列</h3><p>利用二叉堆的性质<code>根节点必定是最大值(最大堆)或者最小值(最小堆)</code>同样可以很容易实现优先级队列。</p>
+<ul>
+<li>队列添加元素：二叉堆对新元素进行sift-up</li>
+<li>队列获取(poll)元素：二叉堆删除根元素 sift-down</li>
+</ul>
+<p>JDK中的PriorityQueue、PriorityBlockingQueue都是基于二叉堆实现的。</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/algorithm/" rel="tag"># algorithm</a>
+          
+            <a href="/tags/sort/" rel="tag"># sort</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2015/11/14/Shell-Sort/" rel="next" title="Shell Sort">
+                <i class="fa fa-chevron-left"></i> Shell Sort
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2015/11/16/Quick-Sort/" rel="prev" title="Quick Sort">
+                Quick Sort <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+      <div class="ds-thread" data-thread-key="2015/11/16/Heap-Sort/"
+           data-title="Heap Sort" data-url="http://guangfei.win/2015/11/16/Heap-Sort/">
+      </div>
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">sky</p>
+              <p class="site-description motion-element" itemprop="description">keep going</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">23</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">3</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">7</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#二叉堆"><span class="nav-number">1.</span> <span class="nav-text">二叉堆</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#二叉堆的操作"><span class="nav-number">2.</span> <span class="nav-text">二叉堆的操作</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#从下至上的重新建堆（sift-up）"><span class="nav-number">2.1.</span> <span class="nav-text">从下至上的重新建堆（sift-up）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#由上至下的重新建堆（sift-down）"><span class="nav-number">2.2.</span> <span class="nav-text">由上至下的重新建堆（sift-down）</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#堆排序"><span class="nav-number">3.</span> <span class="nav-text">堆排序</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#java实现"><span class="nav-number">4.</span> <span class="nav-text">java实现</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#分析"><span class="nav-number">5.</span> <span class="nav-text">分析</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#优先级队列"><span class="nav-number">6.</span> <span class="nav-text">优先级队列</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2015 &mdash; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">sky</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Mist</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"13m"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+    
+    
+    <script src="/lib/ua-parser-js/dist/ua-parser.min.js?v=0.7.9"></script>
+    <script src="/js/src/hook-duoshuo.js"></script>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.4.js"></script>
+  <script>AV.initialize("JhJQHbjn7uinA1k70nNSCqys-gzGzoHsz", "OdTTinqgVB1mkIAMgwB38zH2");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

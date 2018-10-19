@@ -1,0 +1,1159 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="fastjson," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="Fastjson是一个Java语言编写的高性能功能完善的JSON库。它采用一种“假定有序快速匹配”的算法，把JSON Parse的性能提升到极致，是目前Java语言中最快的JSON库。Fastjson接口简单易用，已经被广泛使用在缓存序列化、协议交互、Web输出、Android客户端等多种应用场景。">
+<meta name="keywords" content="fastjson">
+<meta property="og:type" content="article">
+<meta property="og:title" content="fastjson">
+<meta property="og:url" content="http://guangfei.win/2016/05/14/fastjson/index.html">
+<meta property="og:site_name" content="越是憧憬 越要风雨兼程">
+<meta property="og:description" content="Fastjson是一个Java语言编写的高性能功能完善的JSON库。它采用一种“假定有序快速匹配”的算法，把JSON Parse的性能提升到极致，是目前Java语言中最快的JSON库。Fastjson接口简单易用，已经被广泛使用在缓存序列化、协议交互、Web输出、Android客户端等多种应用场景。">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2018-04-02T08:42:29.758Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="fastjson">
+<meta name="twitter:description" content="Fastjson是一个Java语言编写的高性能功能完善的JSON库。它采用一种“假定有序快速匹配”的算法，把JSON Parse的性能提升到极致，是目前Java语言中最快的JSON库。Fastjson接口简单易用，已经被广泛使用在缓存序列化、协议交互、Web输出、Android客户端等多种应用场景。">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://guangfei.win/2016/05/14/fastjson/"/>
+
+
+
+
+
+  <title>fastjson | 越是憧憬 越要风雨兼程</title>
+  
+
+
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?add444b58ef1d82ab2d6e5f7d4c9c159";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">越是憧憬 越要风雨兼程</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://guangfei.win/2016/05/14/fastjson/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="sky">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="越是憧憬 越要风雨兼程">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">fastjson</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-05-14T15:22:27+08:00">
+                2016-05-14
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/java-tool/" itemprop="url" rel="index">
+                    <span itemprop="name">java tool</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2016/05/14/fastjson/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/05/14/fastjson/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+             <span id="/2016/05/14/fastjson/" class="leancloud_visitors" data-flag-title="fastjson">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数&#58;</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>Fastjson是一个Java语言编写的高性能功能完善的JSON库。它采用一种“假定有序快速匹配”的算法，把JSON Parse的性能提升到极致，是目前Java语言中最快的JSON库。Fastjson接口简单易用，已经被广泛使用在缓存序列化、协议交互、Web输出、Android客户端等多种应用场景。<br><a id="more"></a></p>
+<h3 id="主要API"><a href="#主要API" class="headerlink" title="主要API"></a>主要API</h3><p>fastjson入口类是com.alibaba.fastjson.JSON，主要的API是JSON.toJSONString，和parseObject。</p>
+<ul>
+<li><p>序列化</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">String jsonString = JSON.toJSONString(obj);</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>反序列化</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Vo vo = JSON.parseObject(&quot;...&quot;,Vo.class);</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>泛型反序列化</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">List&lt;Vo&gt; list = JSON.parserObject(&quot;...&quot;,new TypeReference&lt;List&lt;Vo&gt;&gt;()&#123;&#125;);</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h3 id="定制序列化"><a href="#定制序列化" class="headerlink" title="定制序列化"></a>定制序列化</h3><h4 id="通过-JSONField定制序列化"><a href="#通过-JSONField定制序列化" class="headerlink" title="通过@JSONField定制序列化"></a>通过@JSONField定制序列化</h4><ul>
+<li><p>JSONField介绍</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">package com.alibaba.fastjson.annotation;</span><br><span class="line"> </span><br><span class="line">public @interface JSONField &#123;</span><br><span class="line">    // 配置序列化和反序列化的顺序，1.1.42版本之后才支持</span><br><span class="line">    int ordinal() default 0;</span><br><span class="line"> </span><br><span class="line">     // 指定字段的名称</span><br><span class="line">    String name() default &quot;&quot;;</span><br><span class="line"> </span><br><span class="line">    // 指定字段的格式，对日期格式有用</span><br><span class="line">    String format() default &quot;&quot;;</span><br><span class="line"> </span><br><span class="line">    // 是否序列化</span><br><span class="line">    boolean serialize() default true;</span><br><span class="line"> </span><br><span class="line">    // 是否反序列化</span><br><span class="line">    boolean deserialize() default true;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>配置方式<br>可以配置在getter/setter方法或者字段上。例如：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">public class A &#123;</span><br><span class="line">     private int id;</span><br><span class="line"></span><br><span class="line">     @JSONField(name=&quot;ID&quot;)</span><br><span class="line">     public int getId() &#123;return id;&#125;</span><br><span class="line">     @JSONField(name=&quot;ID&quot;)</span><br><span class="line">     public void setId(int value) &#123;this.id = id;&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">public class A &#123;</span><br><span class="line">     @JSONField(name=&quot;ID&quot;)</span><br><span class="line">     private int id;</span><br><span class="line"></span><br><span class="line">     public int getId() &#123;return id;&#125;</span><br><span class="line">     public void setId(int value) &#123;this.id = id;&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li><p>使用format配置日期格式化</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">public class A &#123;</span><br><span class="line">     // 配置date序列化和反序列使用yyyyMMdd日期格式</span><br><span class="line">     @JSONField(format=&quot;yyyyMMdd&quot;)</span><br><span class="line">     public Date date;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>序列化、反序列化时排除指定字段</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">public class A &#123;</span><br><span class="line">     @JSONField(serialize=false)</span><br><span class="line">     public Date date;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">public class A &#123;</span><br><span class="line">     @JSONField(deserialize=false)</span><br><span class="line">     public Date date;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>使用ordinal指定字段的顺序。缺省根据fieldName的字母序进行序列化</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">public static class VO &#123;</span><br><span class="line">    @JSONField(ordinal = 3)</span><br><span class="line">    private int f0;</span><br><span class="line"> </span><br><span class="line">    @JSONField(ordinal = 2)</span><br><span class="line">    private int f1;</span><br><span class="line"> </span><br><span class="line">    @JSONField(ordinal = 1)</span><br><span class="line">    private int f2;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h4 id="使用-JSONType配置"><a href="#使用-JSONType配置" class="headerlink" title="使用@JSONType配置"></a>使用@JSONType配置</h4><p>和JSONField类似，但JSONType配置在类上，而不是field或者getter/setter方法上。</p>
+<h4 id="通过SerializeFilter定制序列化"><a href="#通过SerializeFilter定制序列化" class="headerlink" title="通过SerializeFilter定制序列化"></a>通过SerializeFilter定制序列化</h4><p>通过SerializeFilter可以使用扩展编程的方式实现定制序列化。fastjson提供了多种SerializeFilter：</p>
+<ul>
+<li>PropertyPreFilter 根据PropertyName判断是否序列化</li>
+<li>PropertyFilter 根据PropertyName和PropertyValue来判断是否序列化</li>
+<li>NameFilter 修改Key，如果需要修改Key,process返回值则可</li>
+<li>ValueFilter 修改Value</li>
+<li>BeforeFilter 序列化时在最前添加内容</li>
+<li>AfterFilter 序列化时在最后添加内容<br>以上的SerializeFilter在JSON.toJSONString中可以使用。<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">SerializeFilter filter = ...; // 可以是上面5个SerializeFilter的任意一种。</span><br><span class="line">JSON.toJSONString(obj, filter);</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h5 id="PropertyFilter-根据PropertyName和PropertyValue来判断是否序列化"><a href="#PropertyFilter-根据PropertyName和PropertyValue来判断是否序列化" class="headerlink" title="PropertyFilter 根据PropertyName和PropertyValue来判断是否序列化"></a>PropertyFilter 根据PropertyName和PropertyValue来判断是否序列化</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">public interface PropertyFilter extends SerializeFilter &#123;</span><br><span class="line">     boolean apply(Object object, String propertyName, Object propertyValue);</span><br><span class="line"> &#125;</span><br></pre></td></tr></table></figure>
+<p>可以通过扩展实现根据object或者属性名称或者属性值进行判断是否需要序列化。例如：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">PropertyFilter filter = new PropertyFilter() &#123;</span><br><span class="line"> </span><br><span class="line">    public boolean apply(Object source, String name, Object value) &#123;</span><br><span class="line">        if (&quot;id&quot;.equals(name)) &#123;</span><br><span class="line">            int id = ((Integer) value).intValue();</span><br><span class="line">            return id &gt;= 100;</span><br><span class="line">        &#125;</span><br><span class="line">        return false;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line"> </span><br><span class="line">JSON.toJSONString(obj, filter); // 序列化的时候传入filter</span><br></pre></td></tr></table></figure></p>
+<h5 id="PropertyPreFilter-根据PropertyName判断是否序列化"><a href="#PropertyPreFilter-根据PropertyName判断是否序列化" class="headerlink" title="PropertyPreFilter 根据PropertyName判断是否序列化"></a>PropertyPreFilter 根据PropertyName判断是否序列化</h5><p>和PropertyFilter不同只根据object和name进行判断，在调用getter之前，这样避免了getter调用可能存在的异常。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">public interface PropertyPreFilter extends SerializeFilter &#123;</span><br><span class="line">     boolean apply(JSONSerializer serializer, Object object, String name);</span><br><span class="line"> &#125;</span><br></pre></td></tr></table></figure></p>
+<ul>
+<li>SimplePropertyPreFilter接口<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">public class SimplePropertyPreFilter implements PropertyPreFilter &#123;      </span><br><span class="line">    public SimplePropertyPreFilter(String... properties)&#123;</span><br><span class="line">          this(null, properties);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public SimplePropertyPreFilter(Class&lt;?&gt; clazz, String... properties)&#123;</span><br><span class="line">          // ... ...</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public Class&lt;?&gt; getClazz() &#123;</span><br><span class="line">          return clazz;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public Set&lt;String&gt; getIncludes();</span><br><span class="line"></span><br><span class="line">    public Set&lt;String&gt; getExcludes();</span><br><span class="line"></span><br><span class="line">    /**     * @since 1.2.9     */public int getMaxLevel();</span><br><span class="line"></span><br><span class="line">    /**     * @since 1.2.9     */public void setMaxLevel(int maxLevel)</span><br><span class="line"></span><br><span class="line">    //...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>你可以配置includes、excludes。当class不为null时，针对特定类型；当class为null时，针对所有类型。<br> 当includes的size &gt; 0时，属性必须在includes中才会被序列化，excludes优先于includes。</p>
+<ul>
+<li>使用方式<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">VO vo = new VO();</span><br><span class="line"></span><br><span class="line">vo.setId(123);</span><br><span class="line">vo.setName(&quot;flym&quot;);</span><br><span class="line"></span><br><span class="line">SimplePropertyPreFilter filter = new SimplePropertyPreFilter(VO.class, &quot;name&quot;);</span><br><span class="line">Assert.assertEquals(&quot;&#123;\&quot;name\&quot;:\&quot;flym\&quot;&#125;&quot;, JSON.toJSONString(vo, filter));</span><br><span class="line"></span><br><span class="line">public static class VO &#123;</span><br><span class="line">      private int    id;</span><br><span class="line">      private String name;</span><br><span class="line"></span><br><span class="line">      public int getId() &#123;</span><br><span class="line">          return id;</span><br><span class="line">      &#125;</span><br><span class="line">      public void setId(int id) &#123;</span><br><span class="line">          this.id = id;</span><br><span class="line">      &#125;</span><br><span class="line"></span><br><span class="line">      public String getName() &#123;</span><br><span class="line">          return name;</span><br><span class="line">      &#125;</span><br><span class="line">      public void setName(String name) &#123;</span><br><span class="line">          this.name = name;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h5 id="NameFilter-序列化时修改Key"><a href="#NameFilter-序列化时修改Key" class="headerlink" title="NameFilter 序列化时修改Key"></a>NameFilter 序列化时修改Key</h5><p>如果需要修改Key,process返回值则可<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">public interface NameFilter extends SerializeFilter &#123;</span><br><span class="line">    String process(Object object, String propertyName, Object propertyValue);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>fastjson内置一个PascalNameFilter，用于输出将首字符大写的Pascal风格。 例如：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">import com.alibaba.fastjson.serializer.PascalNameFilter;</span><br><span class="line"></span><br><span class="line">Object obj = ...;</span><br><span class="line">String jsonStr = JSON.toJSONString(obj, new PascalNameFilter());</span><br></pre></td></tr></table></figure></p>
+<h5 id="ValueFilter-序列化是修改Value"><a href="#ValueFilter-序列化是修改Value" class="headerlink" title="ValueFilter 序列化是修改Value"></a>ValueFilter 序列化是修改Value</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">public interface ValueFilter extends SerializeFilter &#123;</span><br><span class="line">    Object process(Object object, String propertyName, Object propertyValue);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h5 id="BeforeFilter-序列化时在最前添加内容"><a href="#BeforeFilter-序列化时在最前添加内容" class="headerlink" title="BeforeFilter 序列化时在最前添加内容"></a>BeforeFilter 序列化时在最前添加内容</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">public abstract class BeforeFilter implements SerializeFilter &#123;</span><br><span class="line">    protected final void writeKeyValue(String key, Object value) &#123; ... &#125;</span><br><span class="line">    // 需要实现的抽象方法，在实现中调用writeKeyValue添加内容</span><br><span class="line">    public abstract void writeBefore(Object object);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h5 id="AfterFilter-序列化时在最前添加内容"><a href="#AfterFilter-序列化时在最前添加内容" class="headerlink" title="AfterFilter 序列化时在最前添加内容"></a>AfterFilter 序列化时在最前添加内容</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">public abstract class AfterFilter implements SerializeFilter &#123;</span><br><span class="line">    protected final void writeKeyValue(String key, Object value) &#123; ... &#125;</span><br><span class="line">    // 需要实现的抽象方法，在实现中调用writeKeyValue添加内容</span><br><span class="line">    public abstract void writeAfter(Object object);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h5 id="类级别配置Filter"><a href="#类级别配置Filter" class="headerlink" title="类级别配置Filter"></a>类级别配置Filter</h5><p>对于框架来说，如果在toJSONString的时候，传入SerializeFilter，会导致对所有的类型做过滤，性能会受到一定影响。在1.2.10版本之后，fastjson提供类级别的SerializeFilter支持。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">package com.alibaba.fastjson.serializer;</span><br><span class="line"></span><br><span class="line">public class SerializeConfig &#123;</span><br><span class="line">    public void addFilter(Class&lt;?&gt; clazz, SerializeFilter filter);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">public class ClassNameFilterTest extends TestCase &#123;</span><br><span class="line">    public void test_filter() throws Exception &#123;</span><br><span class="line">        NameFilter upcaseNameFilter = new NameFilter() &#123;</span><br><span class="line">            public String process(Object object, String name, Object value) &#123;</span><br><span class="line">                return name.toUpperCase();</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;;</span><br><span class="line">        SerializeConfig.getGlobalInstance() //</span><br><span class="line">                       .addFilter(A.class, upcaseNameFilter);</span><br><span class="line"></span><br><span class="line">        Assert.assertEquals(&quot;&#123;\&quot;ID\&quot;:0&#125;&quot;, JSON.toJSONString(new A()));</span><br><span class="line">        Assert.assertEquals(&quot;&#123;\&quot;id\&quot;:0&#125;&quot;, JSON.toJSONString(new B()));</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public static class A &#123;</span><br><span class="line">        public int id;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public static class B &#123;</span><br><span class="line">        public int id;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h5 id="BeanToArray"><a href="#BeanToArray" class="headerlink" title="BeanToArray"></a>BeanToArray</h5><p>在fastjson中，支持一种叫做BeanToArray的映射模式。普通模式下，JavaBean映射成json object，BeanToArray模式映射为json array。</p>
+<ul>
+<li>Sample 1<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">class Mode &#123;</span><br><span class="line">   public int id;</span><br><span class="line">   public int name;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">Model model = new Model();</span><br><span class="line">model.id = 1001;</span><br><span class="line">model.name = &quot;gaotie&quot;;</span><br><span class="line"></span><br><span class="line">// &#123;&quot;id&quot;:1001,&quot;name&quot;:&quot;gaotie&quot;&#125;</span><br><span class="line">String text_normal = JSON.toJSONString(model); </span><br><span class="line"></span><br><span class="line">// [1001,&quot;gaotie&quot;]</span><br><span class="line">String text_beanToArray = JSON.toJSONString(model, SerializerFeature.BeanToArray); </span><br><span class="line"></span><br><span class="line">// support beanToArray &amp; normal mode</span><br><span class="line">JSON.parseObject(text_beanToArray, Mode.class, Feature.SupportArrayToBean);</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>上面的例子中，BeanToArray模式下，少了Key的输出，节省了空间，json字符串较小，性能也会更好。</p>
+<ul>
+<li>Sample 2<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">class Company &#123;</span><br><span class="line">     public int code;</span><br><span class="line">     public List&lt;Department&gt; departments = new ArrayList&lt;Department&gt;();</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">@JSONType(serialzeFeatures=SerializerFeature.BeanToArray, parseFeatures=Feature.SupportArrayToBean))</span><br><span class="line">class Department &#123;</span><br><span class="line">     public int id;</span><br><span class="line">     public Stirng name;</span><br><span class="line">     public Department() &#123;&#125;</span><br><span class="line">     public Department(int id, String name) &#123;this.id = id; this.name = name;&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">Company company = new Company();</span><br><span class="line">company.code = 100;</span><br><span class="line">company.departments.add(new Department(1001, &quot;Sales&quot;));</span><br><span class="line">company.departments.add(new Department(1002, &quot;Financial&quot;));</span><br><span class="line"></span><br><span class="line">// &#123;&quot;code&quot;:10,&quot;departments&quot;:[[1001,&quot;Sales&quot;],[1002,&quot;Financial&quot;]]&#125;</span><br><span class="line">String text = JSON.toJSONString(commpany);</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>在这个例子中，如果Company的属性departments元素很多，局部采用BeanToArray就可以获得很好的性能，而整体又能够获得较好的可读性。</p>
+<ul>
+<li><p>性能<br>使用BeanToArray模式，可以获得媲美protobuf的性能。</p>
+<h4 id="通过ParseProcess定制反序列化"><a href="#通过ParseProcess定制反序列化" class="headerlink" title="通过ParseProcess定制反序列化"></a>通过ParseProcess定制反序列化</h4><p>ParseProcess是编程扩展定制反序列化的接口。fastjson支持如下ParseProcess：</p>
+</li>
+<li><p>ExtraProcessor 用于处理多余的字段</p>
+</li>
+<li>ExtraTypeProvider 用于处理多余字段时提供类型信息<h5 id="使用ExtraProcessor-处理多余字段"><a href="#使用ExtraProcessor-处理多余字段" class="headerlink" title="使用ExtraProcessor 处理多余字段"></a>使用ExtraProcessor 处理多余字段</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">public static class VO &#123;</span><br><span class="line">    private int id;</span><br><span class="line">    private Map&lt;String, Object&gt; attributes = new HashMap&lt;String, Object&gt;();</span><br><span class="line">    public int getId() &#123; return id; &#125;</span><br><span class="line">    public void setId(int id) &#123; this.id = id;&#125;</span><br><span class="line">    public Map&lt;String, Object&gt; getAttributes() &#123; return attributes;&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">ExtraProcessor processor = new ExtraProcessor() &#123;</span><br><span class="line">    public void processExtra(Object object, String key, Object value) &#123;</span><br><span class="line">        VO vo = (VO) object;</span><br><span class="line">        vo.getAttributes().put(key, value);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">VO vo = JSON.parseObject(&quot;&#123;\&quot;id\&quot;:123,\&quot;name\&quot;:\&quot;abc\&quot;&#125;&quot;, VO.class, processor);</span><br><span class="line">Assert.assertEquals(123, vo.getId());</span><br><span class="line">Assert.assertEquals(&quot;abc&quot;, vo.getAttributes().get(&quot;name&quot;));</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h5 id="使用ExtraTypeProvider-为多余的字段提供类型"><a href="#使用ExtraTypeProvider-为多余的字段提供类型" class="headerlink" title="使用ExtraTypeProvider 为多余的字段提供类型"></a>使用ExtraTypeProvider 为多余的字段提供类型</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">public static class VO &#123;</span><br><span class="line">    private int id;</span><br><span class="line">    private Map&lt;String, Object&gt; attributes = new HashMap&lt;String, Object&gt;();</span><br><span class="line">    public int getId() &#123; return id; &#125;</span><br><span class="line">    public void setId(int id) &#123; this.id = id;&#125;</span><br><span class="line">    public Map&lt;String, Object&gt; getAttributes() &#123; return attributes;&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">class MyExtraProcessor implements ExtraProcessor, ExtraTypeProvider &#123;</span><br><span class="line">    public void processExtra(Object object, String key, Object value) &#123;</span><br><span class="line">        VO vo = (VO) object;</span><br><span class="line">        vo.getAttributes().put(key, value);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public Type getExtraType(Object object, String key) &#123;</span><br><span class="line">        if (&quot;value&quot;.equals(key)) &#123;</span><br><span class="line">            return int.class;</span><br><span class="line">        &#125;</span><br><span class="line">        return null;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line">ExtraProcessor processor = new MyExtraProcessor();</span><br><span class="line"></span><br><span class="line">VO vo = JSON.parseObject(&quot;&#123;\&quot;id\&quot;:123,\&quot;value\&quot;:\&quot;123456\&quot;&#125;&quot;, VO.class, processor);</span><br><span class="line">Assert.assertEquals(123, vo.getId());</span><br><span class="line">Assert.assertEquals(123456, vo.getAttributes().get(&quot;value&quot;)); // value本应该是字符串类型的，通过getExtraType的处理变成Integer类型了。</span><br></pre></td></tr></table></figure>
+<h3 id="自定义序列化"><a href="#自定义序列化" class="headerlink" title="自定义序列化"></a>自定义序列化</h3><p>fastjson提供了自定义序列化的接口，当你通过配置无法满足自定义序列化需求时，你可以使用ObjectSerializer接口。</p>
+<h4 id="API"><a href="#API" class="headerlink" title="API"></a>API</h4><ul>
+<li><p>ObjectSerializer接口</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">package com.alibaba.fastjson.serializer;</span><br><span class="line"></span><br><span class="line">public interface ObjectSerializer &#123;</span><br><span class="line">    void write(JSONSerializer serializer, </span><br><span class="line">               Object object, </span><br><span class="line">               Object fieldName, </span><br><span class="line">               Type fieldType, </span><br><span class="line">               int features) throws IOException;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>注册API</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">package com.alibaba.fastjson.serializer;</span><br><span class="line"></span><br><span class="line">public class SerializeConfig &#123;</span><br><span class="line">    public boolean put(Type key, ObjectSerializer value);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h4 id="Sample"><a href="#Sample" class="headerlink" title="Sample"></a>Sample</h4><ul>
+<li><p>实现ObjectSerializer</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">public class CharacterSerializer implements ObjectSerializer &#123;</span><br><span class="line">    public void write(JSONSerializer serializer, </span><br><span class="line">                      Object object, </span><br><span class="line">                      Object fieldName, </span><br><span class="line">                      Type fieldType, </span><br><span class="line">                      int features) throws IOException &#123;</span><br><span class="line">        SerializeWriter out = serializer.out;</span><br><span class="line"></span><br><span class="line">        Character value = (Character) object;</span><br><span class="line">        if (value == null) &#123;</span><br><span class="line">            out.writeString(&quot;&quot;);</span><br><span class="line">            return;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        char c = value.charValue();</span><br><span class="line">        if (c == 0) &#123;</span><br><span class="line">            out.writeString(&quot;\u0000&quot;);</span><br><span class="line">        &#125; else &#123;</span><br><span class="line">            out.writeString(value.toString());</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>注册</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">SerializeConfig.getGlobalInstance().put(Character.class, new CharacterSerializer());</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h3 id="自定义反序列化"><a href="#自定义反序列化" class="headerlink" title="自定义反序列化"></a>自定义反序列化</h3><p>fastjson支持注册ObjectDeserializer实现自定义反序列化。要自定义序列化，首先需要实现一个ObjectDeserializer，然后注册到ParserConfig中。</p>
+<h4 id="API-1"><a href="#API-1" class="headerlink" title="API"></a>API</h4><ul>
+<li><p>ObjectDeserializer 定义</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">package com.alibaba.fastjson.parser.deserializer;</span><br><span class="line"></span><br><span class="line">public interface ObjectDeserializer &#123;</span><br><span class="line">    &lt;T&gt; T deserialze(DefaultJSONParser parser, Type type, Object fieldName);</span><br><span class="line"></span><br><span class="line">    int getFastMatchToken();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>注册自定义ObjectDeserializer API</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">package com.alibaba.fastjson.parser;</span><br><span class="line"></span><br><span class="line">public class ParserConfig &#123;</span><br><span class="line">    public void putDeserializer(Type type, ObjectDeserializer deserializer);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h4 id="Sample-1"><a href="#Sample-1" class="headerlink" title="Sample"></a>Sample</h4><ul>
+<li><p>Model定义</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">public static enum OrderActionEnum &#123;</span><br><span class="line">                                    FAIL(1), SUCC(0);</span><br><span class="line"></span><br><span class="line">    private int code;</span><br><span class="line"></span><br><span class="line">    OrderActionEnum(int code)&#123;</span><br><span class="line">        this.code = code;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">public static class Msg &#123;</span><br><span class="line"></span><br><span class="line">    public OrderActionEnum actionEnum;</span><br><span class="line">    public String          body;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>自定义实现ObjectDeserializer</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">public static class OrderActionEnumDeser implements ObjectDeserializer &#123;</span><br><span class="line"></span><br><span class="line">    @SuppressWarnings(&quot;unchecked&quot;)</span><br><span class="line">    @Overridepublic &lt;T&gt; T deserialze(DefaultJSONParser parser, Type type, Object fieldName) &#123;</span><br><span class="line">        Integer intValue = parser.parseObject(int.class);</span><br><span class="line">        if (intValue == 1) &#123;</span><br><span class="line">            return (T) OrderActionEnum.FAIL;</span><br><span class="line">        &#125; else if (intValue == 0) &#123;</span><br><span class="line">            return (T) OrderActionEnum.SUCC;</span><br><span class="line">        &#125;</span><br><span class="line">        throw new IllegalStateException();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    @Overridepublic int getFastMatchToken() &#123;</span><br><span class="line">        return JSONToken.LITERAL_INT;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>注册并使用ObjectDeserializer</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">ParserConfig.getGlobalInstance().putDeserializer(OrderActionEnum.class, new OrderActionEnumDeser());</span><br><span class="line"></span><br><span class="line">&#123;</span><br><span class="line">    Msg msg = JSON.parseObject(&quot;&#123;\&quot;actionEnum\&quot;:1,\&quot;body\&quot;:\&quot;A\&quot;&#125;&quot;, Msg.class);</span><br><span class="line">    Assert.assertEquals(msg.body, &quot;A&quot;);</span><br><span class="line">    Assert.assertEquals(msg.actionEnum, OrderActionEnum.FAIL);</span><br><span class="line">&#125;</span><br><span class="line">&#123;</span><br><span class="line">    Msg msg = JSON.parseObject(&quot;&#123;\&quot;actionEnum\&quot;:0,\&quot;body\&quot;:\&quot;B\&quot;&#125;&quot;, Msg.class);</span><br><span class="line">    Assert.assertEquals(msg.body, &quot;B&quot;);</span><br><span class="line">    Assert.assertEquals(msg.actionEnum, OrderActionEnum.SUCC);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h3 id="处理超大对象和超大JSON文本"><a href="#处理超大对象和超大JSON文本" class="headerlink" title="处理超大对象和超大JSON文本"></a>处理超大对象和超大JSON文本</h3><p>当需要处理超大JSON文本时，需要Stream API，在fastjson-1.1.32版本中开始提供Stream API。</p>
+<h4 id="序列化"><a href="#序列化" class="headerlink" title="序列化"></a>序列化</h4><h5 id="超大JSON数组序列化"><a href="#超大JSON数组序列化" class="headerlink" title="超大JSON数组序列化"></a>超大JSON数组序列化</h5><p>如果你的JSON格式是一个巨大的JSON数组，有很多元素，则先调用startArray，然后挨个写入对象，然后调用endArray。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">JSONWriter writer = new JSONWriter(new FileWriter(&quot;/tmp/huge.json&quot;));</span><br><span class="line">writer.startArray();</span><br><span class="line">for (int i = 0; i &lt; 1000 * 1000; ++i) &#123;</span><br><span class="line">      writer.writeValue(new VO());</span><br><span class="line">&#125;</span><br><span class="line">writer.endArray();</span><br><span class="line">writer.close();</span><br></pre></td></tr></table></figure></p>
+<h5 id="超大JSON对象序列化"><a href="#超大JSON对象序列化" class="headerlink" title="超大JSON对象序列化"></a>超大JSON对象序列化</h5><p>如果你的JSON格式是一个巨大的JSONObject，有很多Key/Value对，则先调用startObject，然后挨个写入Key和Value，然后调用endObject。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">JSONWriter writer = new JSONWriter(new FileWriter(&quot;/tmp/huge.json&quot;));</span><br><span class="line">writer.startObject();</span><br><span class="line">for (int i = 0; i &lt; 1000 * 1000; ++i) &#123;</span><br><span class="line">      writer.writeKey(&quot;x&quot; + i);</span><br><span class="line">      writer.writeValue(new VO());</span><br><span class="line">&#125;</span><br><span class="line">writer.endObject();</span><br><span class="line">writer.close();</span><br></pre></td></tr></table></figure></p>
+<h4 id="反序列化"><a href="#反序列化" class="headerlink" title="反序列化"></a>反序列化</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">JSONReader reader = new JSONReader(new FileReader(&quot;/tmp/huge.json&quot;));</span><br><span class="line">reader.startArray();</span><br><span class="line">while(reader.hasNext()) &#123;</span><br><span class="line">      VO vo = reader.readObject(VO.class);</span><br><span class="line">      // handle vo ...</span><br><span class="line">&#125;</span><br><span class="line">reader.endArray();</span><br><span class="line">reader.close();</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">JSONReader reader = new JSONReader(new FileReader(&quot;/tmp/huge.json&quot;));</span><br><span class="line">reader.startObject();</span><br><span class="line">while(reader.hasNext()) &#123;</span><br><span class="line">      String key = reader.readString();</span><br><span class="line">      VO vo = reader.readObject(VO.class);</span><br><span class="line">      // handle vo ...</span><br><span class="line">&#125;</span><br><span class="line">reader.endObject();</span><br><span class="line">reader.close();</span><br></pre></td></tr></table></figure>
+<h3 id="LabelFilter"><a href="#LabelFilter" class="headerlink" title="LabelFilter"></a>LabelFilter</h3><p>在Fastjson 1.2.7版本之后，fastjson提供LabelFilter功能，用于不同的场景定制序列化。</p>
+<p>需要使用LabelFilter，首先需要用@JSONField配置label。如：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line">public static class VO &#123;</span><br><span class="line">    private int    id;</span><br><span class="line">    private String name;</span><br><span class="line">    private String password;</span><br><span class="line">    private String info;</span><br><span class="line">    @JSONField(label = &quot;normal&quot;)</span><br><span class="line">    public int getId() &#123;</span><br><span class="line">        return id;</span><br><span class="line">    &#125;</span><br><span class="line">    public void setId(int id) &#123;</span><br><span class="line">        this.id = id;</span><br><span class="line">    &#125;</span><br><span class="line">    @JSONField(label = &quot;normal&quot;)</span><br><span class="line">    public String getName() &#123;</span><br><span class="line">        return name;</span><br><span class="line">    &#125;</span><br><span class="line">    public void setName(String name) &#123;</span><br><span class="line">        this.name = name;</span><br><span class="line">    &#125;</span><br><span class="line">    @JSONField(label = &quot;secret&quot;)</span><br><span class="line">    public String getPassword() &#123;</span><br><span class="line">        return password;</span><br><span class="line">    &#125;</span><br><span class="line">    public void setPassword(String password) &#123;</span><br><span class="line">        this.password = password;</span><br><span class="line">    &#125;</span><br><span class="line">    public String getInfo() &#123;</span><br><span class="line">        return info;</span><br><span class="line">    &#125;   </span><br><span class="line">    public void setInfo(String info) &#123;</span><br><span class="line">        this.info = info;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>根据不同场景过滤，如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">VO vo = new VO();</span><br><span class="line">vo.setId(123);</span><br><span class="line">vo.setName(&quot;wenshao&quot;);</span><br><span class="line">vo.setPassword(&quot;ooxxx&quot;);</span><br><span class="line">vo.setPassword(&quot;ooxxx&quot;);</span><br><span class="line"></span><br><span class="line">String text1 = JSON.toJSONString(vo, Labels.includes(&quot;normal&quot;));</span><br><span class="line">Assert.assertEquals(&quot;&#123;\&quot;id\&quot;:123,\&quot;name\&quot;:\&quot;wenshao\&quot;&#125;&quot;, text1);</span><br><span class="line"></span><br><span class="line">String text2 = JSON.toJSONString(vo, Labels.excludes(&quot;secret&quot;));</span><br><span class="line">Assert.assertEquals(&quot;&#123;\&quot;id\&quot;:123,\&quot;info\&quot;:\&quot;fofo\&quot;,\&quot;name\&quot;:\&quot;wenshao\&quot;&#125;&quot;, text2);</span><br></pre></td></tr></table></figure></p>
+<h3 id="从流中反序列化"><a href="#从流中反序列化" class="headerlink" title="从流中反序列化"></a>从流中反序列化</h3><p>在1.2.11版本中，fastjson新增加了对InputStream的支持<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">package com.alibaba.fastjson;</span><br><span class="line"></span><br><span class="line">public abstract class JSON &#123;</span><br><span class="line">    public static &lt;T&gt; T parseObject(InputStream is, //Type type, //Feature... features) throws IOException;</span><br><span class="line"></span><br><span class="line">    public static &lt;T&gt; T parseObject(InputStream is, //Charset charset, //Type type, //Feature... features) throws IOException;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<ul>
+<li>Sample<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">import com.alibaba.fastjson;</span><br><span class="line">import java.nio.charset.Charset;</span><br><span class="line">class Model &#123;</span><br><span class="line">    public int value;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">InputStream is = ...Model model = JSON.parseObject(is, Model.class);</span><br><span class="line">Model model2 = JSON.parseObject(is, Charset.from(&quot;UTF-8&quot;), Model.class);</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h3 id="将对象序列化到流中"><a href="#将对象序列化到流中" class="headerlink" title="将对象序列化到流中"></a>将对象序列化到流中</h3><p>在1.2.11版本中，JSON类新增对OutputStream/Writer直接支持。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">package com.alibaba.fastjson;</span><br><span class="line"></span><br><span class="line">public abstract class JSON &#123;</span><br><span class="line">   public static final int writeJSONString(OutputStream os, // Object object, // SerializerFeature... features) throws IOException;</span><br><span class="line"></span><br><span class="line">    public static final int writeJSONString(OutputStream os, //Charset charset, //  Object object, // SerializerFeature... features) throws IOException;</span><br><span class="line"></span><br><span class="line">   public static final int writeJSONString(Writer os, // Object object, // SerializerFeature... features) throws IOException;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<ul>
+<li>Sample<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">import com.alibaba.fastjson;</span><br><span class="line">import java.nio.charset.Charset;</span><br><span class="line">class Model &#123;</span><br><span class="line">    public int value;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">Model model = new Model();</span><br><span class="line">model.value = 1001;</span><br><span class="line"></span><br><span class="line">OutputStream os = ...;</span><br><span class="line">JSON.writeJSONString(os, model);</span><br><span class="line">JSON.writeJSONString(os, Charset.from(&quot;GB18030&quot;), model);</span><br><span class="line"></span><br><span class="line">Writer writer = ...;</span><br><span class="line">JSON.writeJSONString(os, model);</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h3 id="JSONPath"><a href="#JSONPath" class="headerlink" title="JSONPath"></a>JSONPath</h3><p>fastjson 1.2.0之后的版本支持JSONPath。这是一个很强大的功能，可以在java框架中当作对象查询语言（OQL）来使用。</p>
+<h4 id="API-2"><a href="#API-2" class="headerlink" title="API"></a>API</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">package com.alibaba.fastjson;</span><br><span class="line"></span><br><span class="line">public class JSONPath &#123;          </span><br><span class="line">     //  求值，静态方法</span><br><span class="line">     public static Object eval(Object rootObject, String path);</span><br><span class="line"></span><br><span class="line">     // 计算Size，Map非空元素个数，对象非空元素个数，Collection的Size，数组的长度。其他无法求值返回-1</span><br><span class="line">     public static int size(Object rootObject, String path);</span><br><span class="line"></span><br><span class="line">     // 是否包含，path中是否存在对象</span><br><span class="line">     public static boolean contains(Object rootObject, String path) &#123; &#125;</span><br><span class="line"></span><br><span class="line">     // 是否包含，path中是否存在指定值，如果是集合或者数组，在集合中查找value是否存在</span><br><span class="line">     public static boolean containsValue(Object rootObject, String path, Object value) &#123; &#125;</span><br><span class="line"></span><br><span class="line">     // 修改制定路径的值，如果修改成功，返回true，否则返回false</span><br><span class="line">     public static boolean set(Object rootObject, String path, Object value) &#123;&#125;</span><br><span class="line"></span><br><span class="line">     // 在数组或者集合中添加元素</span><br><span class="line">     public static boolean array_add(Object rootObject, String path, Object... values);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>建议缓存JSONPath对象，这样能够提高求值的性能。</p>
+<h4 id="支持语法"><a href="#支持语法" class="headerlink" title="支持语法"></a>支持语法</h4><table>
+<thead>
+<tr>
+<th style="text-align:right">JSONPATH</th>
+<th style="text-align:left">描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:right">$</td>
+<td style="text-align:left">根对象，例如$.name</td>
+</tr>
+<tr>
+<td style="text-align:right">[num]</td>
+<td style="text-align:left">数组访问，其中num是数字，可以是负数。例如$[0].leader.departments[-1].name</td>
+</tr>
+<tr>
+<td style="text-align:right">[num0,num1,num2…]</td>
+<td style="text-align:left">数组多个元素访问，其中num是数字，可以是负数，返回数组中的多个元素。例如$[0,3,-2,5]</td>
+</tr>
+<tr>
+<td style="text-align:right">[start:end]</td>
+<td style="text-align:left">数组范围访问，其中start和end是开始小表和结束下标，可以是负数，返回数组中的多个元素。例如$[0:5]</td>
+</tr>
+<tr>
+<td style="text-align:right">[start:end :step]</td>
+<td style="text-align:left">数组范围访问，其中start和end是开始小表和结束下标，可以是负数；step是步长，返回数组中的多个元素。例如$[0:5:2]</td>
+</tr>
+<tr>
+<td style="text-align:right">[?(key)]</td>
+<td style="text-align:left">对象属性非空过滤，例如$.departs[?(name)]</td>
+</tr>
+<tr>
+<td style="text-align:right">[key &gt; 123]</td>
+<td style="text-align:left">数值类型对象属性比较过滤，例如$.departs[id &gt;= 123]，比较操作符支持=,!=,&gt;,&gt;=,&lt;,&lt;=</td>
+</tr>
+<tr>
+<td style="text-align:right">[key = ‘123’]</td>
+<td style="text-align:left">字符串类型对象属性比较过滤，例如$.departs[name = ‘123’]，比较操作符支持=,!=,&gt;,&gt;=,&lt;,&lt;=</td>
+</tr>
+<tr>
+<td style="text-align:right">[key like ‘aa%’]</td>
+<td style="text-align:left">字符串类型like过滤，例如$.departs[name like ‘sz*’]，通配符只支持% ,支持not like</td>
+</tr>
+<tr>
+<td style="text-align:right">[key rlike ‘regexpr’]</td>
+<td style="text-align:left">字符串类型正则匹配过滤，例如departs[name like ‘aa(.)*’]，正则语法为jdk的正则语法，支持not rlike</td>
+</tr>
+<tr>
+<td style="text-align:right">[key in (‘v0’, ‘v1’)]</td>
+<td style="text-align:left">IN过滤, 支持字符串和数值类型 例如 \$.departs[name in (‘wenshao’,’Yako’)]  \$.departs[id not in (101,102)]</td>
+</tr>
+<tr>
+<td style="text-align:right">[key between 234 and 456]</td>
+<td style="text-align:left">BETWEEN过滤, 支持数值类型，支持not between 例如 \$.departs[id between 101 and 201],\$.departs[id not between 101 and 201]</td>
+</tr>
+<tr>
+<td style="text-align:right">length() 或者 size()</td>
+<td style="text-align:left">数组长度。例如$.values.size(),支持类型java.util.Map和java.util.Collection和数组</td>
+</tr>
+<tr>
+<td style="text-align:right">.</td>
+<td style="text-align:left">属性访问，例如$.name</td>
+</tr>
+<tr>
+<td style="text-align:right">*</td>
+<td style="text-align:left">对象的所有属性，例如$.leader.*</td>
+</tr>
+<tr>
+<td style="text-align:right">[‘key’]</td>
+<td style="text-align:left">属性访问。例如$[‘name’]</td>
+</tr>
+<tr>
+<td style="text-align:right">[‘key0’,’key1’]</td>
+<td style="text-align:left">多个属性访问。例如$[‘id’,’name’]</td>
+</tr>
+</tbody>
+</table>
+<p>以下两种写法的语义是相同的：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$.store.book[0].title</span><br></pre></td></tr></table></figure></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$[&apos;store&apos;][&apos;book&apos;][0][&apos;title&apos;]</span><br></pre></td></tr></table></figure>
+<h4 id="语法示例"><a href="#语法示例" class="headerlink" title="语法示例"></a>语法示例</h4><table>
+<thead>
+<tr>
+<th style="text-align:center">JSONPath</th>
+<th style="text-align:center">语义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">$</td>
+<td style="text-align:center">根对象</td>
+</tr>
+<tr>
+<td style="text-align:center">$[-1]</td>
+<td style="text-align:center">最后元素</td>
+</tr>
+<tr>
+<td style="text-align:center">$[:-2]</td>
+<td style="text-align:center">第1个至倒数第2个</td>
+</tr>
+<tr>
+<td style="text-align:center">$[1:]</td>
+<td style="text-align:center">第2个之后所有元素</td>
+</tr>
+<tr>
+<td style="text-align:center">$[1,2,3]</td>
+<td style="text-align:center">集合中1,2,3个元素</td>
+</tr>
+</tbody>
+</table>
+<h4 id="API-示例"><a href="#API-示例" class="headerlink" title="API 示例"></a>API 示例</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line">public void test_entity() throws Exception &#123;</span><br><span class="line">   Entity entity = new Entity(123, new Object());</span><br><span class="line"></span><br><span class="line">  Assert.assertSame(entity.getValue(), JSONPath.eval(entity, &quot;$.value&quot;)); </span><br><span class="line">  Assert.assertTrue(JSONPath.contains(entity, &quot;$.value&quot;));</span><br><span class="line">  Assert.assertTrue(JSONPath.containsValue(entity, &quot;$.id&quot;, 123));</span><br><span class="line">  Assert.assertTrue(JSONPath.containsValue(entity, &quot;$.value&quot;, entity.getValue())); </span><br><span class="line">  Assert.assertEquals(2, JSONPath.size(entity, &quot;$&quot;));</span><br><span class="line">  Assert.assertEquals(0, JSONPath.size(new Object[], &quot;$&quot;)); </span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">public static class Entity &#123;</span><br><span class="line">   private Integer id;</span><br><span class="line">   private String name;</span><br><span class="line">   private Object value;</span><br><span class="line"></span><br><span class="line">   public Entity() &#123;&#125;</span><br><span class="line">   public Entity(Integer id, Object value) &#123; this.id = id; this.value = value; &#125;</span><br><span class="line">   public Entity(Integer id, String name) &#123; this.id = id; this.name = name; &#125;</span><br><span class="line">   public Entity(String name) &#123; this.name = name; &#125;</span><br><span class="line"></span><br><span class="line">   public Integer getId() &#123; return id; &#125;</span><br><span class="line">   public Object getValue() &#123; return value; &#125;        </span><br><span class="line">   public String getName() &#123; return name; &#125;</span><br><span class="line"></span><br><span class="line">   public void setId(Integer id) &#123; this.id = id; &#125;</span><br><span class="line">   public void setName(String name) &#123; this.name = name; &#125;</span><br><span class="line">   public void setValue(Object value) &#123; this.value = value; &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li><p>读取集合多个元素的某个属性</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">List&lt;Entity&gt; entities = new ArrayList&lt;Entity&gt;();</span><br><span class="line">entities.add(new Entity(&quot;wenshao&quot;));</span><br><span class="line">entities.add(new Entity(&quot;ljw2083&quot;));</span><br><span class="line"></span><br><span class="line">List&lt;String&gt; names = (List&lt;String&gt;)JSONPath.eval(entities, &quot;$.name&quot;); // 返回enties的所有名称</span><br><span class="line">Assert.assertSame(entities.get(0).getName(), names.get(0));</span><br><span class="line">Assert.assertSame(entities.get(1).getName(), names.get(1));</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>返回集合中多个元素</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">List&lt;Entity&gt; entities = new ArrayList&lt;Entity&gt;();</span><br><span class="line">entities.add(new Entity(&quot;wenshao&quot;));</span><br><span class="line">entities.add(new Entity(&quot;ljw2083&quot;));</span><br><span class="line">entities.add(new Entity(&quot;Yako&quot;));</span><br><span class="line"></span><br><span class="line">List&lt;Entity&gt; result = (List&lt;Entity&gt;)JSONPath.eval(entities, &quot;[1,2]&quot;); // 返回下标为1和2的元素</span><br><span class="line">Assert.assertEquals(2, result.size());</span><br><span class="line">Assert.assertSame(entities.get(1), result.get(0));</span><br><span class="line">Assert.assertSame(entities.get(2), result.get(1));</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>按范围返回集合的子集</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">List&lt;Entity&gt; entities = new ArrayList&lt;Entity&gt;();</span><br><span class="line">entities.add(new Entity(&quot;wenshao&quot;));</span><br><span class="line">entities.add(new Entity(&quot;ljw2083&quot;));</span><br><span class="line">entities.add(new Entity(&quot;Yako&quot;));</span><br><span class="line"></span><br><span class="line">List&lt;Entity&gt; result = (List&lt;Entity&gt;)JSONPath.eval(entities, &quot;[0:2]&quot;); // 返回下标从0到2的元素</span><br><span class="line">Assert.assertEquals(3, result.size());</span><br><span class="line">Assert.assertSame(entities.get(0), result.get(0));</span><br><span class="line">Assert.assertSame(entities.get(1), result.get(1));</span><br><span class="line">Assert.assertSame(entities.get(2), result.get(1));</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>通过条件过滤，返回集合的子集</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">List&lt;Entity&gt; entities = new ArrayList&lt;Entity&gt;();</span><br><span class="line">entities.add(new Entity(1001, &quot;ljw2083&quot;));</span><br><span class="line">entities.add(new Entity(1002, &quot;wenshao&quot;));</span><br><span class="line">entities.add(new Entity(1003, &quot;yakolee&quot;));</span><br><span class="line">entities.add(new Entity(1004, null));</span><br><span class="line"></span><br><span class="line">List&lt;Object&gt; result = (List&lt;Object&gt;) JSONPath.eval(entities, &quot;[id in (1001)]&quot;);</span><br><span class="line">Assert.assertEquals(1, result.size());</span><br><span class="line">Assert.assertSame(entities.get(0), result.get(0));</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>根据属性值过滤条件判断是否返回对象，修改对象，数组属性添加元素</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">Entity entity = new Entity(1001, &quot;ljw2083&quot;);</span><br><span class="line">Assert.assertSame(entity , JSONPath.eval(entity, &quot;[id = 1001]&quot;));</span><br><span class="line">Assert.assertNull(JSONPath.eval(entity, &quot;[id = 1002]&quot;));</span><br><span class="line"></span><br><span class="line">JSONPath.set(entity, &quot;id&quot;, 123456); //将id字段修改为123456</span><br><span class="line">Assert.assertEquals(123456, entity.getId().intValue());</span><br><span class="line"></span><br><span class="line">JSONPath.set(entity, &quot;value&quot;, new int[0]); //将value字段赋值为长度为0的数组</span><br><span class="line">JSONPath.arrayAdd(entity, &quot;value&quot;, 1, 2, 3); //将value字段的数组添加元素1,2,3</span><br></pre></td></tr></table></figure></li>
+</ul>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/fastjson/" rel="tag"># fastjson</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/04/22/解析proto文件/" rel="next" title="解析proto文件">
+                <i class="fa fa-chevron-left"></i> 解析proto文件
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2016/07/20/JMockit/" rel="prev" title="JMockit">
+                JMockit <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+      <div class="ds-thread" data-thread-key="2016/05/14/fastjson/"
+           data-title="fastjson" data-url="http://guangfei.win/2016/05/14/fastjson/">
+      </div>
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">sky</p>
+              <p class="site-description motion-element" itemprop="description">keep going</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">23</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">3</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">7</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#主要API"><span class="nav-number">1.</span> <span class="nav-text">主要API</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#定制序列化"><span class="nav-number">2.</span> <span class="nav-text">定制序列化</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#通过-JSONField定制序列化"><span class="nav-number">2.1.</span> <span class="nav-text">通过@JSONField定制序列化</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#使用-JSONType配置"><span class="nav-number">2.2.</span> <span class="nav-text">使用@JSONType配置</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#通过SerializeFilter定制序列化"><span class="nav-number">2.3.</span> <span class="nav-text">通过SerializeFilter定制序列化</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#PropertyFilter-根据PropertyName和PropertyValue来判断是否序列化"><span class="nav-number">2.3.1.</span> <span class="nav-text">PropertyFilter 根据PropertyName和PropertyValue来判断是否序列化</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#PropertyPreFilter-根据PropertyName判断是否序列化"><span class="nav-number">2.3.2.</span> <span class="nav-text">PropertyPreFilter 根据PropertyName判断是否序列化</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#NameFilter-序列化时修改Key"><span class="nav-number">2.3.3.</span> <span class="nav-text">NameFilter 序列化时修改Key</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#ValueFilter-序列化是修改Value"><span class="nav-number">2.3.4.</span> <span class="nav-text">ValueFilter 序列化是修改Value</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#BeforeFilter-序列化时在最前添加内容"><span class="nav-number">2.3.5.</span> <span class="nav-text">BeforeFilter 序列化时在最前添加内容</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#AfterFilter-序列化时在最前添加内容"><span class="nav-number">2.3.6.</span> <span class="nav-text">AfterFilter 序列化时在最前添加内容</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#类级别配置Filter"><span class="nav-number">2.3.7.</span> <span class="nav-text">类级别配置Filter</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#BeanToArray"><span class="nav-number">2.3.8.</span> <span class="nav-text">BeanToArray</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#通过ParseProcess定制反序列化"><span class="nav-number">2.4.</span> <span class="nav-text">通过ParseProcess定制反序列化</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#使用ExtraProcessor-处理多余字段"><span class="nav-number">2.4.1.</span> <span class="nav-text">使用ExtraProcessor 处理多余字段</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#使用ExtraTypeProvider-为多余的字段提供类型"><span class="nav-number">2.4.2.</span> <span class="nav-text">使用ExtraTypeProvider 为多余的字段提供类型</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#自定义序列化"><span class="nav-number">3.</span> <span class="nav-text">自定义序列化</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#API"><span class="nav-number">3.1.</span> <span class="nav-text">API</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Sample"><span class="nav-number">3.2.</span> <span class="nav-text">Sample</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#自定义反序列化"><span class="nav-number">4.</span> <span class="nav-text">自定义反序列化</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#API-1"><span class="nav-number">4.1.</span> <span class="nav-text">API</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Sample-1"><span class="nav-number">4.2.</span> <span class="nav-text">Sample</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#处理超大对象和超大JSON文本"><span class="nav-number">5.</span> <span class="nav-text">处理超大对象和超大JSON文本</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#序列化"><span class="nav-number">5.1.</span> <span class="nav-text">序列化</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#超大JSON数组序列化"><span class="nav-number">5.1.1.</span> <span class="nav-text">超大JSON数组序列化</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#超大JSON对象序列化"><span class="nav-number">5.1.2.</span> <span class="nav-text">超大JSON对象序列化</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#反序列化"><span class="nav-number">5.2.</span> <span class="nav-text">反序列化</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#LabelFilter"><span class="nav-number">6.</span> <span class="nav-text">LabelFilter</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#从流中反序列化"><span class="nav-number">7.</span> <span class="nav-text">从流中反序列化</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#将对象序列化到流中"><span class="nav-number">8.</span> <span class="nav-text">将对象序列化到流中</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#JSONPath"><span class="nav-number">9.</span> <span class="nav-text">JSONPath</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#API-2"><span class="nav-number">9.1.</span> <span class="nav-text">API</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#支持语法"><span class="nav-number">9.2.</span> <span class="nav-text">支持语法</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#语法示例"><span class="nav-number">9.3.</span> <span class="nav-text">语法示例</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#API-示例"><span class="nav-number">9.4.</span> <span class="nav-text">API 示例</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2015 &mdash; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">sky</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Mist</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"13m"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+    
+    
+    <script src="/lib/ua-parser-js/dist/ua-parser.min.js?v=0.7.9"></script>
+    <script src="/js/src/hook-duoshuo.js"></script>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.4.js"></script>
+  <script>AV.initialize("JhJQHbjn7uinA1k70nNSCqys-gzGzoHsz", "OdTTinqgVB1mkIAMgwB38zH2");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

@@ -1,0 +1,1010 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="test," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="JMockit 是用以帮助开发人员编写测试程序的一组工具和API，与JUnit TestNG配合使用。">
+<meta name="keywords" content="test">
+<meta property="og:type" content="article">
+<meta property="og:title" content="JMockit">
+<meta property="og:url" content="http://guangfei.win/2016/07/20/JMockit/index.html">
+<meta property="og:site_name" content="越是憧憬 越要风雨兼程">
+<meta property="og:description" content="JMockit 是用以帮助开发人员编写测试程序的一组工具和API，与JUnit TestNG配合使用。">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2018-10-19T06:41:17.988Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="JMockit">
+<meta name="twitter:description" content="JMockit 是用以帮助开发人员编写测试程序的一组工具和API，与JUnit TestNG配合使用。">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://guangfei.win/2016/07/20/JMockit/"/>
+
+
+
+
+
+  <title>JMockit | 越是憧憬 越要风雨兼程</title>
+  
+
+
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?add444b58ef1d82ab2d6e5f7d4c9c159";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">越是憧憬 越要风雨兼程</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://guangfei.win/2016/07/20/JMockit/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="sky">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="越是憧憬 越要风雨兼程">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">JMockit</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-07-20T17:01:54+08:00">
+                2016-07-20
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/java-tool/" itemprop="url" rel="index">
+                    <span itemprop="name">java tool</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2016/07/20/JMockit/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/07/20/JMockit/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+             <span id="/2016/07/20/JMockit/" class="leancloud_visitors" data-flag-title="JMockit">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数&#58;</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>JMockit 是用以帮助开发人员编写测试程序的一组工具和API，与<code>JUnit</code> <code>TestNG</code>配合使用。<br><a id="more"></a></p>
+<h3 id="Maven地址"><a href="#Maven地址" class="headerlink" title="Maven地址"></a>Maven地址</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&lt;dependency&gt;</span><br><span class="line">    &lt;groupId&gt;org.jmockit&lt;/groupId&gt;</span><br><span class="line">    &lt;artifactId&gt;jmockit&lt;/artifactId&gt;</span><br><span class="line">    &lt;version&gt;1.25&lt;/version&gt;</span><br><span class="line">&lt;/dependency&gt;</span><br></pre></td></tr></table></figure>
+<h3 id="注解"><a href="#注解" class="headerlink" title="注解"></a>注解</h3><ul>
+<li>@Mocked：mock类及其父类，Object除外</li>
+<li>@Injectable：mock类的某个实例，其他实例不受影响</li>
+<li>@Capturing：mock类及其子类</li>
+<li>@Tested：自动实例化，并注入mocked依赖</li>
+<li>@Mock：MockUp模式中，指定被Fake的方法<h3 id="常用类"><a href="#常用类" class="headerlink" title="常用类"></a>常用类</h3></li>
+<li><code>Expectations</code>：期望，指定必须被调用的方法，返回值，调用次数</li>
+<li><code>StrictExpectations</code>：严格期望，指定的方法必须按顺序被调用</li>
+<li><code>Verifications</code>：验证</li>
+<li><code>Invocation</code>：工具类，可以获取调用信息</li>
+<li><code>Delegate</code>：根据参数指定返回值</li>
+<li><code>MockUp</code>：模拟函数实现</li>
+<li><code>Deencapsulation</code>：反射攻击类</li>
+</ul>
+<h3 id="模式"><a href="#模式" class="headerlink" title="模式"></a>模式</h3><p>JMocket有两种mock模式，基于行为的mock方式和基于状态的mock方式</p>
+<h3 id="基于状态的mock方式-Faking"><a href="#基于状态的mock方式-Faking" class="headerlink" title="基于状态的mock方式(Faking)"></a>基于状态的mock方式(Faking)</h3><p>基于状态的mock直接改写被mock类方法的逻辑<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">public static class MockLoginContextThatFailsAuthentication extends MockUp&lt;LoginContext&gt;</span><br><span class="line">&#123;</span><br><span class="line">   @Mock</span><br><span class="line">   public void $init(String name) &#123;&#125;</span><br><span class="line"> </span><br><span class="line">   @Mock</span><br><span class="line">   public void login() throws LoginException</span><br><span class="line">   &#123;</span><br><span class="line">      throw new LoginException();</span><br><span class="line">   &#125;</span><br><span class="line">&#125;</span><br><span class="line"> </span><br><span class="line">@Test(expected = LoginException.class)</span><br><span class="line">public void applyingAnotherMockClass() throws Exception</span><br><span class="line">&#123;</span><br><span class="line">   new MockLoginContextThatFailsAuthentication();</span><br><span class="line"> </span><br><span class="line">   // Inside an application class:</span><br><span class="line">   new LoginContext(&quot;test&quot;).login();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>除了fack <code>public</code> 方法外，<code>private</code>,<code>protected</code>,<code>package-private</code>,<code>static</code>,<code>final</code>,<code>native</code>方法都开源被fake。<br>被fake的方法需要有实现，所以<code>abstract</code>方法，<code>interface</code>的方法不能直接被fack</p>
+<h4 id="In-line-mock-up-classes"><a href="#In-line-mock-up-classes" class="headerlink" title="In-line mock-up classes"></a>In-line mock-up classes</h4><p>如果只是需要在一个单独的测试中face一个类，可以在测试方法内部定义一个匿名的<code>mock-up</code>类。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">@Test</span><br><span class="line">public void applyingAnAnonymousMockup() throws Exception</span><br><span class="line">&#123;</span><br><span class="line">   new MockUp&lt;LoginContext&gt;() &#123;</span><br><span class="line">      @Mock void $init(String name) &#123; /* do nothing */ &#125;</span><br><span class="line">      @Mock void login() &#123;&#125;</span><br><span class="line">   &#125;);</span><br><span class="line"> </span><br><span class="line">   new LoginContext(&quot;test&quot;).login();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h4 id="Faking-an-interface"><a href="#Faking-an-interface" class="headerlink" title="Faking an interface"></a>Faking an interface</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">@Test</span><br><span class="line">public void fakingAnInterface() throws Exception</span><br><span class="line">&#123;</span><br><span class="line">   CallbackHandler callbackHandler = new MockUp&lt;CallbackHandler&gt;() &#123;</span><br><span class="line">      @Mock</span><br><span class="line">      void handle(Callback[] callbacks)</span><br><span class="line">      &#123;</span><br><span class="line">         // fake implementation here</span><br><span class="line">      &#125;</span><br><span class="line">   &#125;.getMockInstance();</span><br><span class="line"> </span><br><span class="line">   callbackHandler.handle(new Callback[] &#123;new NameCallback(&quot;Enter name:&quot;)&#125;);</span><br></pre></td></tr></table></figure>
+<p><code>MockUp#getMockInstance()</code>方法返回一个实现了<code>CallbackHandler</code>接口的代理对象</p>
+<h4 id="Faking-unspecified-implementation-classes"><a href="#Faking-unspecified-implementation-classes" class="headerlink" title="Faking unspecified implementation classes"></a>Faking unspecified implementation classes</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">public interface Service &#123; int doSomething(); &#125;</span><br><span class="line">final class ServiceImpl implements Service &#123; public int doSomething() &#123; return 1; &#125; &#125;</span><br><span class="line"> </span><br><span class="line">public final class TestedUnit</span><br><span class="line">&#123;</span><br><span class="line">   private final Service service1 = new ServiceImpl();</span><br><span class="line">   private final Service service2 = new Service() &#123; public int doSomething() &#123; return 2; &#125; &#125;;</span><br><span class="line"> </span><br><span class="line">   public int businessOperation()</span><br><span class="line">   &#123;</span><br><span class="line">      return service1.doSomething() + service2.doSomething();</span><br><span class="line">   &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">@Test</span><br><span class="line">public &lt;T extends Service&gt; void fakingImplementationClassesFromAGivenBaseType()</span><br><span class="line">&#123;</span><br><span class="line">   new MockUp&lt;T&gt;() &#123;</span><br><span class="line">      @Mock int doSomething() &#123; return 7; &#125;</span><br><span class="line">   &#125;;</span><br><span class="line"> </span><br><span class="line">   int result = new TestedUnit().businessOperation();</span><br><span class="line"> </span><br><span class="line">   assertEquals(14, result);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>在上边的测试中，所有实现了<code>Service#doSomething()</code>的方法调用都会被重定向到mock的方法。</p>
+<h4 id="Accessing-the-invocation-context"><a href="#Accessing-the-invocation-context" class="headerlink" title="Accessing the invocation context"></a>Accessing the invocation context</h4><p>mock方法时，可以将<code>mockit.Invocation</code>作为方法的第一个参数（附加参数，调用方法时无需传入）传入，当方法被执行的时候，<code>Invocation</code>对象会自动被传入。<br><code>Invocation</code>提供了一些getter方法，可以在mock方法内部使用。其中一个是<code>getInvokedInstance()</code>，返回被mocked的对象。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br></pre></td><td class="code"><pre><span class="line">@Test</span><br><span class="line">public void accessingTheMockedInstanceInMockMethods() throws Exception</span><br><span class="line">&#123;</span><br><span class="line">   final Subject testSubject = new Subject();</span><br><span class="line"> </span><br><span class="line">   new MockUp&lt;LoginContext&gt;() &#123;</span><br><span class="line">      @Mock</span><br><span class="line">      void $init(Invocation invocation, String name, Subject subject)</span><br><span class="line">      &#123;</span><br><span class="line">         assertNotNull(name);</span><br><span class="line">         assertSame(testSubject, subject);</span><br><span class="line"> </span><br><span class="line">         // Gets the invoked instance.</span><br><span class="line">         LoginContext loginContext = invocation.getInvokedInstance();</span><br><span class="line"> </span><br><span class="line">         // Verifies that this is the first invocation.</span><br><span class="line">         assertEquals(1, invocation.getInvocationCount());</span><br><span class="line"> </span><br><span class="line">         // Forces setting of private Subject field, since no setter is available.</span><br><span class="line">         Deencapsulation.setField(loginContext, subject);</span><br><span class="line">      &#125;</span><br><span class="line"> </span><br><span class="line">      @Mock</span><br><span class="line">      void login(Invocation invocation)</span><br><span class="line">      &#123;</span><br><span class="line">         // Gets the invoked instance.</span><br><span class="line">         LoginContext loginContext = invocation.getInvokedInstance();</span><br><span class="line"> </span><br><span class="line">         // getSubject() returns null until the subject is authenticated.</span><br><span class="line">         assertNull(loginContext.getSubject());</span><br><span class="line"> </span><br><span class="line">         // Private field set to true when login succeeds.</span><br><span class="line">         Deencapsulation.setField(loginContext, &quot;loginSucceeded&quot;, true);</span><br><span class="line">      &#125;</span><br><span class="line"> </span><br><span class="line">      @Mock</span><br><span class="line">      void logout(Invocation invocation)</span><br><span class="line">      &#123;</span><br><span class="line">         // Gets the invoked instance.</span><br><span class="line">         LoginContext loginContext = invocation.getInvokedInstance();</span><br><span class="line"> </span><br><span class="line">         assertSame(testSubject, loginContext.getSubject());</span><br><span class="line">      &#125;</span><br><span class="line">   &#125;;</span><br><span class="line"> </span><br><span class="line">   LoginContext theMockedInstance = new LoginContext(&quot;test&quot;, testSubject);</span><br><span class="line">   theMockedInstance.login();</span><br><span class="line">   theMockedInstance.logout();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h4 id="Proceeding-into-the-real-implementation"><a href="#Proceeding-into-the-real-implementation" class="headerlink" title="Proceeding into the real implementation"></a>Proceeding into the real implementation</h4><p>@Mock方法一旦执行就会被从定向到mock方法。如果想执行mock方法的真实实现，可以将<code>Invocation</code>当做mock方法的第一个参数，并调用<code>proceed()</code>方法。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br></pre></td><td class="code"><pre><span class="line">@Test</span><br><span class="line">public void proceedIntoRealImplementationsOfFakedMethods() throws Exception</span><br><span class="line">&#123;</span><br><span class="line">   // Create objects used by the code under test:</span><br><span class="line">   LoginContext loginContext = new LoginContext(&quot;test&quot;, null, null, configuration);</span><br><span class="line"> </span><br><span class="line">   // Apply mock-ups:</span><br><span class="line">   ProceedingMockLoginContext mockInstance = new ProceedingMockLoginContext();</span><br><span class="line"> </span><br><span class="line">   // Exercise the code under test:</span><br><span class="line">   assertNull(loginContext.getSubject());</span><br><span class="line">   loginContext.login();</span><br><span class="line">   assertNotNull(loginContext.getSubject());</span><br><span class="line">   assertTrue(mockInstance.loggedIn);</span><br><span class="line"> </span><br><span class="line">   mockInstance.ignoreLogout = true;</span><br><span class="line">   loginContext.logout(); // first entry: do nothing</span><br><span class="line">   assertTrue(mockInstance.loggedIn);</span><br><span class="line"> </span><br><span class="line">   mockInstance.ignoreLogout = false;</span><br><span class="line">   loginContext.logout(); // second entry: execute real implementation</span><br><span class="line">   assertFalse(mockInstance.loggedIn);</span><br><span class="line">&#125;</span><br><span class="line"> </span><br><span class="line">static final class ProceedingMockLoginContext extends MockUp&lt;LoginContext&gt;</span><br><span class="line">&#123;</span><br><span class="line">   boolean ignoreLogout;</span><br><span class="line">   boolean loggedIn;</span><br><span class="line"> </span><br><span class="line">   @Mock</span><br><span class="line">   void login(Invocation inv) throws LoginException</span><br><span class="line">   &#123;</span><br><span class="line">      try &#123;</span><br><span class="line">         inv.proceed(); // executes the real code of the mocked method</span><br><span class="line">         loggedIn = true;</span><br><span class="line">      &#125;</span><br><span class="line">      finally &#123;</span><br><span class="line">         // This is here just to show that arbitrary actions can be taken inside</span><br><span class="line">         // the mock, before and/or after the real method gets executed.</span><br><span class="line">         LoginContext lc = inv.getInvokedInstance();</span><br><span class="line">         System.out.println(&quot;Login attempted for &quot; + lc.getSubject());</span><br><span class="line">      &#125;</span><br><span class="line">   &#125;</span><br><span class="line"> </span><br><span class="line">   @Mock</span><br><span class="line">   void logout(Invocation inv) throws LoginException</span><br><span class="line">   &#123;</span><br><span class="line">      // We can choose to proceed into the real implementation or not.</span><br><span class="line">      if (!ignoreLogout) &#123;</span><br><span class="line">         inv.proceed();</span><br><span class="line">         loggedIn = false;</span><br><span class="line">      &#125;</span><br><span class="line">   &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h4 id="Reusing-mock-ups-between-tests"><a href="#Reusing-mock-ups-between-tests" class="headerlink" title="Reusing mock-ups between tests"></a>Reusing mock-ups between tests</h4><p>如果需要在测试用例中重复使用<code>mock-up</code>类，可以将其定义到<code>@Before</code>,<code>@BeforeClass</code>注解等方法中，当最后一个<code>@After</code>,<code>@AfterClass</code>方法执行完毕后，<code>mock-up</code>类自动失效。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">public class MyTestClass</span><br><span class="line">&#123;</span><br><span class="line">   @BeforeClass</span><br><span class="line">   public static void applySharedMockups()</span><br><span class="line">   &#123;</span><br><span class="line">      new MockUp&lt;LoginContext&gt;() &#123;</span><br><span class="line">         // shared @Mock&apos;s here...</span><br><span class="line">      &#125;;</span><br><span class="line">   &#125;</span><br><span class="line"> </span><br><span class="line">   // test methods that will share the mock-ups applied above...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h4 id="Global-mock-ups"><a href="#Global-mock-ups" class="headerlink" title="Global mock-ups"></a>Global mock-ups</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">@RunWith(Suite.class)</span><br><span class="line">@Suite.SuiteClasses(&#123;MyFirstTest.class, MySecondTest.class&#125;)</span><br><span class="line">public final class TestSuite</span><br><span class="line">&#123;</span><br><span class="line">   @BeforeClass</span><br><span class="line">   public static void applyGlobalMockUps()</span><br><span class="line">   &#123;</span><br><span class="line">      new LoggingMocks();</span><br><span class="line"> </span><br><span class="line">      new MockUp&lt;SomeClass&gt;() &#123;</span><br><span class="line">         @Mock someMethod() &#123;&#125;</span><br><span class="line">      &#125;;</span><br><span class="line">   &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="Applying-AOP-style-advice"><a href="#Applying-AOP-style-advice" class="headerlink" title="Applying AOP-style advice"></a>Applying AOP-style advice</h4><p>Jmocke中还有一个特殊的Mock方法可以在<code>mock-up</code>类中出现：<code>$advice</code>。如果定义了此方法，它将处理目标类中的每一个方法。与普通的mock方法不同，这个方法有特殊的方法签名、返回值：<code>Object $advice(Invocation)</code><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line">public final class MethodTiming extends MockUp&lt;Object&gt;</span><br><span class="line">&#123;</span><br><span class="line">   private final Map&lt;Method, Long&gt; methodTimes = new HashMap&lt;&gt;();</span><br><span class="line"> </span><br><span class="line">   public MethodTiming(Class&lt;?&gt; targetClass) &#123; super(targetClass); &#125;</span><br><span class="line">   MethodTiming(String className) throws ClassNotFoundException &#123; super(Class.forName(className)); &#125;</span><br><span class="line"> </span><br><span class="line">   @Mock</span><br><span class="line">   public Object $advice(Invocation invocation)</span><br><span class="line">   &#123;</span><br><span class="line">      long timeBefore = System.nanoTime();</span><br><span class="line"> </span><br><span class="line">      try &#123;</span><br><span class="line">         return invocation.proceed();</span><br><span class="line">      &#125;</span><br><span class="line">      finally &#123;</span><br><span class="line">         long timeAfter = System.nanoTime();</span><br><span class="line">         long dt = timeAfter - timeBefore;</span><br><span class="line"> </span><br><span class="line">         Method executedMethod = invocation.getInvokedMember();</span><br><span class="line">         Long dtUntilLastExecution = methodTimes.get(executedMethod);</span><br><span class="line">         Long dtUntilNow = dtUntilLastExecution == null ? dt : dtUntilLastExecution + dt;</span><br><span class="line">         methodTimes.put(executedMethod, dtUntilNow);</span><br><span class="line">      &#125;</span><br><span class="line">   &#125;</span><br><span class="line"> </span><br><span class="line">   @Override</span><br><span class="line">   protected void onTearDown()</span><br><span class="line">   &#123;</span><br><span class="line">      System.out.println(&quot;\nTotal timings for methods in &quot; + mockedType + &quot; (ms)&quot;);</span><br><span class="line"> </span><br><span class="line">      for (Entry&lt;Method, Long&gt; methodAndTime : methodTimes.entrySet()) &#123;</span><br><span class="line">         Method method = methodAndTime.getKey();</span><br><span class="line">         long dtNanos = methodAndTime.getValue();</span><br><span class="line">         long dtMillis = dtNanos / 1000000L;</span><br><span class="line">         System.out.println(&quot;\t&quot; + method + &quot; = &quot; + dtMillis);</span><br><span class="line">      &#125;</span><br><span class="line">   &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h3 id="基于行为的mock方式-mocking"><a href="#基于行为的mock方式-mocking" class="headerlink" title="基于行为的mock方式(mocking)"></a>基于行为的mock方式(mocking)</h3><p>步骤为：</p>
+<ol>
+<li>录制：预期被调用的方法、返回值、调用测试。对应<code>Expectations</code>。</li>
+<li>回放：执行测试。对应真实测试代码。</li>
+<li>验证：检查被mock对象是否按照录制行为被调用。对应<code>Verifications</code>。<br>基本模板如下：<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">@Test    </span><br><span class="line">public void testWithBothRecordAndVerify(mock parameters)    </span><br><span class="line">&#123;    </span><br><span class="line">   //测试前的准备  </span><br><span class="line">  </span><br><span class="line">   new Expectations() &#123; // 期望块     </span><br><span class="line">      &#123;    </span><br><span class="line">         // 一个或者多个mock对象(类型)的调用   </span><br><span class="line">      &#125;    </span><br><span class="line">   &#125;;    </span><br><span class="line">  </span><br><span class="line">   // 单元测试业务逻辑</span><br><span class="line">  </span><br><span class="line">   new Verifications() &#123;&#123; // 验证块    </span><br><span class="line"> </span><br><span class="line">   &#125;&#125;;    </span><br><span class="line">  </span><br><span class="line">  // 其他额外的验证代码，JUnit/TestNG 断言等      </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<h4 id="Expectations"><a href="#Expectations" class="headerlink" title="Expectations"></a>Expectations</h4><p>expectations是一个给定的测试要调用的方法的集合。在测试阶段，被测试对象调用mock对象的方法过程要与expectations匹配，包括：方法、参数、调用次数。<br>对于non-void方法，在方法调用后紧跟返回值，<code>result=xxx;</code>或者<code>returns(xxx);</code><br>使用<code>result=xxx;</code>模式，还可以返回构造方法，异常对象。<br>连续调用同一个方法返回不同的值或异常，有以下几种方法：</p>
+<ol>
+<li>对<code>result</code>多次赋值</li>
+<li>调用<code>returns(Object...)</code>方法</li>
+<li>将<code>list</code>或者<code>array</code>赋值给<code>result</code><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">        new Expectations()&#123;</span><br><span class="line">            &#123;</span><br><span class="line">                fun.publicMethod(anyString); //期望调用publicMethod</span><br><span class="line">//                result = &quot;mock1&quot;; // 连续赋值</span><br><span class="line">//                result = &quot;mock2&quot;;</span><br><span class="line">//                returns(&quot;mock1&quot;,&quot;mock2&quot;); //使用returns()方法返回</span><br><span class="line">//                result = Arrays.asList(&quot;mock1&quot;,&quot;mock2&quot;); //返回list</span><br><span class="line">                result = new String[]&#123;&quot;mock1&quot;,&quot;mock2&quot;&#125;; //返回array</span><br><span class="line">                fun.withException(anyString);//期望调用withException</span><br><span class="line">                result = new NullPointerException(&quot;mock exception&quot;);//抛出异常</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;;</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<h4 id="Injectable"><a href="#Injectable" class="headerlink" title="Injectable"></a>Injectable</h4><p>@Mocked 会作用于类的所有实例上。而@Injectable只作用于对象，不会mock构造方法、static方法、父类。<br>被测试类：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">public final class ConcatenatingInputStream extends InputStream</span><br><span class="line">&#123;</span><br><span class="line">   private final Queue&lt;InputStream&gt; sequentialInputs;</span><br><span class="line">   private InputStream currentInput;</span><br><span class="line"> </span><br><span class="line">   public ConcatenatingInputStream(InputStream... sequentialInputs)</span><br><span class="line">   &#123;</span><br><span class="line">      this.sequentialInputs = new LinkedList&lt;InputStream&gt;(Arrays.asList(sequentialInputs));</span><br><span class="line">      currentInput = this.sequentialInputs.poll();</span><br><span class="line">   &#125;</span><br><span class="line"> </span><br><span class="line">   @Override</span><br><span class="line">   public int read() throws IOException</span><br><span class="line">   &#123;</span><br><span class="line">      if (currentInput == null) return -1;</span><br><span class="line"> </span><br><span class="line">      int nextByte = currentInput.read();</span><br><span class="line"> </span><br><span class="line">      if (nextByte &gt;= 0) &#123;</span><br><span class="line">         return nextByte;</span><br><span class="line">      &#125;</span><br><span class="line"> </span><br><span class="line">      currentInput = sequentialInputs.poll();</span><br><span class="line">      return read();</span><br><span class="line">   &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>测试类：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">@Test</span><br><span class="line">public void concatenateInputStreams(</span><br><span class="line">   @Injectable final InputStream input1, @Injectable final InputStream input2)</span><br><span class="line">   throws Exception</span><br><span class="line">&#123;</span><br><span class="line">   new Expectations() &#123;&#123;</span><br><span class="line">      input1.read(); returns(1, 2, -1);</span><br><span class="line">      input2.read(); returns(3, -1);</span><br><span class="line">   &#125;&#125;;</span><br><span class="line"> </span><br><span class="line">   InputStream concatenatedInput = new ConcatenatingInputStream(input1, input2);</span><br><span class="line">   byte[] buf = new byte[3];</span><br><span class="line">   concatenatedInput.read(buf);</span><br><span class="line"> </span><br><span class="line">   assertArrayEquals(new byte[] &#123;1, 2, 3&#125;, buf);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h4 id="Mocked"><a href="#Mocked" class="headerlink" title="Mocked"></a>Mocked</h4><p>@Mocket注解可以修饰类字段或者方法参数上。</p>
+<ul>
+<li>修饰类字段时<br>同一个测试用例都会受影响</li>
+<li>修饰方法参数时<br>只影响所在方法范围</li>
+</ul>
+<p>缺省的，@Mocked 标注的类型及其父类型(除了Object)的所有方法和构造方法都被mock。将类或者对象作为<code>Expectations</code>的参数可以mock部分方法，也就是说只有录制过的方法才被mock, 而其他的方法直接调用实际的实现。一个对象在<code>Expectations</code>中转化为mock对象后，之前的状态任然保留</p>
+<ul>
+<li><p>mock类<br>类、父类的所有方法及构造方法都可以被录制</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">new Expectations(Collaborator.class) &#123;&#123;</span><br><span class="line">   anyInstance.getValue(); result = 123;</span><br><span class="line">&#125;&#125;;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>mock对象</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">final Collaborator collaborator = new Collaborator(2);</span><br><span class="line"> </span><br><span class="line">new Expectations(collaborator) &#123;&#123;</span><br><span class="line">   collaborator.getValue(); result = 123;</span><br><span class="line">   collaborator.simpleOperation(1, &quot;&quot;, null); result = false;</span><br><span class="line"> </span><br><span class="line">   // Static methods can be dynamically mocked too.</span><br><span class="line">   Collaborator.doSomething(anyBoolean, &quot;test&quot;);</span><br><span class="line">&#125;&#125;;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h4 id="Capaturing"><a href="#Capaturing" class="headerlink" title="Capaturing"></a>Capaturing</h4><p>@Capaturing 使给定类的子孙类被mock<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">public interface Service &#123; int doSomething(); &#125;</span><br><span class="line">final class ServiceImpl implements Service &#123; public int doSomething() &#123; return 1; &#125; &#125;</span><br><span class="line"> </span><br><span class="line">public final class TestedUnit</span><br><span class="line">&#123;</span><br><span class="line">   private final Service service1 = new ServiceImpl();</span><br><span class="line">   private final Service service2 = new Service() &#123; public int doSomething() &#123; return 2; &#125; &#125;;</span><br><span class="line"> </span><br><span class="line">   public int businessOperation()</span><br><span class="line">   &#123;</span><br><span class="line">      return service1.doSomething() + service2.doSomething();</span><br><span class="line">   &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>businessOperation() 是我们要测试的目标方法。但service1 和 service2 是 final 的属性，不能通过反射设置。我们需要在实例化被测实例前先 mock <code>service1</code>和匿名类<code>service2</code>, 但是匿名类，怎么mock呢！这时可以通过<code>@Capaturing</code>，来mock<code>Service</code>的实现类。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">public final class UnitTest</span><br><span class="line">&#123;</span><br><span class="line">   @Capturing Service anyService;</span><br><span class="line"> </span><br><span class="line">   @Test</span><br><span class="line">   public void mockingImplementationClassesFromAGivenBaseType()</span><br><span class="line">   &#123;</span><br><span class="line">      new Expectations() &#123;&#123; anyService.doSomething(); returns(3, 4); &#125;&#125;;</span><br><span class="line"> </span><br><span class="line">      int result = new TestedUnit().businessOperation();</span><br><span class="line"> </span><br><span class="line">      assertEquals(7, result);</span><br><span class="line">   &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p><code>@Capaturing</code>还可以通过可选属性<code>maxInstance</code>限制受影响的实例数量，这样就可以为父类的多个子类录制不同的行为。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">@Test</span><br><span class="line">public void testWithDifferentBehaviorForFirstNewInstanceAndRemainingNewInstances(</span><br><span class="line">   @Capturing(maxInstances = 1) final Buffer firstNewBuffer,</span><br><span class="line">   @Capturing final Buffer remainingNewBuffers)</span><br><span class="line">&#123;</span><br><span class="line">   new Expectations() &#123;&#123;</span><br><span class="line">      firstNewBuffer.position(); result = 10;</span><br><span class="line">      remainingNewBuffers.position(); result = 20;</span><br><span class="line">   &#125;&#125;;</span><br><span class="line"> </span><br><span class="line">   // Code under test creates several buffers...</span><br><span class="line">   ByteBuffer buffer1 = ByteBuffer.allocate(100);</span><br><span class="line">   IntBuffer  buffer2 = IntBuffer.wrap(new int[] &#123;1, 2, 3&#125;);</span><br><span class="line">   CharBuffer buffer3 = CharBuffer.wrap(&quot;                &quot;);</span><br><span class="line"> </span><br><span class="line">   // ... and eventually read their positions, getting 10 for</span><br><span class="line">   // the first buffer created, and 20 for the remaining ones.</span><br><span class="line">   assertEquals(10, buffer1.position());</span><br><span class="line">   assertEquals(20, buffer2.position());</span><br><span class="line">   assertEquals(20, buffer3.position());</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h4 id="Tested"><a href="#Tested" class="headerlink" title="Tested"></a>Tested</h4><p>通常，一个测试类总是操作一个被测试类的对象。通过<code>@Tested</code>可以自动实例化并为其注入mocked依赖。<br><code>@Tested</code>类的属性通过<code>@Injectable</code>注入，非mock的数据（原始类型、数组）等也可以通过<code>Injectable</code>注入，但要显示赋值。<br><code>@Tested</code>支持构造方法注入、属性注入。对应构造方法注入，需要有构造方法能与<code>@Injectable</code>变量匹配。<br>如果<code>@Tested</code>没有被实例化，则先通过匹配到的构造方法注入，之后通过属性注入；如果在定义的时候就被构造，则为null的属性会通过属性注入。<br>注入会先通过类型匹配，如果相同类型有多个，则通过名称匹配。<br>注意，被<code>final</code>修饰的属性只能通过构造方法注入。<br>实例化和依赖注入是在测试方法执行前完成的。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">public class SomeTest</span><br><span class="line">&#123;</span><br><span class="line">   @Tested CodeUnderTest tested;</span><br><span class="line">   @Injectable Dependency dep1;</span><br><span class="line">   @Injectable AnotherDependency dep2;</span><br><span class="line">   @Injectable int someIntegralProperty = 123;</span><br><span class="line"> </span><br><span class="line">   @Test</span><br><span class="line">   public void someTestMethod(@Injectable(&quot;true&quot;) boolean flag, @Injectable(&quot;Mary&quot;) String name)</span><br><span class="line">   &#123;</span><br><span class="line">      // Record expectations on mocked types, if needed.</span><br><span class="line"> </span><br><span class="line">      tested.exerciseCodeUnderTest();</span><br><span class="line"> </span><br><span class="line">      // Verify expectations on mocked types, if required.</span><br><span class="line">   &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h4 id="构造对象"><a href="#构造对象" class="headerlink" title="构造对象"></a>构造对象</h4><p>在测试代码中创建对象实例，有以下两种方式<br>方式一：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">@Test</span><br><span class="line">public void newCollaboratorsWithDifferentBehaviors(@Mocked Collaborator anyCollaborator)</span><br><span class="line">&#123;</span><br><span class="line">   // Record different behaviors for each set of instances:</span><br><span class="line">   new Expectations() &#123;&#123;</span><br><span class="line">      // One set, instances created with &quot;a value&quot;:</span><br><span class="line">      Collaborator col1 = new Collaborator(&quot;a value&quot;);</span><br><span class="line">      col1.doSomething(anyInt); result = 123;</span><br><span class="line"> </span><br><span class="line">      // Another set, instances created with &quot;another value&quot;:</span><br><span class="line">      Collaborator col2 = new Collaborator(&quot;another value&quot;);</span><br><span class="line">      col2.doSomething(anyInt); result = new InvalidStateException();</span><br><span class="line">   &#125;&#125;;</span><br><span class="line"> </span><br><span class="line">   // Code under test:</span><br><span class="line">   new Collaborator(&quot;a value&quot;).doSomething(5); // will return 123</span><br><span class="line">   ...</span><br><span class="line">   new Collaborator(&quot;another value&quot;).doSomething(0); // will throw the exception</span><br><span class="line">   ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>anyCollaborator 参数并没有用到，但这里 @Mocked 使得类型 Collaborator 成为Mocked 类型，方可对其方法和构造方法录制。<br>方式二：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">@Test</span><br><span class="line">public void newCollaboratorsWithDifferentBehaviors(</span><br><span class="line">   @Mocked final Collaborator col1, @Mocked final Collaborator col2)</span><br><span class="line">&#123;</span><br><span class="line">   new Expectations() &#123;&#123;</span><br><span class="line">      // Map separate sets of future instances to separate mock parameters:</span><br><span class="line">      new Collaborator(&quot;a value&quot;); result = col1;</span><br><span class="line">      new Collaborator(&quot;another value&quot;); result = col2;</span><br><span class="line"> </span><br><span class="line">      // Record different behaviors for each set of instances:</span><br><span class="line">      col1.doSomething(anyInt); result = 123;</span><br><span class="line">      col2.doSomething(anyInt); result = new InvalidStateException();</span><br><span class="line">   &#125;&#125;;</span><br><span class="line"> </span><br><span class="line">   // Code under test:</span><br><span class="line">   new Collaborator(&quot;a value&quot;).doSomething(5); // will return 123</span><br><span class="line">   ...</span><br><span class="line">   new Collaborator(&quot;another value&quot;).doSomething(0); // will throw the exception</span><br><span class="line">   ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>因为这里@Mocked 作用于两个同类型的变量，从而决定了之后对复发和的录制是关联到实例而非类。 </p>
+<h4 id="Flexible-matching-of-argument-values"><a href="#Flexible-matching-of-argument-values" class="headerlink" title="Flexible matching of argument values"></a>Flexible matching of argument values</h4><p>在录制、验证阶段，不可能穷尽所有可能得参数值，这是需要使用弹性匹配。<br>弹性匹配通过两种方式表达，anyXxx 或 withXx() 方法，他们都是 Expectations 和 Verifacations 的基类 mockit.Invocations 的成员，所以对所有的Expectation 和 Verifaction 可用。</p>
+<ul>
+<li><p>any<br>提供了原始类型及其包装类型(<code>anyLong</code>,<code>anyInt</code>,<code>anyShort</code>…)，String类型(<code>anyString</code>)，通用类型(<code>any</code>)。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">new Expectations() &#123;&#123;</span><br><span class="line">   // Will match &quot;voidMethod(String, List)&quot; invocations where the first argument is</span><br><span class="line">   // any string and the second any list.</span><br><span class="line">   abc.voidMethod(anyString, (List&lt;?&gt;) any);</span><br><span class="line">&#125;&#125;;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>with</p>
+<ol>
+<li>实例： <code>withSameInstance</code>, <code>withEqual/withNotEqual</code>, <code>withNull/withNotNull</code></li>
+<li>类型： <code>withAny</code>,  <code>withInstanceLike</code> , <code>withInstanceOf</code></li>
+<li>String ： <code>withMatch</code>, <code>withSubString</code>,<code>withPrefix/withSuffix</code></li>
+<li>自定义匹配：<code>with</code> , <code>withArgThat</code></li>
+</ol>
+</li>
+</ul>
+<h4 id="Specifying-invocation-count-constraints"><a href="#Specifying-invocation-count-constraints" class="headerlink" title="Specifying invocation count constraints"></a>Specifying invocation count constraints</h4><p>在录制、验证阶段，可以通过三个属性指定方法的调用次数：<code>times</code>,<code>minTimes</code>,<code>maxTimes</code>。将其放在方法调用之后，对于每个方法每个属性只能使用一次。如果指定<code>times = 0</code> 或<code>maxTimes = 0</code>意味着只要方法被调用，测试就失败了。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line">@Test</span><br><span class="line">public void someTestMethod(@Mocked final DependencyAbc abc)</span><br><span class="line">&#123;</span><br><span class="line">   new Expectations() &#123;&#123;</span><br><span class="line">      // By default, at least one invocation is expected, i.e. &quot;minTimes = 1&quot;:</span><br><span class="line">      new DependencyAbc();</span><br><span class="line"> </span><br><span class="line">      // At least two invocations are expected:</span><br><span class="line">      abc.voidMethod(); minTimes = 2;</span><br><span class="line"> </span><br><span class="line">      // 1 to 5 invocations are expected:</span><br><span class="line">      abc.stringReturningMethod(); minTimes = 1; maxTimes = 5;</span><br><span class="line">   &#125;&#125;;</span><br><span class="line"> </span><br><span class="line">   new UnitUnderTest().doSomething();</span><br><span class="line">&#125;</span><br><span class="line"> </span><br><span class="line">@Test</span><br><span class="line">public void someOtherTestMethod(@Mocked final DependencyAbc abc)</span><br><span class="line">&#123;</span><br><span class="line">   new UnitUnderTest().doSomething();</span><br><span class="line"> </span><br><span class="line">   new Verifications() &#123;&#123;</span><br><span class="line">      // Verifies that zero or one invocations occurred, with the specified argument value:</span><br><span class="line">      abc.anotherVoidMethod(3); maxTimes = 1;</span><br><span class="line"> </span><br><span class="line">      // Verifies the occurrence of at least one invocation with the specified arguments:</span><br><span class="line">      DependencyAbc.someStaticMethod(&quot;test&quot;, false); // &quot;minTimes = 1&quot; is implied</span><br><span class="line">   &#125;&#125;;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h4 id="验证"><a href="#验证" class="headerlink" title="验证"></a>验证</h4><ul>
+<li><p>Explicit verification<br>使用<code>Verifications</code>对方法、参数、调用次数做明确验证</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">// Verifies that Dependency#doSomething(int, boolean, String) was called at least once,</span><br><span class="line">// with arguments that obey the specified constraints:</span><br><span class="line">new Verifications() &#123;&#123; mock.doSomething(anyInt, true, withPrefix(&quot;abc&quot;)); &#125;&#125;;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>Verification in order<br>使用<code>VerificationsInOrder</code>对方法的调用顺序做验证</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">@Test</span><br><span class="line">public void verifyingExpectationsInOrder(@Mocked final DependencyAbc abc)</span><br><span class="line">&#123;</span><br><span class="line">   // Somewhere inside the tested code:</span><br><span class="line">   abc.aMethod();</span><br><span class="line">   abc.doSomething(&quot;blah&quot;, 123);</span><br><span class="line">   abc.anotherMethod(5);</span><br><span class="line">   ...</span><br><span class="line"> </span><br><span class="line">   new VerificationsInOrder() &#123;&#123;</span><br><span class="line">      // The order of these invocations must be the same as the order</span><br><span class="line">      // of occurrence during replay of the matching invocations.</span><br><span class="line">      abc.aMethod();</span><br><span class="line">      abc.anotherMethod(anyInt);</span><br><span class="line">   &#125;&#125;;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>Partially ordered verification<br>使用<code>unverifiedInvocations</code>隔离方法之间顺序的相关性。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">@Mocked DependencyAbc abc;</span><br><span class="line">@Mocked AnotherDependency xyz;</span><br><span class="line"> </span><br><span class="line">@Test</span><br><span class="line">public void verifyingTheOrderOfSomeExpectationsRelativeToAllOthers()</span><br><span class="line">&#123;</span><br><span class="line">   new UnitUnderTest().doSomething();</span><br><span class="line"> </span><br><span class="line">   new VerificationsInOrder() &#123;&#123;</span><br><span class="line">      abc.methodThatNeedsToExecuteFirst();</span><br><span class="line">      unverifiedInvocations(); // Invocations not verified must come here...</span><br><span class="line">      xyz.method1();</span><br><span class="line">      abc.method2();</span><br><span class="line">      unverifiedInvocations(); // ... and/or here.</span><br><span class="line">      xyz.methodThatNeedsToExecuteLast();</span><br><span class="line">   &#125;&#125;;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>上边的代码验证三件事：</p>
+<pre><code>1. `abc.methodThatNeedsToExecuteFirst()`第一个调用
+2. `xyz.methodThatNeedsToExecuteLast()`最后一个调用
+3. `xyz.method1()`必须在`abc.method2()`之前调用
+</code></pre><p>另外一种情况是我们关系某几个方法的调用顺序，其他的方法只验证调用，不验证顺序。这时可以通过两个验证块来实现。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">@Test</span><br><span class="line">public void verifyFirstAndLastCallsWithOthersInBetweenInAnyOrder()</span><br><span class="line">&#123;</span><br><span class="line">   // Invocations that occur while exercising the code under test:</span><br><span class="line">   mock.prepare();</span><br><span class="line">   mock.setSomethingElse(&quot;anotherValue&quot;);</span><br><span class="line">   mock.setSomething(123);</span><br><span class="line">   mock.notifyBeforeSave();</span><br><span class="line">   mock.save();</span><br><span class="line"> </span><br><span class="line">   new VerificationsInOrder() &#123;&#123;</span><br><span class="line">      mock.prepare(); // first expected call</span><br><span class="line">      unverifiedInvocations(); // others at this point</span><br><span class="line">      mock.notifyBeforeSave(); // just before last</span><br><span class="line">      mock.save(); times = 1; // last expected call</span><br><span class="line">   &#125;&#125;;</span><br><span class="line"> </span><br><span class="line">   // Unordered verification of the invocations previously left unverified.</span><br><span class="line">   // Could be ordered, but then it would be simpler to just include these invocations</span><br><span class="line">   // in the previous block, at the place where &quot;unverifiedInvocations()&quot; is called.</span><br><span class="line">   new Verifications() &#123;&#123;</span><br><span class="line">      mock.setSomething(123);</span><br><span class="line">      mock.setSomethingElse(anyString);</span><br><span class="line">   &#125;&#125;;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<ul>
+<li>Full verification<br>通过<code>FullVerifications</code>来做完全验证，即所有方法都被调用，且调用次数匹配。如果在<code>expectation</code>中已经指定了方法调用最小次数限制，则<code>FullVerifications</code>中不需要再次指定该方法。</li>
+<li>Full verification in order<br>通过<code>FullVerificationsInOrder</code>做验证</li>
+<li><p>Restricting the set of mocked types to be fully verified<br>通过<code>FullVerifications(instance/class)</code>只对指定的 mock 对象或类型做完全验证。参数可以是class或对象。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">@Test</span><br><span class="line">public void verifyAllInvocationsToOnlyOneOfTwoMockedTypes(</span><br><span class="line">   @Mocked final Dependency mock1, @Mocked AnotherDependency mock2)</span><br><span class="line">&#123;</span><br><span class="line">   // Inside code under test:</span><br><span class="line">   mock1.prepare();</span><br><span class="line">   mock1.setSomething(123);</span><br><span class="line">   mock2.doSomething();</span><br><span class="line">   mock1.editABunchMoreStuff();</span><br><span class="line">   mock1.save();</span><br><span class="line"> </span><br><span class="line">   new FullVerifications(mock1) &#123;&#123;</span><br><span class="line">      mock1.prepare();</span><br><span class="line">      mock1.setSomething(anyInt);</span><br><span class="line">      mock1.editABunchMoreStuff();</span><br><span class="line">      mock1.save(); times = 1;</span><br><span class="line">   &#125;&#125;;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>Verifying that no invocations occurred<br>使用空的<code>full verification</code>代码块可以作为没有任何调用的验证。如果<code>expectations</code>中已经指定了<code>times/minTimes</code>，则空的<code>full verification</code>代码块代表没有其他方法的调用</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">@Test</span><br><span class="line">public void verifyNoInvocationsOnOneOfTwoMockedDependenciesBeyondThoseRecordedAsExpected(</span><br><span class="line">   @Mocked final Dependency mock1, @Mocked final AnotherDependency mock2)</span><br><span class="line">&#123;</span><br><span class="line">   new Expectations() &#123;&#123;</span><br><span class="line">      // These two are recorded as expected:</span><br><span class="line">      mock1.setSomething(anyInt);</span><br><span class="line">      mock2.doSomething(); times = 1;</span><br><span class="line">   &#125;&#125;;</span><br><span class="line"> </span><br><span class="line">   // Inside code under test:</span><br><span class="line">   mock1.prepare();</span><br><span class="line">   mock1.setSomething(1);</span><br><span class="line">   mock1.setSomething(2);</span><br><span class="line">   mock1.save();</span><br><span class="line">   mock2.doSomething();</span><br><span class="line"> </span><br><span class="line">   // Will verify that no invocations other than to &quot;doSomething()&quot; occurred on mock2:</span><br><span class="line">   new FullVerifications(mock2) &#123;&#125;;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>Verifying unspecified invocations that should not happen<br>在<code>FullVerifications</code>中指定方法的<code>minTimes = 0</code>可验证方法永远没有被调用</p>
+</li>
+</ul>
+<h4 id="Delegates-specifying-custom-results"><a href="#Delegates-specifying-custom-results" class="headerlink" title="Delegates: specifying custom results"></a>Delegates: specifying custom results</h4><p>通过<code>Delegate</code>可以根据参数返回不同的结果。<code>Delegate</code>接口没有任何方法，被用来告知JMocket方法被调用后在返回结果阶段应该委托给指定的对象。所以实现中方法可以任意命名，但要方法保证不是<code>private</code>。方法的参数可以与record的方法参数一致，或者没有参数。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">@Test</span><br><span class="line">public void delegatingInvocationsToACustomDelegate(@Mocked final DependencyAbc anyAbc)</span><br><span class="line">&#123;</span><br><span class="line">   new Expectations() &#123;&#123;</span><br><span class="line">      anyAbc.intReturningMethod(anyInt, null);</span><br><span class="line">      result = new Delegate() &#123;</span><br><span class="line">         int aDelegateMethod(int i, String s)</span><br><span class="line">         &#123;</span><br><span class="line">            return i == 1 ? i : s.length();</span><br><span class="line">         &#125;</span><br><span class="line">      &#125;;</span><br><span class="line">   &#125;&#125;;</span><br><span class="line"> </span><br><span class="line">   // Calls to &quot;intReturningMethod(int, String)&quot; will execute the delegate method above.</span><br><span class="line">   new UnitUnderTest().doSomething();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>构造方法同样通过<code>Delegate</code>方法来处理。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">@Test</span><br><span class="line">public void delegatingConstructorInvocations(@Mocked Collaborator anyCollaboratorInstance)</span><br><span class="line">&#123;</span><br><span class="line">   new Expectations() &#123;&#123;</span><br><span class="line">      new Collaborator(anyInt);</span><br><span class="line">      result = new Delegate() &#123;</span><br><span class="line">         void delegate(int i) &#123; if (i &lt; 1) throw new IllegalArgumentException(); &#125;</span><br><span class="line">      &#125;;</span><br><span class="line">   &#125;&#125;;</span><br><span class="line"> </span><br><span class="line">   // The first instantiation using &quot;Collaborator(int)&quot; will execute the delegate above.</span><br><span class="line">   new Collaborator(4);</span><br></pre></td></tr></table></figure></p>
+<h4 id="Iterated-expectations"><a href="#Iterated-expectations" class="headerlink" title="Iterated expectations"></a>Iterated expectations</h4><p><code>StrictExpectations</code>可以指定连续调用次数。<br><code>expectations</code>同样可以指定，但只是作为最大、最小调用次数限制的倍数。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">@Test</span><br><span class="line">public void recordStrictInvocationsInIteratingBlock(@Mocked final Collaborator mock)</span><br><span class="line">&#123;</span><br><span class="line">   new StrictExpectations(2) &#123;&#123; //默认1</span><br><span class="line">      mock.setSomething(anyInt);</span><br><span class="line">      mock.save();</span><br><span class="line">   &#125;&#125;;</span><br><span class="line"> </span><br><span class="line">   // In the tested code:</span><br><span class="line">   mock.setSomething(123);</span><br><span class="line">   mock.save();</span><br><span class="line">   mock.setSomething(45);</span><br><span class="line">   mock.save();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h4 id="Verifying-iterations"><a href="#Verifying-iterations" class="headerlink" title="Verifying iterations"></a>Verifying iterations</h4><p>验证中同样可以指定循环次数<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">@Test</span><br><span class="line">public void verifyAllInvocationsInLoop(@Mocked final Dependency mock)</span><br><span class="line">&#123;</span><br><span class="line">   int numberOfIterations = 3;</span><br><span class="line"> </span><br><span class="line">   // Code under test included here for easy reference:</span><br><span class="line">   for (int i = 0; i &lt; numberOfIterations; i++) &#123;</span><br><span class="line">      DataItem data = getData(i);</span><br><span class="line">      mock.setData(data);</span><br><span class="line">      mock.save();</span><br><span class="line">   &#125;</span><br><span class="line"> </span><br><span class="line">   new Verifications(numberOfIterations) &#123;&#123;</span><br><span class="line">      mock.setData((DataItem) withNotNull());</span><br><span class="line">      mock.save();</span><br><span class="line">   &#125;&#125;;</span><br><span class="line"> </span><br><span class="line">   new VerificationsInOrder(numberOfIterations) &#123;&#123;</span><br><span class="line">      mock.setData((DataItem) withNotNull());</span><br><span class="line">      mock.save();</span><br><span class="line">   &#125;&#125;;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h4 id="Accessing-private-members"><a href="#Accessing-private-members" class="headerlink" title="Accessing private members"></a>Accessing private members</h4><p>有时我们需要访问被测对象和mocked对象的私有成员，Deencapsulation 提供了静态方法来解决这个问题：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">@Test</span><br><span class="line">public void someTestMethod(@Mocked final DependencyAbc abc)</span><br><span class="line">&#123;</span><br><span class="line">   final CodeUnderTest tested = new CodeUnderTest();</span><br><span class="line"> </span><br><span class="line">   // Defines some necessary state on the tested object:</span><br><span class="line">   setField(tested, &quot;someIntField&quot;, 123);</span><br><span class="line"> </span><br><span class="line">   new Expectations() &#123;&#123;</span><br><span class="line">      // Expectations still recorded, even if the invocations are done through Reflection:</span><br><span class="line">      newInstance(&quot;some.package.AnotherDependency&quot;, true, &quot;test&quot;); maxTimes = 1;</span><br><span class="line">      invoke(abc, &quot;intReturningMethod&quot;, 45, &quot;&quot;); result = 1;</span><br><span class="line">      // other expectations recorded...</span><br><span class="line">   &#125;&#125;;</span><br><span class="line"> </span><br><span class="line">   tested.doSomething();</span><br><span class="line"> </span><br><span class="line">   String result = getField(tested, &quot;result&quot;);</span><br><span class="line">   assertEquals(&quot;expected result&quot;, result);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>参考：</p>
+<ul>
+<li><a href="http://jmockit.org/tutorial.html" target="_blank" rel="noopener">The JMockit Testing Toolkit Tutorial</a></li>
+<li><a href="http://www.cnblogs.com/yoogo/p/JMockit.html" target="_blank" rel="noopener">JMockit 指南 翻译</a></li>
+</ul>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/test/" rel="tag"># test</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/05/14/fastjson/" rel="next" title="fastjson">
+                <i class="fa fa-chevron-left"></i> fastjson
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/10/19/JMH/" rel="prev" title="JMH">
+                JMH <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+      <div class="ds-thread" data-thread-key="2016/07/20/JMockit/"
+           data-title="JMockit" data-url="http://guangfei.win/2016/07/20/JMockit/">
+      </div>
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">sky</p>
+              <p class="site-description motion-element" itemprop="description">keep going</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">23</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">3</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">7</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#Maven地址"><span class="nav-number">1.</span> <span class="nav-text">Maven地址</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#注解"><span class="nav-number">2.</span> <span class="nav-text">注解</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#常用类"><span class="nav-number">3.</span> <span class="nav-text">常用类</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#模式"><span class="nav-number">4.</span> <span class="nav-text">模式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#基于状态的mock方式-Faking"><span class="nav-number">5.</span> <span class="nav-text">基于状态的mock方式(Faking)</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#In-line-mock-up-classes"><span class="nav-number">5.1.</span> <span class="nav-text">In-line mock-up classes</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Faking-an-interface"><span class="nav-number">5.2.</span> <span class="nav-text">Faking an interface</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Faking-unspecified-implementation-classes"><span class="nav-number">5.3.</span> <span class="nav-text">Faking unspecified implementation classes</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Accessing-the-invocation-context"><span class="nav-number">5.4.</span> <span class="nav-text">Accessing the invocation context</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Proceeding-into-the-real-implementation"><span class="nav-number">5.5.</span> <span class="nav-text">Proceeding into the real implementation</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Reusing-mock-ups-between-tests"><span class="nav-number">5.6.</span> <span class="nav-text">Reusing mock-ups between tests</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Global-mock-ups"><span class="nav-number">5.7.</span> <span class="nav-text">Global mock-ups</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Applying-AOP-style-advice"><span class="nav-number">5.8.</span> <span class="nav-text">Applying AOP-style advice</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#基于行为的mock方式-mocking"><span class="nav-number">6.</span> <span class="nav-text">基于行为的mock方式(mocking)</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Expectations"><span class="nav-number">6.1.</span> <span class="nav-text">Expectations</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Injectable"><span class="nav-number">6.2.</span> <span class="nav-text">Injectable</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Mocked"><span class="nav-number">6.3.</span> <span class="nav-text">Mocked</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Capaturing"><span class="nav-number">6.4.</span> <span class="nav-text">Capaturing</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Tested"><span class="nav-number">6.5.</span> <span class="nav-text">Tested</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#构造对象"><span class="nav-number">6.6.</span> <span class="nav-text">构造对象</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Flexible-matching-of-argument-values"><span class="nav-number">6.7.</span> <span class="nav-text">Flexible matching of argument values</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Specifying-invocation-count-constraints"><span class="nav-number">6.8.</span> <span class="nav-text">Specifying invocation count constraints</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#验证"><span class="nav-number">6.9.</span> <span class="nav-text">验证</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Delegates-specifying-custom-results"><span class="nav-number">6.10.</span> <span class="nav-text">Delegates: specifying custom results</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Iterated-expectations"><span class="nav-number">6.11.</span> <span class="nav-text">Iterated expectations</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Verifying-iterations"><span class="nav-number">6.12.</span> <span class="nav-text">Verifying iterations</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Accessing-private-members"><span class="nav-number">6.13.</span> <span class="nav-text">Accessing private members</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2015 &mdash; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">sky</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Mist</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"13m"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+    
+    
+    <script src="/lib/ua-parser-js/dist/ua-parser.min.js?v=0.7.9"></script>
+    <script src="/js/src/hook-duoshuo.js"></script>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.4.js"></script>
+  <script>AV.initialize("JhJQHbjn7uinA1k70nNSCqys-gzGzoHsz", "OdTTinqgVB1mkIAMgwB38zH2");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
