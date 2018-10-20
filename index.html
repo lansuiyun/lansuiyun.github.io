@@ -272,6 +272,174 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://guangfei.win/2018/10/20/伪共享/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="sky">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="越是憧憬 越要风雨兼程">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/10/20/伪共享/" itemprop="url">伪共享</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-10-20T16:56:13+08:00">
+                2018-10-20
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/java冷知识/" itemprop="url" rel="index">
+                    <span itemprop="name">java冷知识</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2018/10/20/伪共享/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2018/10/20/伪共享/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+             <span id="/2018/10/20/伪共享/" class="leancloud_visitors" data-flag-title="伪共享">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数&#58;</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <h3 id="引入"><a href="#引入" class="headerlink" title="引入"></a>引入</h3><p>在JMH的例子中，<a href="http://hg.openjdk.java.net/code-tools/jmh/file/66fb723292d4/jmh-samples/src/main/java/org/openjdk/jmh/samples/JMHSample_37_CacheAccess.java" target="_blank" rel="noopener">JMHSample_37_CacheAccess</a>这个例子很有意思，测试一个二维数组通过<code>row</code>、<code>col</code>两种不同的方式遍历数据的平均时间。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br></pre></td><td class="code"><pre><span class="line">@BenchmarkMode(Mode.AverageTime)</span><br><span class="line">@OutputTimeUnit(TimeUnit.NANOSECONDS)</span><br><span class="line">@Warmup(iterations = 5, time = 1, timeUnit = TimeUnit.SECONDS)</span><br><span class="line">@Measurement(iterations = 5, time = 1, timeUnit = TimeUnit.SECONDS)</span><br><span class="line">@Fork(5)</span><br><span class="line">@State(Scope.Benchmark)</span><br><span class="line">public class JMHSample_37_CacheAccess &#123;</span><br><span class="line"></span><br><span class="line">    /*</span><br><span class="line">     * This sample serves as a warning against subtle differences in cache access patterns.</span><br><span class="line">     *</span><br><span class="line">     * Many performance differences may be explained by the way tests are accessing memory.</span><br><span class="line">     * In the example below, we walk the matrix either row-first, or col-first:</span><br><span class="line">     */</span><br><span class="line"></span><br><span class="line">    private final static int COUNT = 4096;</span><br><span class="line">    private final static int MATRIX_SIZE = COUNT * COUNT;</span><br><span class="line"></span><br><span class="line">    private int[][] matrix;</span><br><span class="line"></span><br><span class="line">    @Setup</span><br><span class="line">    public void setup() &#123;</span><br><span class="line">        matrix = new int[COUNT][COUNT];</span><br><span class="line">        Random random = new Random(1234);</span><br><span class="line">        for (int i = 0; i &lt; COUNT; i++) &#123;</span><br><span class="line">            for (int j = 0; j &lt; COUNT; j++) &#123;</span><br><span class="line">                matrix[i][j] = random.nextInt();</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    @Benchmark</span><br><span class="line">    @OperationsPerInvocation(MATRIX_SIZE)</span><br><span class="line">    public void colFirst(Blackhole bh) &#123;</span><br><span class="line">        for (int c = 0; c &lt; COUNT; c++) &#123;</span><br><span class="line">            for (int r = 0; r &lt; COUNT; r++) &#123;</span><br><span class="line">                bh.consume(matrix[r][c]);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    @Benchmark</span><br><span class="line">    @OperationsPerInvocation(MATRIX_SIZE)</span><br><span class="line">    public void rowFirst(Blackhole bh) &#123;</span><br><span class="line">        for (int r = 0; r &lt; COUNT; r++) &#123;</span><br><span class="line">            for (int c = 0; c &lt; COUNT; c++) &#123;</span><br><span class="line">                bh.consume(matrix[r][c]);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>如上述代码所示，两种遍历的次数相同，差异是一个按行读取，一个按列读取。那么，最终两种方式的性能会有差异吗？<br>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2018/10/20/伪共享/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://guangfei.win/2018/10/19/JMH/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -291,7 +459,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2018/10/19/JMH/" itemprop="url">JMH</a></h1>
+                <a class="post-title-link" href="/2018/10/19/JMH/" itemprop="url">微基准测试JMH</a></h1>
         
 
         <div class="post-meta">
@@ -353,7 +521,7 @@
 
           
           
-             <span id="/2018/10/19/JMH/" class="leancloud_visitors" data-flag-title="JMH">
+             <span id="/2018/10/19/JMH/" class="leancloud_visitors" data-flag-title="微基准测试JMH">
                <span class="post-meta-divider">|</span>
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -385,159 +553,18 @@
 
       
         
-          
-            <p>JMH 是 Java Microbenchmark Harness（微基准测试）,其特色优势在于它是由 Oracle 实现 JIT 的相同人员开发的。 </p>
+          <p>JMH 是 Java Microbenchmark Harness（微基准测试）,其特色优势在于它是由 Oracle 实现 JIT 的相同人员开发的。 </p>
 <h3 id="为什么使用JMH"><a href="#为什么使用JMH" class="headerlink" title="为什么使用JMH"></a>为什么使用JMH</h3><p>在开发过程中，为了确定一个方法的性能，很多时候都是写一个循环多次调用方法通过计算时间来查看性能是否达到预期。但这种简单的方式得出的结论往往是不准确的。现代JVM不断优化，随着代码执行次数的增加，JVM会对其进行编译优化（JIT），最终结果与简单测试得出的结果可能差距很大。此外，测试往往需要做很多额外工作，比如：控制读写线程比例，控制线程同时启动，设置多线程测试中的状态对象，统计测试结果等等，自己实现这些功能既繁琐又不能完全保证正确。而JMH就是恰好能满足上述性能测试需求的工具。</p>
 <h3 id="hello-wrold"><a href="#hello-wrold" class="headerlink" title="hello wrold"></a>hello wrold</h3><p>增加JMH依赖<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">&lt;dependency&gt;</span><br><span class="line">    &lt;groupId&gt;org.openjdk.jmh&lt;/groupId&gt;</span><br><span class="line">    &lt;artifactId&gt;jmh-core&lt;/artifactId&gt;</span><br><span class="line">    &lt;version&gt;1.21&lt;/version&gt;</span><br><span class="line">&lt;/dependency&gt;</span><br><span class="line">&lt;dependency&gt;</span><br><span class="line">    &lt;groupId&gt;org.openjdk.jmh&lt;/groupId&gt;</span><br><span class="line">    &lt;artifactId&gt;jmh-generator-annprocess&lt;/artifactId&gt;</span><br><span class="line">    &lt;version&gt;1.18&lt;/version&gt;</span><br><span class="line">&lt;/dependency&gt;</span><br></pre></td></tr></table></figure></p>
 <p>第一个例子：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">/**</span><br><span class="line"> * hello JMH</span><br><span class="line"> *</span><br><span class="line"> * @author fei</span><br><span class="line"> */</span><br><span class="line">@BenchmarkMode(Mode.Throughput)</span><br><span class="line">@Warmup(iterations = 5, time = 1, timeUnit = TimeUnit.SECONDS)</span><br><span class="line">@Measurement(iterations = 5, time = 1, timeUnit = TimeUnit.SECONDS)</span><br><span class="line">public class HelloJHM &#123;</span><br><span class="line"></span><br><span class="line">    @Benchmark</span><br><span class="line">    public void wellHelloThere() &#123;</span><br><span class="line">        // this method was intentionally left blank.</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
 <p>最终结果：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Benchmark                 Mode  Cnt           Score          Error  Units</span><br><span class="line">HelloJHM.wellHelloThere  thrpt    5  1173003521.014 ± 72815462.460  ops/s</span><br></pre></td></tr></table></figure></p>
-<h3 id="基本概念"><a href="#基本概念" class="headerlink" title="基本概念"></a>基本概念</h3><p><code>@BenchmarkMode(Mode.Throughput)</code>用来设置测试模式，本来中为<code>吞吐量</code>模式，即一个时间单位内操作数量。</p>
-<p><code>@Warmup</code>用来设置预热相关参数。<code>iterations</code>代表预热要迭代几次，<code>time = 1, timeUnit = TimeUnit.SECONDS</code>两个参数表明预热每次迭代的时间。</p>
-<p><code>@Measurement</code>设置正式测试参数。参数与<code>@Warmup</code>意义相同。</p>
-<p><code>@Benchmark</code>标记要测试的方法。</p>
-<p>运行测试有两种方式：</p>
-<ol>
-<li>通过命令行<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ mvn clean install</span><br><span class="line">$ java -jar target/benchmarks.jar HelloJHM</span><br></pre></td></tr></table></figure>
-</li>
-</ol>
-<p><code>$ java -jar target/benchmarks.jar -h</code> 可以查看JMH的命令</p>
-<ol start="2">
-<li>IDE中运行<br>在类中加入如下的<code>main</code>方法，直接运行。<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">public static void main(String[] args) throws RunnerException &#123;</span><br><span class="line">    Options opt = new OptionsBuilder()</span><br><span class="line">            .include(HelloJHM.class.getSimpleName())</span><br><span class="line">            .forks(1)</span><br><span class="line">            .build();</span><br><span class="line"></span><br><span class="line">    new Runner(opt).run();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-</li>
-</ol>
-<h3 id="测试模式"><a href="#测试模式" class="headerlink" title="测试模式"></a>测试模式</h3><p>JMH提供的测试模式有：</p>
-<ul>
-<li><code>Throughput</code> 吞吐量 即每时间单位进行的操作数</li>
-<li><code>AverageTime</code> 平均耗时 </li>
-<li><code>SampleTime</code> 随机取样，最后输出取样结果的分布，例如“99%的调用在xxx毫秒以内，99.99%的调用在xxx毫秒以内”</li>
-<li><code>SingleShotTime</code> 执行一次时间。可以用来测试<code>冷测试模式</code>（不进行预热）</li>
-<li><code>ALL</code> 以上所有模式</li>
-</ul>
-<p><code>@BenchmarkMode()</code> 可以标记在方法上指定方法的测试模式，或者标记在类上提供默认模式。</p>
-<h3 id="状态对象"><a href="#状态对象" class="headerlink" title="状态对象"></a>状态对象</h3><p>大多数的测试都需要维护一些状态，在JMH中在类上加上<code>@State</code>注解，类就变成了一个状态对象。<br><code>@State</code>接受一个 <code>Scope</code> 参数用来表示该状态的共享范围。状态对象一般以依赖注入的方式作为参数注入到<code>Benchmark methods</code>，或者注入到其它状态对象<code>Setup and TearDown methods</code>中做初始化工作。状态对象可以被继承，父类加了<code>@State</code>注解，则子类也可以被当做状态对象。<br><code>Scope</code>有以下三种：</p>
-<ul>
-<li><code>Benchmark</code> 所有线程共享对象，<code>Setup</code>、<code>TearDown</code>方法只会被其中的一个线程执行一次</li>
-<li><code>Group</code> 现场组共享</li>
-<li><code>Thread</code> 线程独享</li>
-</ul>
-<p>也可以给<code>benchmark</code>所在类加<code>@State</code>注解，<code>benchmark</code>方法可以直接使用类属性。</p>
-<p>注：<strong><code>benchmark</code>方法中只能使用状态对象或者局部变量，否则会提示编译错误。</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line">public class JMHSample_03_States &#123;</span><br><span class="line">    @State(Scope.Benchmark)</span><br><span class="line">    public static class BenchmarkState &#123;</span><br><span class="line">        volatile double x = Math.PI;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    @State(Scope.Thread)</span><br><span class="line">    public static class ThreadState &#123;</span><br><span class="line">        volatile double x = Math.PI;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    /*</span><br><span class="line">     * Benchmark methods can reference the states, and JMH will inject the</span><br><span class="line">     * appropriate states while calling these methods. You can have no states at</span><br><span class="line">     * all, or have only one state, or have multiple states referenced. This</span><br><span class="line">     * makes building multi-threaded benchmark a breeze.</span><br><span class="line">     *</span><br><span class="line">     * For this exercise, we have two methods.</span><br><span class="line">     */</span><br><span class="line"></span><br><span class="line">    @Benchmark</span><br><span class="line">    public void measureUnshared(ThreadState state) &#123;</span><br><span class="line">        // All benchmark threads will call in this method.</span><br><span class="line">        //</span><br><span class="line">        // However, since ThreadState is the Scope.Thread, each thread</span><br><span class="line">        // will have it&apos;s own copy of the state, and this benchmark</span><br><span class="line">        // will measure unshared case.</span><br><span class="line">        state.x++;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    @Benchmark</span><br><span class="line">    public void measureShared(BenchmarkState state) &#123;</span><br><span class="line">        // All benchmark threads will call in this method.</span><br><span class="line">        //</span><br><span class="line">        // Since BenchmarkState is the Scope.Benchmark, all threads</span><br><span class="line">        // will share the state instance, and we will end up measuring</span><br><span class="line">        // shared case.</span><br><span class="line">        state.x++;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure></p>
-<p><code>@Setup</code>,<code>@TearDown</code> 用来标记状态对象的设置与清理方法（JMH中称为<code>fixture method</code>），概念类似于JUnit中<code>@Before</code>、<code>@After</code>。<code>setup/teardown</code>方法的数量是任意的。这些方法不会影响测试时间。<code>@Setup</code>,<code>@TearDown</code>通过设置<code>Level</code>参数来指定方法被何时调用，有以下三种：</p>
-<ul>
-<li><code>Level.Trial</code> 一轮benchmark测试前/后调用，默认Level。<code>fork(number)</code>即为<code>number</code>轮。</li>
-<li><code>Level.Iteration</code> 一次迭代前之后调用</li>
-<li><code>Level.Invocation</code> 每个方法调用前/后调用。<strong>慎用</strong></li>
-</ul>
-<p>除了将单独的类标记@State，也可以将<code>benchmark</code>类使用<code>@State</code>标记，然后在<code>benchmark</code>方法中直接使用类属性。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">@State(Scope.Thread)</span><br><span class="line">public class JMHSample_06_FixtureLevel &#123;</span><br><span class="line"></span><br><span class="line">    double x;</span><br><span class="line">    </span><br><span class="line">    @TearDown(Level.Trial)</span><br><span class="line">    public void check() &#123;</span><br><span class="line">        assert x &gt; Math.PI : &quot;Nothing changed?&quot;;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    @Benchmark</span><br><span class="line">    public void measureRight() &#123;</span><br><span class="line">        x++;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    @Benchmark</span><br><span class="line">    public void measureWrong() &#123;</span><br><span class="line">        double x = 0;</span><br><span class="line">        x++;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<h3 id="死代码消除"><a href="#死代码消除" class="headerlink" title="死代码消除"></a>死代码消除</h3><p>很多测试失败都是由于死代码消除(Dead-Code Elimination (DCE))引起的。编译器会优化去掉无用的代码。要想限制死代码消除，方法必须返回计算结果，不能返回 void。但如果方法有多个返回值时，部分代码可能会被优化掉<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">/*</span><br><span class="line"> * While the Math.log(x2) computation is intact, Math.log(x1)</span><br><span class="line"> * is redundant and optimized out.</span><br><span class="line"> */</span><br><span class="line"></span><br><span class="line">@Benchmark</span><br><span class="line">public double measureWrong() &#123;</span><br><span class="line">    Math.log(x1);</span><br><span class="line">    return Math.log(x2);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p>这时，可以使用<code>Blackhole</code>处理返回值<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">/*</span><br><span class="line"> * This demonstrates Option B:</span><br><span class="line"> *</span><br><span class="line"> * Use explicit Blackhole objects, and sink the values there.</span><br><span class="line"> * (Background: Blackhole is just another @State object, bundled with JMH).</span><br><span class="line"> */</span><br><span class="line"></span><br><span class="line">@Benchmark</span><br><span class="line">public void measureRight_2(Blackhole bh) &#123;</span><br><span class="line">    bh.consume(Math.log(x1));</span><br><span class="line">    bh.consume(Math.log(x2));</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p>死代码消除的另一个方面是常量处理。如果计算结果是可预见的并且不依赖于状态对象，它可能被JIT优化。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">// IDEs will say &quot;Oh, you can convert this field to local variable&quot;. Don&apos;t. Trust. Them.</span><br><span class="line">// (While this is normally fine advice, it does not work in the context of measuring correctly.)</span><br><span class="line">private double x = Math.PI;</span><br><span class="line"></span><br><span class="line">// IDEs will probably also say &quot;Look, it could be final&quot;. Don&apos;t. Trust. Them. Either.</span><br><span class="line">// (While this is normally fine advice, it does not work in the context of measuring correctly.)</span><br><span class="line">private final double wrongX = Math.PI;</span><br><span class="line"></span><br><span class="line">@Benchmark</span><br><span class="line">public double baseline() &#123;</span><br><span class="line">    // simply return the value, this is a baseline</span><br><span class="line">    return Math.PI;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">@Benchmark</span><br><span class="line">public double measureWrong_1() &#123;</span><br><span class="line">    // This is wrong: the source is predictable, and computation is foldable.</span><br><span class="line">    return Math.log(Math.PI);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">@Benchmark</span><br><span class="line">public double measureWrong_2() &#123;</span><br><span class="line">    // This is wrong: the source is predictable, and computation is foldable.</span><br><span class="line">    return Math.log(wrongX);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">@Benchmark</span><br><span class="line">public double measureRight() &#123;</span><br><span class="line">    // This is correct: the source is not predictable.</span><br><span class="line">    return Math.log(x);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p>为防止常量处理被优化掉，需要遵守规则：永远从状态对象的<code>non-final</code>字段读取测试输入并返回计算的结果</p>
-<h3 id="fork"><a href="#fork" class="headerlink" title="fork"></a>fork</h3><p>jvm在<code>profile-guided optimizations</code>方面表现出色，但这对测试来说是不利的，已经完成的测试可能会对其后运行的测试产生影响。而为每个测试fork一个新的java进程可以避免这样的问题。<br>默认JMH为每个测试fork一个新的java进程。</p>
-<p><code>@Fork</code>注解用来设置forking参数，可以被标记在方法（影响单个方法）或者类（影响所有的<code>Benchmark</code>方法）上。<code>@Fork</code>可以设置fork进程的数量，预热次数，jvm参数等。</p>
-<p><code>@Fork(0)</code>表示在同样的进程中运行测试。</p>
-<h3 id="线程组"><a href="#线程组" class="headerlink" title="线程组"></a>线程组</h3><p>使用jmh可以进行非统一测试，即绑定几个测试方法为一组，每个测试方法分配不同个数的线程进行测试。</p>
-<ul>
-<li><code>@Group(name)</code> 为同一个组中的所有测试设置相同的名称.</li>
-<li><code>@GroupThreads(threadsNumber)</code> 为测试方法指定测试线程数量<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">private AtomicInteger counter;</span><br><span class="line"></span><br><span class="line">@Setup</span><br><span class="line">public void up() &#123;</span><br><span class="line">    counter = new AtomicInteger();</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">@Benchmark</span><br><span class="line">@Group(&quot;g&quot;)</span><br><span class="line">@GroupThreads(3)</span><br><span class="line">public int inc() &#123;</span><br><span class="line">    return counter.incrementAndGet();</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">@Benchmark</span><br><span class="line">@Group(&quot;g&quot;)</span><br><span class="line">@GroupThreads(1)</span><br><span class="line">public int get() &#123;</span><br><span class="line">    return counter.get();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-</li>
-</ul>
-<p>上述代码中：</p>
-<ol>
-<li>定义了执行组<code>g</code>，共有4个线程，其中3个线程执行<code>inc()</code>，一个线程执行<code>get()</code></li>
-<li>如果使用4个线程运行测试，则有一个阵型组。使用4*N 个线程运行测试则创建N个执行组</li>
-<li>每个执行组共享一个<code>@State</code>(counter)对象.</li>
-</ol>
-<h3 id="编译控制"><a href="#编译控制" class="headerlink" title="编译控制"></a>编译控制</h3><p>使用<code>@CompilerControl(Mode)</code>可以告诉编译器应该怎么编译特定的方法。有以下几种<code>Mode</code>:</p>
-<ul>
-<li><code>EXCLUDE</code> 禁止编译，解释执行</li>
-<li><code>INLINE</code> 强制内联</li>
-<li><code>DONT_INLINE</code> 强制不内联</li>
-<li><code>COMPILE_ONLY</code> 编译</li>
-<li><code>PRINT</code> 打印方法的一些信息</li>
-<li><code>BREAK</code> Insert the breakpoint into the generated compiled code.</li>
-</ul>
-<h3 id="批量测试"><a href="#批量测试" class="headerlink" title="批量测试"></a>批量测试</h3><p>有些方法的性能会随着调用会发生显著的变化（例如：将原始插入到<code>LinkedList</code>中间的位置），如果我们需要评估这样一个状态不稳定的操作，使用时间测试测量并求平均值并不是一个好的方法。这时候可以使用<code>batch</code>+<code>SingleShotTime</code>模式测试。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line">List&lt;String&gt; list = new LinkedList&lt;&gt;();</span><br><span class="line"></span><br><span class="line">@Benchmark</span><br><span class="line">@Warmup(iterations = 5, time = 1)</span><br><span class="line">@Measurement(iterations = 5, time = 1)</span><br><span class="line">@BenchmarkMode(Mode.AverageTime)</span><br><span class="line">public List&lt;String&gt; measureWrong_1() &#123;</span><br><span class="line">    list.add(list.size() / 2, &quot;something&quot;);</span><br><span class="line">    return list;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">@Benchmark</span><br><span class="line">@Warmup(iterations = 5, time = 5)</span><br><span class="line">@Measurement(iterations = 5, time = 5)</span><br><span class="line">@BenchmarkMode(Mode.AverageTime)</span><br><span class="line">public List&lt;String&gt; measureWrong_5() &#123;</span><br><span class="line">    list.add(list.size() / 2, &quot;something&quot;);</span><br><span class="line">    return list;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">/*</span><br><span class="line"> * This is what you do with JMH.</span><br><span class="line"> */</span><br><span class="line">@Benchmark</span><br><span class="line">@Warmup(iterations = 5, batchSize = 5000)</span><br><span class="line">@Measurement(iterations = 5, batchSize = 5000)</span><br><span class="line">@BenchmarkMode(Mode.SingleShotTime)</span><br><span class="line">public List&lt;String&gt; measureRight() &#123;</span><br><span class="line">    list.add(list.size() / 2, &quot;something&quot;);</span><br><span class="line">    return list;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">@Setup(Level.Iteration)</span><br><span class="line">public void setup()&#123;</span><br><span class="line">    list.clear();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p><code>@Measurement</code>的<code>batch</code>参数描述了执行一次需要调用测试方法的次数。</p>
-<h3 id="Params"><a href="#Params" class="headerlink" title="Params"></a>Params</h3><p>如果需要根据配置对比不同参数情况下的性能，这时候可以使用<code>@Param</code><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">@Param(&#123;&quot;1&quot;, &quot;31&quot;, &quot;65&quot;, &quot;101&quot;, &quot;103&quot;&#125;)</span><br><span class="line">public int arg;</span><br><span class="line"></span><br><span class="line">@Param(&#123;&quot;0&quot;, &quot;1&quot;, &quot;2&quot;, &quot;4&quot;, &quot;8&quot;, &quot;16&quot;, &quot;32&quot;&#125;)</span><br><span class="line">public int certainty;</span><br><span class="line"></span><br><span class="line">@Benchmark</span><br><span class="line">public boolean bench() &#123;</span><br><span class="line">    return BigInteger.valueOf(arg).isProbablePrime(certainty);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<h3 id="安全的使用循环"><a href="#安全的使用循环" class="headerlink" title="安全的使用循环"></a>安全的使用循环</h3><p>有以下两种方式可以安全的使用循环:</p>
-<ol>
-<li>在循环中将要测试方法的结果传递给<code>Blackhole(x)</code></li>
-<li>在循环中将要测试方法的结果传递给禁止内联的空方法<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br></pre></td><td class="code"><pre><span class="line">static final int BASE = 42;</span><br><span class="line"></span><br><span class="line">static int work(int x) &#123;</span><br><span class="line">    return BASE + x;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">/*</span><br><span class="line"> * Every benchmark requires control. We do a trivial control for our benchmarks</span><br><span class="line"> * by checking the benchmark costs are growing linearly with increased task size.</span><br><span class="line"> * If it doesn&apos;t, then something wrong is happening.</span><br><span class="line"> */</span><br><span class="line"></span><br><span class="line">@Param(&#123;&quot;1&quot;, &quot;10&quot;, &quot;100&quot;, &quot;1000&quot;&#125;)</span><br><span class="line">int size;</span><br><span class="line"></span><br><span class="line">int[] xs;</span><br><span class="line"></span><br><span class="line">@Setup</span><br><span class="line">public void setup() &#123;</span><br><span class="line">    xs = new int[size];</span><br><span class="line">    for (int c = 0; c &lt; size; c++) &#123;</span><br><span class="line">        xs[c] = c;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">/*</span><br><span class="line"> * First, the obviously wrong way: &quot;saving&quot; the result into a local variable would not</span><br><span class="line"> * work. A sufficiently smart compiler will inline work(), and figure out only the last</span><br><span class="line"> * work() call needs to be evaluated. Indeed, if you run it with varying $size, the score</span><br><span class="line"> * will stay the same!</span><br><span class="line"> */</span><br><span class="line"></span><br><span class="line">/**</span><br><span class="line"> * 编译器会内联work()，并发现只有最后一次work()需要被调用。改变xs的长度，你会发现耗时并没有改变</span><br><span class="line"> */</span><br><span class="line">@Benchmark</span><br><span class="line">public int measureWrong_1() &#123;</span><br><span class="line">    int acc = 0;</span><br><span class="line">    for (int x : xs) &#123;</span><br><span class="line">        acc = work(x);</span><br><span class="line">    &#125;</span><br><span class="line">    return acc;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">/**</span><br><span class="line"> * Second, another wrong way: &quot;accumulating&quot; the result into a local variable. While</span><br><span class="line"> * it would force the computation of each work() method, there are software pipelining</span><br><span class="line"> * effects in action, that can merge the operations between two otherwise distinct work()</span><br><span class="line"> * bodies. This will obliterate the benchmark setup.</span><br><span class="line"> * In this example, HotSpot does the unrolled loop, merges the $BASE operands into a single</span><br><span class="line"> * addition to $acc, and then does a bunch of very tight stores of $x-s. The final performance</span><br><span class="line"> * depends on how much of the loop unrolling happened *and* how much data is available to make</span><br><span class="line"> * the large strides.</span><br><span class="line"> */</span><br><span class="line">@Benchmark</span><br><span class="line">public int measureWrong_2() &#123;</span><br><span class="line">    int acc = 0;</span><br><span class="line">    for (int x : xs) &#123;</span><br><span class="line">        acc += work(x);</span><br><span class="line">    &#125;</span><br><span class="line">    return acc;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">/*</span><br><span class="line"> * Now, let&apos;s see how to measure these things properly. A very straight-forward way to</span><br><span class="line"> * break the merging is to sink each result to Blackhole. This will force runtime to compute</span><br><span class="line"> * every work() call in full. (We would normally like to care about several concurrent work()</span><br><span class="line"> * computations at once, but the memory effects from Blackhole.consume() prevent those optimization</span><br><span class="line"> * on most runtimes).</span><br><span class="line"> */</span><br><span class="line">@Benchmark</span><br><span class="line">public void measureRight_1(Blackhole bh) &#123;</span><br><span class="line">    for (int x : xs) &#123;</span><br><span class="line">        bh.consume(work(x));</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">/*</span><br><span class="line"> * DANGEROUS AREA, PLEASE READ THE DESCRIPTION BELOW.</span><br><span class="line"> *</span><br><span class="line"> * Sometimes, the cost of sinking the value into a Blackhole is dominating the nano-benchmark score.</span><br><span class="line"> * In these cases, one may try to do a make-shift &quot;sinker&quot; with non-inlineable method. This trick is</span><br><span class="line"> * *very* VM-specific, and can only be used if you are verifying the generated code (that&apos;s a good</span><br><span class="line"> * strategy when dealing with nano-benchmarks anyway).</span><br><span class="line"> *</span><br><span class="line"> * You SHOULD NOT use this trick in most cases. Apply only where needed.</span><br><span class="line"> */</span><br><span class="line"></span><br><span class="line">/**</span><br><span class="line"> * 如果测试的是nano级别的方法，Blackhole.consume(x)将会占据大部分的消耗。这时候可以将方法结果作为参数传递给一个</span><br><span class="line"> * “non-inlineable”的空方法。</span><br><span class="line"> * 注意：绝大多数情况都不应该使用这个技巧。</span><br><span class="line"> */</span><br><span class="line">@Benchmark</span><br><span class="line">public void measureRight_2() &#123;</span><br><span class="line">    for (int x : xs) &#123;</span><br><span class="line">        sink(work(x));</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">@CompilerControl(CompilerControl.Mode.DONT_INLINE)</span><br><span class="line">public static void sink(int v) &#123;</span><br><span class="line">    // IT IS VERY IMPORTANT TO MATCH THE SIGNATURE TO AVOID AUTOBOXING.</span><br><span class="line">    // The method intentionally does nothing.</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-</li>
-</ol>
-<h3 id="其它注解"><a href="#其它注解" class="headerlink" title="其它注解"></a>其它注解</h3><ul>
-<li><code>@OperationsPerInvocation</code> 标记在类或者<code>benchmark</code>方法上。用来告诉jmh调用一次方法相当于多少次<code>operation</code>。如果测试方法内部有循环，但想测试一次操作的性能，可以用此注解。</li>
-<li><code>@OutputTimeUnit</code> 指定输出时间单位</li>
-<li><code>@AuxCounters</code></li>
-</ul>
-<h3 id="工具类"><a href="#工具类" class="headerlink" title="工具类"></a>工具类</h3><ul>
-<li><code>Control</code> :<code>cnt.stopMeasurement</code> 见<a href="http://hg.openjdk.java.net/code-tools/jmh/file/66fb723292d4/jmh-samples/src/main/java/org/openjdk/jmh/samples/JMHSample_18_Control.java" target="_blank" rel="noopener">JMHSample_18_Control</a></li>
-<li><code>OptionsBuilder.syncIterations(true)</code></li>
-<li><code>Blackhole</code><ul>
-<li><code>consume(o)</code> 消耗对象，避免JIT优化导致操作被消除</li>
-<li><code>consumeCPU(0)</code> 消耗CPU时钟</li>
-<li>可以直接作为<code>@Setup</code>、<code>@TearDown</code>方法的参数（<code>Blackhole</code>本身是一个状态对象）</li>
-</ul>
-</li>
-<li><code>BenchmarkParams</code> 获取测试设置</li>
-<li><code>IterationParams</code> 获取当前进行中的迭代的设置</li>
-<li><code>ThreadParams</code> 获取线程的细节信息</li>
-</ul>
-<h3 id="Options-amp-OptionsBuilder"><a href="#Options-amp-OptionsBuilder" class="headerlink" title="Options &amp; OptionsBuilder"></a>Options &amp; OptionsBuilder</h3><p><code>Options</code>是JMH的配置的配置类。可以通过<code>OptionsBuilder</code>构建，<code>OptionsBuilder</code>中一些方法能能达到上述很多注解相同的效果。</p>
-<ul>
-<li><code>Options build()</code> 产生最终的<code>Options</code>对象</li>
-<li><code>parent(Options other)</code> 使用other的配置作为默认配置</li>
-<li><code>include(regexp)</code> <code>exclude(regexp)</code> 添加/排除需要测试的类。注意：参数为一个正则表达式。可以调用多次。</li>
-<li><code>output(filename)</code> 设置记录运行日志的文件</li>
-<li><code>result(filename)</code> 设置记录运行结果的文件</li>
-<li><code>shouldDoGC(boolean value)</code> 测试迭代间隔是否需要GC</li>
-<li><code>shouldFailOnError(boolean value)</code> 测试过程中出现异常是否意味着测试失败。<ul>
-<li>设置为<code>true</code>，JMH会立即停止，抛出异常，并且已经正确测试过的结果也不会输出。</li>
-<li>设置为<code>false</code> 会停止测试有异常的方法，其它测试正常进行，最后给出正确测试的结果。 </li>
-</ul>
-</li>
-<li><code>threads(int count)</code> 设置运行测试的线程数，默认为<code>1</code></li>
-<li><code>syncIterations(boolean value)</code> 是否同步进行测试。详见<a href="http://hg.openjdk.java.net/code-tools/jmh/file/66fb723292d4/jmh-samples/src/main/java/org/openjdk/jmh/samples/JMHSample_17_SyncIterations.java" target="_blank" rel="noopener">JMHSample_17_SyncIterations</a><ul>
-<li>设置为<code>true</code>，测试会确保在所有线程运行后开始。</li>
-<li>如果设置<code>false</code>，则不能保证所有线程能同时运行，会对测试结果照常偏差，测试结果会显得更好。默认为<code>true</code>。</li>
-</ul>
-</li>
-<li><code>warmupIterations(int value)</code> 设置预热次数，默认为<code>5</code></li>
-<li><code>warmupBatchSize(int value)</code> </li>
-<li><code>warmupTime(TimeValue value)</code> 预热每次迭代运行时长，默认<code>10秒</code></li>
-<li><code>warmupMode(WarmupMode)</code> 预热模式，可以单独预热<code>INDI</code>或者全部预热<code>BULK</code></li>
-<li><code>measurementIterations(int count)</code> 测试迭代次数，默认为<code>5</code></li>
-<li><code>measurementTime(TimeValue value)</code> 测试热每次迭代运行时长，默认<code>10秒</code></li>
-<li><code>mode(Mode mode)</code> 测试模式，默认<code>Throughput</code></li>
-<li><code>timeUnit(TimeUnit tu)</code> 结果中展示用的时间单位，默认<code>秒</code></li>
-<li><code>forks(int value)</code> fork 数量，默认<code>5</code></li>
-<li><code>timeout(TimeValue value)</code> 每轮等待时长，默认<code>10分钟</code></li>
-<li><code>addProfiler(profiler)</code> 添加分析器</li>
-</ul>
-<h3 id="Profilers"><a href="#Profilers" class="headerlink" title="Profilers"></a>Profilers</h3><p>JMH内置了一些有用的Profilers</p>
-<ul>
-<li><code>StackProfiler</code> 基础的堆栈分析器</li>
-<li><code>GCProfiler</code></li>
-<li><code>ClassloaderProfiler</code></li>
-<li><code>CompilerProfiler</code> 编译解析器。在调整测试方面非常有用，通过它可以准确的设置warmup 迭代次数，以确保正式测试时JIT已经编译了代码</li>
-<li><code>Hotspot profilers</code><ul>
-<li><code>HotspotClassloadingProfiler</code></li>
-<li><code>HotspotCompilationProfiler</code></li>
-<li><code>HotspotMemoryProfiler</code></li>
-<li><code>HotspotRuntimeProfiler</code></li>
-<li><code>HotspotThreadProfiler</code></li>
-</ul>
-</li>
-</ul>
-<h3 id="指令"><a href="#指令" class="headerlink" title="指令"></a>指令</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br></pre></td><td class="code"><pre><span class="line">λ java -jar target/benchmarks.jar -h</span><br><span class="line">Usage: java -jar ... [regexp*] [options]</span><br><span class="line"> [opt] means optional argument.</span><br><span class="line"> &lt;opt&gt; means required argument.</span><br><span class="line"> &quot;+&quot; means comma-separated list of values.</span><br><span class="line"> &quot;time&quot; arguments accept time suffixes, like &quot;100ms&quot;.</span><br><span class="line"></span><br><span class="line">  [arguments]                 Benchmarks to run (regexp+).</span><br><span class="line">  -bm &lt;mode&gt;                  Benchmark mode. Available modes are: [Throughput/thrpt,</span><br><span class="line">                              AverageTime/avgt, SampleTime/sample, SingleShotTime/ss,</span><br><span class="line">                              All/all]</span><br><span class="line">  -bs &lt;int&gt;                   Batch size: number of benchmark method calls per</span><br><span class="line">                              operation. (some benchmark modes can ignore this</span><br><span class="line">                              setting)</span><br><span class="line">  -e &lt;regexp+&gt;                Benchmarks to exclude from the run.</span><br><span class="line">  -f [int]                    How many times to forks a single benchmark. Use 0 to</span><br><span class="line">                              disable forking altogether (WARNING: disabling</span><br><span class="line">                              forking may have detrimental impact on benchmark</span><br><span class="line">                              and infrastructure reliability, you might want</span><br><span class="line">                              to use different warmup mode instead).</span><br><span class="line">  -foe [bool]                 Should JMH fail immediately if any benchmark had</span><br><span class="line">                              experienced the unrecoverable error?</span><br><span class="line">  -gc [bool]                  Should JMH force GC between iterations?</span><br><span class="line">  -h                          Display help.</span><br><span class="line">  -i &lt;int&gt;                    Number of measurement iterations to do.</span><br><span class="line">  -jvm &lt;string&gt;               Custom JVM to use when forking (path to JVM executable).</span><br><span class="line"></span><br><span class="line">  -jvmArgs &lt;string&gt;           Custom JVM args to use when forking.</span><br><span class="line">  -jvmArgsAppend &lt;string&gt;     Custom JVM args to use when forking (append these)</span><br><span class="line"></span><br><span class="line">  -jvmArgsPrepend &lt;string&gt;    Custom JVM args to use when forking (prepend these)</span><br><span class="line"></span><br><span class="line">  -l                          List matching benchmarks and exit.</span><br><span class="line">  -lprof                      List profilers.</span><br><span class="line">  -lrf                        List result formats.</span><br><span class="line">  -o &lt;filename&gt;               Redirect human-readable output to file.</span><br><span class="line">  -opi &lt;int&gt;                  Operations per invocation.</span><br><span class="line">  -p &lt;param=&#123;v,&#125;*&gt;            Benchmark parameters. This option is expected to</span><br><span class="line">                              be used once per parameter. Parameter name and parameter</span><br><span class="line">                              values should be separated with equals sign. Parameter</span><br><span class="line">                              values should be separated with commas.</span><br><span class="line">  -prof &lt;profiler+&gt;           Use profilers to collect additional data. See the</span><br><span class="line">                              list of available profilers first.</span><br><span class="line">  -r &lt;time&gt;                   Time to spend at each measurement iteration.</span><br><span class="line">  -rf &lt;type&gt;                  Result format type. See the list of available result</span><br><span class="line">                              formats first.</span><br><span class="line">  -rff &lt;filename&gt;             Write results to given file.</span><br><span class="line">  -si [bool]                  Synchronize iterations?</span><br><span class="line">  -t &lt;int&gt;                    Number of worker threads to run with.</span><br><span class="line">  -tg &lt;int+&gt;                  Override thread group distribution for asymmetric</span><br><span class="line">                              benchmarks.</span><br><span class="line">  -tu &lt;TU&gt;                    Output time unit. Available time units are: [m, s,</span><br><span class="line">                              ms, us, ns].</span><br><span class="line">  -v &lt;mode&gt;                   Verbosity mode. Available modes are: [SILENT, NORMAL,</span><br><span class="line">                              EXTRA]</span><br><span class="line">  -w &lt;time&gt;                   Time to spend at each warmup iteration.</span><br><span class="line">  -wbs &lt;int&gt;                  Warmup batch size: number of benchmark method calls</span><br><span class="line">                              per operation. (some benchmark modes can ignore</span><br><span class="line">                              this setting)</span><br><span class="line">  -wf &lt;int&gt;                   How many warmup forks to make for a single benchmark.</span><br><span class="line">                              0 to disable warmup forks.</span><br><span class="line">  -wi &lt;int&gt;                   Number of warmup iterations to do.</span><br><span class="line">  -wm &lt;mode&gt;                  Warmup mode for warming up selected benchmarks.</span><br><span class="line">                              Warmup modes are: [INDI, BULK, BULK_INDI].</span><br><span class="line">  -wmb &lt;regexp+&gt;              Warmup benchmarks to include in the run in addition</span><br><span class="line">                              to already selected. JMH will not measure these benchmarks,</span><br><span class="line">                              but only use them for the warmup.</span><br></pre></td></tr></table></figure>
-<h3 id="相关网址"><a href="#相关网址" class="headerlink" title="相关网址"></a>相关网址</h3><ul>
-<li><a href="http://openjdk.java.net/projects/code-tools/jmh/" target="_blank" rel="noopener">jmh</a></li>
-<li><a href="http://hg.openjdk.java.net/code-tools/jmh/file/tip/jmh-samples/src/main/java/org/openjdk/jmh/samples/" target="_blank" rel="noopener">jmh samples</a></li>
-<li><a href="http://java-performance.info/introduction-jmh-profilers/" target="_blank" rel="noopener">Java Performance Tuning Guide</a></li>
-</ul>
-
-          
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2018/10/19/JMH/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -1909,180 +1936,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://guangfei.win/2015/11/16/Heap-Sort/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="sky">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="越是憧憬 越要风雨兼程">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2015/11/16/Heap-Sort/" itemprop="url">Heap Sort</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2015-11-16T10:22:34+08:00">
-                2015-11-16
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/algorithm/" itemprop="url" rel="index">
-                    <span itemprop="name">algorithm</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2015/11/16/Heap-Sort/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2015/11/16/Heap-Sort/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-             <span id="/2015/11/16/Heap-Sort/" class="leancloud_visitors" data-flag-title="Heap Sort">
-               <span class="post-meta-divider">|</span>
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               
-                 <span class="post-meta-item-text">阅读次数&#58;</span>
-               
-                 <span class="leancloud-visitors-count"></span>
-             </span>
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <p>堆排序（Heapsort）是指利用二叉堆这种数据结构所设计的一种排序算法。</p>
-<h3 id="二叉堆"><a href="#二叉堆" class="headerlink" title="二叉堆"></a>二叉堆</h3><p>二叉堆是一种特殊的堆，其有以下特性：</p>
-<ol>
-<li>二叉堆是完全二叉树或者是近似完全二叉树</li>
-<li>每个节点的左子树和右子树都是一个二叉堆</li>
-<li>父节点的键值总是与子节点的键值保持固定的序关系（parent&gt;=son || parent&lt;=son）</li>
-</ol>
-<p>当父节点的键值总是大于或等于任何一个子节点的键值时为 <strong>最大堆</strong>。 当父节点的键值总是小于或等于任何一个子节点的键值时为 <strong>最小堆</strong>。<br>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2015/11/16/Heap-Sort/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -2133,7 +1986,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">23</span>
+                  <span class="site-state-item-count">24</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -2144,7 +1997,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">3</span>
+                  <span class="site-state-item-count">4</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>
@@ -2155,7 +2008,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">7</span>
+                  <span class="site-state-item-count">8</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>

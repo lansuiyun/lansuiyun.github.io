@@ -1,0 +1,920 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="并发," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="引入在JMH的例子中，JMHSample_37_CacheAccess这个例子很有意思，测试一个二维数组通过row、col两种不同的方式遍历数据的平均时间。123456789101112131415161718192021222324252627282930313233343536373839404142434445464748495051@BenchmarkMode(Mode.AverageTi">
+<meta name="keywords" content="并发">
+<meta property="og:type" content="article">
+<meta property="og:title" content="伪共享">
+<meta property="og:url" content="http://guangfei.win/2018/10/20/伪共享/index.html">
+<meta property="og:site_name" content="越是憧憬 越要风雨兼程">
+<meta property="og:description" content="引入在JMH的例子中，JMHSample_37_CacheAccess这个例子很有意思，测试一个二维数组通过row、col两种不同的方式遍历数据的平均时间。123456789101112131415161718192021222324252627282930313233343536373839404142434445464748495051@BenchmarkMode(Mode.AverageTi">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2018-10-20T08:58:23.547Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="伪共享">
+<meta name="twitter:description" content="引入在JMH的例子中，JMHSample_37_CacheAccess这个例子很有意思，测试一个二维数组通过row、col两种不同的方式遍历数据的平均时间。123456789101112131415161718192021222324252627282930313233343536373839404142434445464748495051@BenchmarkMode(Mode.AverageTi">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://guangfei.win/2018/10/20/伪共享/"/>
+
+
+
+
+
+  <title>伪共享 | 越是憧憬 越要风雨兼程</title>
+  
+
+
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?add444b58ef1d82ab2d6e5f7d4c9c159";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">越是憧憬 越要风雨兼程</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://guangfei.win/2018/10/20/伪共享/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="sky">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="越是憧憬 越要风雨兼程">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">伪共享</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-10-20T16:56:13+08:00">
+                2018-10-20
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/java冷知识/" itemprop="url" rel="index">
+                    <span itemprop="name">java冷知识</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2018/10/20/伪共享/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2018/10/20/伪共享/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+             <span id="/2018/10/20/伪共享/" class="leancloud_visitors" data-flag-title="伪共享">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数&#58;</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h3 id="引入"><a href="#引入" class="headerlink" title="引入"></a>引入</h3><p>在JMH的例子中，<a href="http://hg.openjdk.java.net/code-tools/jmh/file/66fb723292d4/jmh-samples/src/main/java/org/openjdk/jmh/samples/JMHSample_37_CacheAccess.java" target="_blank" rel="noopener">JMHSample_37_CacheAccess</a>这个例子很有意思，测试一个二维数组通过<code>row</code>、<code>col</code>两种不同的方式遍历数据的平均时间。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br></pre></td><td class="code"><pre><span class="line">@BenchmarkMode(Mode.AverageTime)</span><br><span class="line">@OutputTimeUnit(TimeUnit.NANOSECONDS)</span><br><span class="line">@Warmup(iterations = 5, time = 1, timeUnit = TimeUnit.SECONDS)</span><br><span class="line">@Measurement(iterations = 5, time = 1, timeUnit = TimeUnit.SECONDS)</span><br><span class="line">@Fork(5)</span><br><span class="line">@State(Scope.Benchmark)</span><br><span class="line">public class JMHSample_37_CacheAccess &#123;</span><br><span class="line"></span><br><span class="line">    /*</span><br><span class="line">     * This sample serves as a warning against subtle differences in cache access patterns.</span><br><span class="line">     *</span><br><span class="line">     * Many performance differences may be explained by the way tests are accessing memory.</span><br><span class="line">     * In the example below, we walk the matrix either row-first, or col-first:</span><br><span class="line">     */</span><br><span class="line"></span><br><span class="line">    private final static int COUNT = 4096;</span><br><span class="line">    private final static int MATRIX_SIZE = COUNT * COUNT;</span><br><span class="line"></span><br><span class="line">    private int[][] matrix;</span><br><span class="line"></span><br><span class="line">    @Setup</span><br><span class="line">    public void setup() &#123;</span><br><span class="line">        matrix = new int[COUNT][COUNT];</span><br><span class="line">        Random random = new Random(1234);</span><br><span class="line">        for (int i = 0; i &lt; COUNT; i++) &#123;</span><br><span class="line">            for (int j = 0; j &lt; COUNT; j++) &#123;</span><br><span class="line">                matrix[i][j] = random.nextInt();</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    @Benchmark</span><br><span class="line">    @OperationsPerInvocation(MATRIX_SIZE)</span><br><span class="line">    public void colFirst(Blackhole bh) &#123;</span><br><span class="line">        for (int c = 0; c &lt; COUNT; c++) &#123;</span><br><span class="line">            for (int r = 0; r &lt; COUNT; r++) &#123;</span><br><span class="line">                bh.consume(matrix[r][c]);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    @Benchmark</span><br><span class="line">    @OperationsPerInvocation(MATRIX_SIZE)</span><br><span class="line">    public void rowFirst(Blackhole bh) &#123;</span><br><span class="line">        for (int r = 0; r &lt; COUNT; r++) &#123;</span><br><span class="line">            for (int c = 0; c &lt; COUNT; c++) &#123;</span><br><span class="line">                bh.consume(matrix[r][c]);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>如上述代码所示，两种遍历的次数相同，差异是一个按行读取，一个按列读取。那么，最终两种方式的性能会有差异吗？<br><a id="more"></a><br>让我们来看一下测试结果：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Benchmark                          Mode  Cnt   Score   Error  Units</span><br><span class="line">JMHSample_37_CacheAccess.colFirst  avgt   25  15.535 ± 0.106  ns/op</span><br><span class="line">JMHSample_37_CacheAccess.rowFirst  avgt   25   5.011 ± 0.061  ns/op</span><br></pre></td></tr></table></figure></p>
+<p>通过结果可以得出结论：按行访问的效率远远高于按列访问。为什么会这样呢，先不忙回答这个问题，看完这篇文章你应该就可以得出答案了。</p>
+<h3 id="缓存行-cache-line"><a href="#缓存行-cache-line" class="headerlink" title="缓存行 cache line"></a>缓存行 cache line</h3><p>当前CPU频率的不断提升，内存的访问速度却并没有什么突破。传统CPU 直连内存的方式会因为等待内存响应而降低效率。所以为减少处理器访问内存所需平均时间，就出现了<code>CPU高速缓存CPU Cache</code>。<code>CPU Cache</code>位于金字塔式存储体系中自顶向下的第二层，仅次于CPU寄存器。其容量远小于内存，但速度却可以接近处理器的频率。</p>
+<p>当处理器发出内存访问请求时，会先查看缓存内是否有请求数据。如果存在（命中），则不经访问内存直接返回该数据；如果不存在（失效），则要先把内存中的相应数据载入缓存，再将其返回处理器。</p>
+<p>缓存是由缓存行组成的，CPU在操作缓存时是以缓存行为单位的。一个缓存行的大小通常是64 字节，通过指令才可以查看缓存行大小：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cat /sys/devices/system/cpu/cpu0/cache/index0/coherency_line_size</span><br></pre></td></tr></table></figure></p>
+<p>以<code>long[] a</code>数组为例，因为数组是连续内存，所以当<code>a[0]</code>被加载到缓存后，则<code>a[1]</code>~<code>a[7]</code>也同时被加载到了缓存。如果这时要访问<code>a[1]</code>，cpu就可以直接从缓存中获取，无需加载。看到这里，是不是上边那个问题已经有了一半的答案了呢。为什么是一半呢，因为另一半的答案在于java内存中二维数组的结构。引用<a href="http://hg.openjdk.java.net/code-tools/jmh/file/66fb723292d4/jmh-samples/src/main/java/org/openjdk/jmh/samples/JMHSample_37_CacheAccess.java" target="_blank" rel="noopener">JMHSample_37_CacheAccess</a>中的说明：</p>
+<blockquote>
+<p>Notably, colFirst accesses are much slower, and that’s not a surprise: Java’s multidimensional<br>        arrays are actually rigged, being one-dimensional arrays of one-dimensional arrays. Therefore,<br>        pulling n-th element from each of the inner array induces more cache misses, when matrix is large.</p>
+</blockquote>
+<h3 id="伪共享"><a href="#伪共享" class="headerlink" title="伪共享"></a>伪共享</h3><p>在单线程下遍历数组，<code>cache line</code> 给我们带来了更高的效率。但多线程情况下，这种好处可能就变成了坏处。想象一下，多个线程同时修改的对象位于同一个<code>cache line</code>，其中一个线程修改了对象，导致其它线程对应的<code>cache line</code>会失效，需要重新加载，效率降低。这种情况就被称为<code>伪共享</code>。多线程竞争激烈的情况下，伪共享会大大影响性能。</p>
+<p>那怎么能避免伪共享呢，其实想想伪共享产生的原理，答案就呼之欲出了：只要确保一个<code>cache line</code>只有一个对象。</p>
+<h3 id="避免伪共享"><a href="#避免伪共享" class="headerlink" title="避免伪共享"></a>避免伪共享</h3><p>怎么才能确保一个<code>cache line</code>只有一个对象来避免伪共享呢。继续以<code>long[] a</code>数组为例，一个<code>long</code>占8个字节，它的长度是固定的，我们不可能把它的长度变成64。但我们可以把<code>long[]</code>替换成另外一个对象数组，对象提供<code>long</code>属性，同时整个对象占64或者以上字节。这样就能满足我们的需求了。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">public class PaddingLong&#123;</span><br><span class="line">    public long value = ;  </span><br><span class="line">    public long p1, p2, p3, p4, p5, p6; // 填充数据</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>7个<code>long</code>+对象头长度刚好大于64。</p>
+<p>江湖传说，在 Java7 中，上述的代码<code>public long p1, p2, p3, p4, p5, p6;</code> 会被认为是无效代码而被优化掉，这时候可以使用继承的方法。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">abstract class AbstractPaddingObject&#123;</span><br><span class="line">    protected long p1, p2, p3, p4, p5, p6;// 填充数据</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">public class PaddingObject extends AbstractPaddingObject&#123;</span><br><span class="line">    public volatile long value = 0L;    // 实际数据</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>但在JAVA8环境下测试，发现避免伪共享有效，说明<code>public long p1, p2, p3, p4, p5, p6;</code>并没有被优化掉。不过，在java8环境下，我们也无需用上述两种方式填充，更简单的方式是使用<code>@Contended</code><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">@Contended</span><br><span class="line">public final static class VolatileLong &#123;</span><br><span class="line">    public volatile long value = 0L;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>完整实例<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br></pre></td><td class="code"><pre><span class="line">public final class FalseSharing implements Runnable &#123;</span><br><span class="line">    public final static int NUM_THREADS = 4;</span><br><span class="line">    public final static long ITERATIONS = 500L * 1000L * 1000L;</span><br><span class="line">    private final int arrayIndex;</span><br><span class="line"></span><br><span class="line">    private static VolatileLong[] longs = new VolatileLong[NUM_THREADS];</span><br><span class="line"></span><br><span class="line">    static &#123;</span><br><span class="line">        for (int i = 0; i &lt; longs.length; i++) &#123;</span><br><span class="line">            longs[i] = new VolatileLong();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public FalseSharing(final int arrayIndex) &#123;</span><br><span class="line">        this.arrayIndex = arrayIndex;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public static void main(final String[] args) throws Exception &#123;</span><br><span class="line">        final long start = System.nanoTime();</span><br><span class="line">        runTest();</span><br><span class="line">        System.out.println(&quot;duration = &quot; + (System.nanoTime() - start));</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    private static void runTest() throws InterruptedException &#123;</span><br><span class="line">        Thread[] threads = new Thread[NUM_THREADS];</span><br><span class="line"></span><br><span class="line">        for (int i = 0; i &lt; threads.length; i++) &#123;</span><br><span class="line">            threads[i] = new Thread(new FalseSharing(i));</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        for (Thread t : threads) &#123;</span><br><span class="line">            t.start();</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        for (Thread t : threads) &#123;</span><br><span class="line">            t.join();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public void run() &#123;</span><br><span class="line">        long i = ITERATIONS + 1;</span><br><span class="line">        while (0 != --i) &#123;</span><br><span class="line">            longs[arrayIndex].value = i;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    @Contended</span><br><span class="line">    public final static class VolatileLong &#123;</span><br><span class="line">        public volatile long value = 0L;</span><br><span class="line">//        public long p1, p2, p3, p4, p5, p6; // comment out</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>测试结果：</p>
+<ol>
+<li>不填充，不加<code>@Contended</code>注解：<code>64473661814</code></li>
+<li>使用填充：<code>7221347389</code></li>
+<li>加<code>@Contended</code>注解：<code>7034235497</code></li>
+</ol>
+<p>通过测试结果，可以看出伪共享对新能的影响有多大。</p>
+<h3 id="Contended"><a href="#Contended" class="headerlink" title="@Contended"></a><code>@Contended</code></h3><p><code>@Contended</code> 注解可以加在类或者字段上，会增加目标实例大小，使目标占满整个<code>cache line</code>。默认情况，只会对JDK内部的类生效。如果想要对自己的代码生效，需要在jvm启动时增加<code>-XX:-RestrictContended</code>参数。</p>
+<p>当<code>@Contended</code>加在字段上时，还可以增加<code>group</code>参数，这样，相同<code>group</code>的字段会在内存上连续分配。当我们每一次操作都会更新对象的多个属性时很有用，会提高效率。但要谨慎使用。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">public class VolatileLong &#123;</span><br><span class="line">    @Contended(&quot;group0&quot;)</span><br><span class="line">    public volatile long value1 = 0L;  </span><br><span class="line">    @Contended(&quot;group0&quot;)</span><br><span class="line">    public volatile long value2 = 0L;  </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h3 id="相关工具"><a href="#相关工具" class="headerlink" title="相关工具"></a>相关工具</h3><ol>
+<li>查看对象内存布局<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">java -cp a.jar -XX:+PrintFieldLayout obj</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<p>该命令只在debug版本的jvm中生效</p>
+<ol start="2">
+<li>查看对象大小<a href="https://www.javamex.com/classmexer/" target="_blank" rel="noopener">Classmexer</a></li>
+</ol>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/并发/" rel="tag"># 并发</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/10/19/JMH/" rel="next" title="微基准测试JMH">
+                <i class="fa fa-chevron-left"></i> 微基准测试JMH
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+      <div class="ds-thread" data-thread-key="2018/10/20/伪共享/"
+           data-title="伪共享" data-url="http://guangfei.win/2018/10/20/伪共享/">
+      </div>
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">sky</p>
+              <p class="site-description motion-element" itemprop="description">keep going</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">24</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">4</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">8</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#引入"><span class="nav-number">1.</span> <span class="nav-text">引入</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#缓存行-cache-line"><span class="nav-number">2.</span> <span class="nav-text">缓存行 cache line</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#伪共享"><span class="nav-number">3.</span> <span class="nav-text">伪共享</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#避免伪共享"><span class="nav-number">4.</span> <span class="nav-text">避免伪共享</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Contended"><span class="nav-number">5.</span> <span class="nav-text">@Contended</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#相关工具"><span class="nav-number">6.</span> <span class="nav-text">相关工具</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2015 &mdash; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">sky</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Mist</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"13m"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+    
+    
+    <script src="/lib/ua-parser-js/dist/ua-parser.min.js?v=0.7.9"></script>
+    <script src="/js/src/hook-duoshuo.js"></script>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.4.js"></script>
+  <script>AV.initialize("JhJQHbjn7uinA1k70nNSCqys-gzGzoHsz", "OdTTinqgVB1mkIAMgwB38zH2");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
