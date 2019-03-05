@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="zmq," />
+  <meta name="keywords" content="spring," />
 
 
 
@@ -79,18 +79,18 @@
 
 
 
-<meta name="description" content="版本：zmq4.14">
-<meta name="keywords" content="zmq">
+<meta name="description" content="在spring中，有多种配置、使用Properties的方式。">
+<meta name="keywords" content="spring">
 <meta property="og:type" content="article">
-<meta property="og:title" content="jzmq编译">
-<meta property="og:url" content="http://guangfei.win/2016/04/06/jzmq编译/index.html">
+<meta property="og:title" content="Spring-properties">
+<meta property="og:url" content="http://guangfei.win/2019/03/05/Spring-properties/index.html">
 <meta property="og:site_name" content="越是憧憬 越要风雨兼程">
-<meta property="og:description" content="版本：zmq4.14">
+<meta property="og:description" content="在spring中，有多种配置、使用Properties的方式。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-12-01T06:59:46.827Z">
+<meta property="og:updated_time" content="2019-03-05T11:52:52.988Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="jzmq编译">
-<meta name="twitter:description" content="版本：zmq4.14">
+<meta name="twitter:title" content="Spring-properties">
+<meta name="twitter:description" content="在spring中，有多种配置、使用Properties的方式。">
 
 
 
@@ -120,13 +120,13 @@
 
 
 
-  <link rel="canonical" href="http://guangfei.win/2016/04/06/jzmq编译/"/>
+  <link rel="canonical" href="http://guangfei.win/2019/03/05/Spring-properties/"/>
 
 
 
 
 
-  <title>jzmq编译 | 越是憧憬 越要风雨兼程</title>
+  <title>Spring-properties | 越是憧憬 越要风雨兼程</title>
   
 
 
@@ -273,7 +273,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://guangfei.win/2016/04/06/jzmq编译/">
+    <link itemprop="mainEntityOfPage" href="http://guangfei.win/2019/03/05/Spring-properties/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="sky">
@@ -290,7 +290,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">jzmq编译</h1>
+          <h1 class="post-title" itemprop="name headline">Spring-properties</h1>
         
 
         <div class="post-meta">
@@ -302,8 +302,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-04-06T20:04:41+08:00">
-                2016-04-06
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-03-05T19:48:09+08:00">
+                2019-03-05
               </time>
             
 
@@ -325,8 +325,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/java-tool/" itemprop="url" rel="index">
-                    <span itemprop="name">java tool</span>
+                  <a href="/categories/spring/" itemprop="url" rel="index">
+                    <span itemprop="name">spring</span>
                   </a>
                 </span>
 
@@ -343,8 +343,8 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2016/04/06/jzmq编译/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/04/06/jzmq编译/" itemprop="commentCount"></span>
+                <a href="/2019/03/05/Spring-properties/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2019/03/05/Spring-properties/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -352,7 +352,7 @@
 
           
           
-             <span id="/2016/04/06/jzmq编译/" class="leancloud_visitors" data-flag-title="jzmq编译">
+             <span id="/2019/03/05/Spring-properties/" class="leancloud_visitors" data-flag-title="Spring-properties">
                <span class="post-meta-divider">|</span>
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -383,72 +383,24 @@
       
 
       
-        <p>版本：zmq4.14<br><a id="more"></a></p>
-<h3 id="下载地址"><a href="#下载地址" class="headerlink" title="下载地址"></a>下载地址</h3><ul>
-<li><a href="https://github.com/jedisct1/libsodium/tree/1.0.8" target="_blank" rel="noopener">libsodium1.0.8</a> </li>
-<li><a href="http://zeromq.org/intro:get-the-software" target="_blank" rel="noopener">zmq</a></li>
-<li><a href="https://github.com/zeromq/jzmq/tree/v3.1.0" target="_blank" rel="noopener">jzmq</a></li>
-</ul>
-<h3 id="window编译"><a href="#window编译" class="headerlink" title="window编译"></a>window编译</h3><h4 id="libsodium-1-0-8编译"><a href="#libsodium-1-0-8编译" class="headerlink" title="libsodium-1.0.8编译"></a>libsodium-1.0.8编译</h4><ol>
-<li>进入libsodium\builds\msvc\vs2012，双击libsodium.sln</li>
-<li>项目编译平台属性设置为：ReleaseDLL, X64</li>
-<li>设置编译环境为vs2013:项目-&gt;属性配置属性-&gt;平台工具集，选VS2013（V120）</li>
-</ol>
-<h4 id="zeromq-4-1-4"><a href="#zeromq-4-1-4" class="headerlink" title="zeromq-4.1.4"></a>zeromq-4.1.4</h4><ol>
-<li>下载<a href="http://download.zeromq.org/zeromq-4.1.4.zip" target="_blank" rel="noopener">Windows sources</a></li>
-<li>打开项目zeromq-4.1.4\builds\msvc\vs2013</li>
-<li>只编译libzmq这个项目</li>
-<li>项目编译平台属性设置为：DynRelease, X64</li>
-<li><p>报错：<code>1&gt;..\..\..\..\src\tcp_address.cpp(440): error C3861: “if_nametoindex”:  找不到标识符。</code><br> 解决方法：在libzmq工程上右键-属性，弹出的属性页中，在配置属性-连接器-输入中的“附加依赖项”中增加Iphlpapi.lib。然后在出错的“tcp_address.cpp”文件上方增加“#include &lt;netioapi.h&gt;”，如下所示：</p>
- <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">#ifdef ZMQ_HAVE_WINDOWS</span><br><span class="line">#include &quot;windows.hpp&quot;</span><br><span class="line">#include &lt;netioapi.h&gt; //新添加</span><br><span class="line">#else</span><br><span class="line">#include &lt;sys/types.h&gt;</span><br><span class="line">#include &lt;arpa/inet.h&gt;</span><br><span class="line">#include &lt;netinet/tcp.h&gt;</span><br><span class="line">#include &lt;netdb.h&gt;</span><br><span class="line">#endif</span><br></pre></td></tr></table></figure>
-<p> <a href="http://www.th7.cn/system/win/201602/152056.shtml" target="_blank" rel="noopener">参考</a></p>
-</li>
-<li><p>报错：</p>
- <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">e:\zmq\zeromq-4.1.4\src\curve_client.hpp(41): fatal error C1083: </span><br><span class="line">无法打开包括文件:“sodium.h”: No such file or directory (..\..\..\..\src\stream_engine.cpp)</span><br></pre></td></tr></table></figure>
-<p> 解决：libzmq 属性-配置属性-c/c++-常规-附加包含的目录，加入<br> libsodium-1.0.8\src\libsodium\include<br> libsodium-1.0.8\src\libsodium\include\sodium</p>
-</li>
-<li><p>报错：</p>
- <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">1&gt;LINK : fatal error LNK1181: 无法打开输入文件“libsodium.lib”</span><br></pre></td></tr></table></figure>
-<p> 解决方法：在libzmq 项目-&gt;属性配置属性-&gt;链接器-&gt;常规-&gt;附加库目录，增加libsodium的编译好的dll的目录。（比如：E:\libsodium\Build\ReleaseDLL\x64）</p>
-</li>
-<li><p>报错：</p>
- <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">E:\zeromq-4.1.4\builds\msvc\vs2013\libsodium.import.props(39,5): error MSB3030:  </span><br><span class="line">无法复制文件“E:\zmq\zeromq-4.1.4\builds\msvc\vs2012\libzmq\..\..\..\..\..\libsodium\bin\x64\Release\v110\dynamic\libsodium.dll”，原因是找不到该文件。</span><br></pre></td></tr></table></figure>
-<p> 解决方法：把libsodium-1.0.8改名为libsodium</p>
-</li>
-</ol>
-<h4 id="编译jzmq-3-1-0"><a href="#编译jzmq-3-1-0" class="headerlink" title="编译jzmq-3.1.0"></a>编译jzmq-3.1.0</h4><ol>
-<li>打开jzmq-3.1.0\builds\msvc</li>
-<li>编译平台属性设置为：Release, X64</li>
-<li>设置包含目录：属性配置-vc++目录-包含目录加入：zeromq\include,jdk\include,jdk\include\win32</li>
-<li>设置库目录：属性配置-vc++目录-库目录加入：<br> zeromq-4.1.4编译后的目录</li>
-<li><p>报错</p>
- <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">1&gt;e:\zmq\jzmq-3.1.0\src\main\c++\jzmq.hpp(23): fatal error C1083: </span><br><span class="line">无法打开包括文件:“config.hpp”: No such file or directory</span><br></pre></td></tr></table></figure>
-<p> 解决：将jzmq-3.1.0\builds\msvc下的config.hpp放入jzmq-3.1.0\src\main\c++中。</p>
-</li>
-</ol>
-<h3 id="linux编译"><a href="#linux编译" class="headerlink" title="linux编译"></a>linux编译</h3><h4 id="安装需要的组件"><a href="#安装需要的组件" class="headerlink" title="安装需要的组件"></a>安装需要的组件</h4><ul>
-<li><p>autoconf</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">查看当前版本</span><br><span class="line">#rpm -qf /usr/bin/autoconf</span><br><span class="line">卸载  </span><br><span class="line">rpm -e --nodeps autoconf   </span><br><span class="line">下载</span><br><span class="line">wget http://ftp.gnu.org/gnu/autoconf/autoconf-2.69.tar.gz  </span><br><span class="line">解压安装</span><br><span class="line">tar zxvf autoconf-2.69.tar.gz  </span><br><span class="line">cd autoconf-2.69  </span><br><span class="line">./configure --prefix=/usr  </span><br><span class="line">make &amp;&amp; make install</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>libtool gcc gcc-c++</p>
-  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">yum install libtool</span><br><span class="line">yum install gcc</span><br><span class="line">yum install gcc-c++</span><br></pre></td></tr></table></figure>
-</li>
-</ul>
-<h4 id="编译libsodium-1-0-8"><a href="#编译libsodium-1-0-8" class="headerlink" title="编译libsodium-1.0.8"></a>编译libsodium-1.0.8</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">./autogen.sh</span><br><span class="line">./configure</span><br><span class="line">make &amp;&amp; make check</span><br><span class="line">make install</span><br></pre></td></tr></table></figure>
-<h4 id="编译zeromq-4-1-4"><a href="#编译zeromq-4-1-4" class="headerlink" title="编译zeromq-4.1.4"></a>编译zeromq-4.1.4</h4><p>下载<a href="http://download.zeromq.org/zeromq-4.1.4.tar.gz" target="_blank" rel="noopener">POSIX tarball</a><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">./autogen.sh</span><br><span class="line">./configure</span><br><span class="line">make</span><br><span class="line">make install</span><br></pre></td></tr></table></figure></p>
-<h4 id="编译jzmq-3-1-0-1"><a href="#编译jzmq-3-1-0-1" class="headerlink" title="编译jzmq-3.1.0"></a>编译jzmq-3.1.0</h4><ul>
-<li>将<code>src/main/c++/Event.cpp</code>替换，具体<a href="https://github.com/zeromq/jzmq/commit/eb40d6db43ce3545e623dad6cc6721a90885b5ba" target="_blank" rel="noopener">查看</a>，否则会报错：<br><code>‘zmq_event_t’ was not declared in this scope</code>,查看<a href="https://github.com/zeromq/jzmq/issues/401" target="_blank" rel="noopener">issues</a><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">./autogen.sh</span><br><span class="line">./configure</span><br><span class="line">make</span><br><span class="line">make install</span><br></pre></td></tr></table></figure>
-</li>
-</ul>
-<h4 id="编译后文件位置"><a href="#编译后文件位置" class="headerlink" title="编译后文件位置"></a>编译后文件位置</h4><ul>
-<li>so文件<br>/usr/local/lib</li>
-<li>jar<br>/usr/local/share/java/zmq.jar</li>
-</ul>
-<p>参考文章</p>
-<ul>
-<li><a href="https://www.javacodegeeks.com/2015/09/how-to-configure-and-install-zeromq-libsodium-on-centos-6-7.html" target="_blank" rel="noopener">https://www.javacodegeeks.com/2015/09/how-to-configure-and-install-zeromq-libsodium-on-centos-6-7.html</a></li>
-<li><a href="https://github.com/zeromq/jzmq/issues/401" target="_blank" rel="noopener">https://github.com/zeromq/jzmq/issues/401</a></li>
-</ul>
+        <p>在spring中，有多种配置、使用<code>Properties</code>的方式。</p>
+<a id="more"></a>
+<h3 id="准备属性文件"><a href="#准备属性文件" class="headerlink" title="准备属性文件"></a>准备属性文件</h3><p>在<code>resurces</code>下增加<code>dev/config.properties</code>文件，添加内容：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">server.name=gxj</span><br></pre></td></tr></table></figure></p>
+<h3 id="util-properties"><a href="#util-properties" class="headerlink" title="util:properties"></a>util:properties</h3><h4 id="配置："><a href="#配置：" class="headerlink" title="配置："></a>配置：</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;util:properties id=&quot;config&quot; location=&quot;classpath:dev/config.properties&quot;/&gt;</span><br></pre></td></tr></table></figure>
+<p>bean 配置方式<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&lt;!-- creates a java.util.Properties instance with values loaded from the supplied location --&gt;</span><br><span class="line">&lt;bean id=&quot;config&quot; class=&quot;org.springframework.beans.factory.config.PropertiesFactoryBean&quot;&gt;</span><br><span class="line">    &lt;property name=&quot;location&quot; value=&quot;classpath:dev/config.properties&quot;/&gt;</span><br><span class="line">&lt;/bean&gt;</span><br></pre></td></tr></table></figure></p>
+<h4 id="读取："><a href="#读取：" class="headerlink" title="读取："></a>读取：</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">@Value(&quot;#&#123;config[&apos;server.name&apos;]&#125;&quot;)</span><br></pre></td></tr></table></figure>
+<p>或者在xml配置中读取：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&lt;bean id=&quot;name&quot; class=&quot;java.lang.String&quot;&gt;</span><br><span class="line">  &lt;constructor-arg value=&quot;#&#123;config[&apos;server.name&apos;]&#125;&quot;/&gt;</span><br><span class="line">&lt;/bean&gt;</span><br></pre></td></tr></table></figure></p>
+<p>注意：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">ConfigurableEnvironment environment = context.getEnvironment();</span><br><span class="line">//name为null</span><br><span class="line">String name = environment.getProperty(&quot;server.name&quot;)</span><br></pre></td></tr></table></figure></p>
+<p>结果为null。</p>
+<h3 id="context-property-placeholder"><a href="#context-property-placeholder" class="headerlink" title="context:property-placeholder"></a>context:property-placeholder</h3><h4 id="配置：-1"><a href="#配置：-1" class="headerlink" title="配置："></a>配置：</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;context:property-placeholder location=&quot;classpath:dev/config.properties&quot;/&gt;</span><br></pre></td></tr></table></figure>
+<p>如果有多个配置文件，用<code>,</code>隔开：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;context:property-placeholder location=&quot;classpath:dev/config.properties,classpath:dev/config1.properties&quot;/&gt;</span><br></pre></td></tr></table></figure></p>
+<p>bean 配置方式：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&lt;bean id=&quot;propertyConfigurer&quot; class=&quot;org.springframework.beans.factory.config.PropertyPlaceholderConfigurer&quot;&gt;</span><br><span class="line">  &lt;property name=&quot;location&quot; value=&quot;classpath:dev/config.properties&quot;/&gt;</span><br><span class="line">&lt;/bean&gt;</span><br></pre></td></tr></table></figure></p>
+<p>多个配置文件使用<code>locations</code>属性：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">&lt;bean id=&quot;propertyConfigurer&quot; class=&quot;org.springframework.beans.factory.config.PropertyPlaceholderConfigurer&quot;&gt;</span><br><span class="line">  &lt;property name=&quot;locations&quot;&gt;</span><br><span class="line">    &lt;list&gt;</span><br><span class="line">      &lt;value&gt;classpath:dev/config.properties&lt;/value&gt;</span><br><span class="line">      &lt;value&gt;classpath:dev/config1.properties&lt;/value&gt;</span><br><span class="line">    &lt;/list&gt;</span><br><span class="line">  &lt;/property&gt;</span><br><span class="line">&lt;/bean&gt;</span><br></pre></td></tr></table></figure></p>
+<h4 id="读取：-1"><a href="#读取：-1" class="headerlink" title="读取："></a>读取：</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">@Value(&quot;$&#123;server.name&#125;&quot;)</span><br><span class="line">private String name;</span><br></pre></td></tr></table></figure>
+<p>或者在xml配置中读取：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&lt;bean id=&quot;name&quot; class=&quot;java.lang.String&quot;&gt;</span><br><span class="line">  &lt;constructor-arg value=&quot;$&#123;pro.name&#125;&quot;/&gt;</span><br><span class="line">&lt;/bean&gt;</span><br></pre></td></tr></table></figure></p>
+<p>同样，直接用<code>ConfigurableEnvironment</code>获取为null。</p>
+<h3 id="PropertySource方式"><a href="#PropertySource方式" class="headerlink" title="@PropertySource方式"></a><code>@PropertySource</code>方式</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">@Component</span><br><span class="line">@PropertySource(&#123;&quot;classpath:dev/config.properties&quot;,&quot;classpath:dev/config1.properties&quot;&#125;)</span><br><span class="line">public class TestBeanImpl2 implements TestBean &#123;</span><br><span class="line"></span><br><span class="line">    @Value(&quot;$&#123;pro.name&#125;&quot;)</span><br><span class="line">    private String name;</span><br><span class="line"></span><br><span class="line">    ....</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>使用这种方式可以使用<code>Environment</code> 获取属性。</p>
 
       
     </div>
@@ -466,7 +418,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/zmq/" rel="tag"># zmq</a>
+            <a href="/tags/spring/" rel="tag"># spring</a>
           
         </div>
       
@@ -479,8 +431,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2015/11/23/Merge-Sort/" rel="next" title="Merge Sort">
-                <i class="fa fa-chevron-left"></i> Merge Sort
+              <a href="/2019/03/05/Spring-profile/" rel="next" title="Spring profile">
+                <i class="fa fa-chevron-left"></i> Spring profile
               </a>
             
           </div>
@@ -488,10 +440,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2016/04/07/protobuf/" rel="prev" title="protobuf">
-                protobuf <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -522,8 +470,8 @@
 
   
     <div class="comments" id="comments">
-      <div class="ds-thread" data-thread-key="2016/04/06/jzmq编译/"
-           data-title="jzmq编译" data-url="http://guangfei.win/2016/04/06/jzmq编译/">
+      <div class="ds-thread" data-thread-key="2019/03/05/Spring-properties/"
+           data-title="Spring-properties" data-url="http://guangfei.win/2019/03/05/Spring-properties/">
       </div>
     </div>
 
@@ -630,7 +578,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#下载地址"><span class="nav-number">1.</span> <span class="nav-text">下载地址</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#window编译"><span class="nav-number">2.</span> <span class="nav-text">window编译</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#libsodium-1-0-8编译"><span class="nav-number">2.1.</span> <span class="nav-text">libsodium-1.0.8编译</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#zeromq-4-1-4"><span class="nav-number">2.2.</span> <span class="nav-text">zeromq-4.1.4</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#编译jzmq-3-1-0"><span class="nav-number">2.3.</span> <span class="nav-text">编译jzmq-3.1.0</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#linux编译"><span class="nav-number">3.</span> <span class="nav-text">linux编译</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#安装需要的组件"><span class="nav-number">3.1.</span> <span class="nav-text">安装需要的组件</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#编译libsodium-1-0-8"><span class="nav-number">3.2.</span> <span class="nav-text">编译libsodium-1.0.8</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#编译zeromq-4-1-4"><span class="nav-number">3.3.</span> <span class="nav-text">编译zeromq-4.1.4</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#编译jzmq-3-1-0-1"><span class="nav-number">3.4.</span> <span class="nav-text">编译jzmq-3.1.0</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#编译后文件位置"><span class="nav-number">3.5.</span> <span class="nav-text">编译后文件位置</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#准备属性文件"><span class="nav-number">1.</span> <span class="nav-text">准备属性文件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#util-properties"><span class="nav-number">2.</span> <span class="nav-text">util:properties</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#配置："><span class="nav-number">2.1.</span> <span class="nav-text">配置：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#读取："><span class="nav-number">2.2.</span> <span class="nav-text">读取：</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#context-property-placeholder"><span class="nav-number">3.</span> <span class="nav-text">context:property-placeholder</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#配置：-1"><span class="nav-number">3.1.</span> <span class="nav-text">配置：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#读取：-1"><span class="nav-number">3.2.</span> <span class="nav-text">读取：</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#PropertySource方式"><span class="nav-number">4.</span> <span class="nav-text">@PropertySource方式</span></a></li></ol></div>
             
 
           </div>
