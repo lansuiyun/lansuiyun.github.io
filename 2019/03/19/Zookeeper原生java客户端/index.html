@@ -70,7 +70,7 @@
 
 
 
-  <meta name="keywords" content="design pattern," />
+  <meta name="keywords" content="Zookeeper," />
 
 
 
@@ -81,18 +81,18 @@
 
 
 
-<meta name="description" content="定义命令模式，属于行为模式，将一个请求封装成对象，从而让你使用不同的请求把客户端参数化，对请求排队或者记录请求日志，可以提供命令的撤销和恢复功能。将命令的请求者与执行者解耦，请求者不需要知道执行的细节。">
-<meta name="keywords" content="design pattern">
+<meta name="description" content="maven依赖12345&amp;lt;dependency&amp;gt;  &amp;lt;groupId&amp;gt;org.apache.zookeeper&amp;lt;/groupId&amp;gt;  &amp;lt;artifactId&amp;gt;zookeeper&amp;lt;/artifactId&amp;gt;  &amp;lt;version&amp;gt;3.4.13&amp;lt;/version&amp;gt;&amp;lt;/dependency&amp;gt;">
+<meta name="keywords" content="Zookeeper">
 <meta property="og:type" content="article">
-<meta property="og:title" content="命令模式">
-<meta property="og:url" content="http://guangfei.win/2013/09/21/命令模式/index.html">
+<meta property="og:title" content="Zookeeper原生java客户端">
+<meta property="og:url" content="http://guangfei.win/2019/03/19/Zookeeper原生java客户端/index.html">
 <meta property="og:site_name" content="越是憧憬 越要风雨兼程">
-<meta property="og:description" content="定义命令模式，属于行为模式，将一个请求封装成对象，从而让你使用不同的请求把客户端参数化，对请求排队或者记录请求日志，可以提供命令的撤销和恢复功能。将命令的请求者与执行者解耦，请求者不需要知道执行的细节。">
+<meta property="og:description" content="maven依赖12345&amp;lt;dependency&amp;gt;  &amp;lt;groupId&amp;gt;org.apache.zookeeper&amp;lt;/groupId&amp;gt;  &amp;lt;artifactId&amp;gt;zookeeper&amp;lt;/artifactId&amp;gt;  &amp;lt;version&amp;gt;3.4.13&amp;lt;/version&amp;gt;&amp;lt;/dependency&amp;gt;">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-12-01T06:59:46.543Z">
+<meta property="og:updated_time" content="2019-03-19T08:14:10.116Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="命令模式">
-<meta name="twitter:description" content="定义命令模式，属于行为模式，将一个请求封装成对象，从而让你使用不同的请求把客户端参数化，对请求排队或者记录请求日志，可以提供命令的撤销和恢复功能。将命令的请求者与执行者解耦，请求者不需要知道执行的细节。">
+<meta name="twitter:title" content="Zookeeper原生java客户端">
+<meta name="twitter:description" content="maven依赖12345&amp;lt;dependency&amp;gt;  &amp;lt;groupId&amp;gt;org.apache.zookeeper&amp;lt;/groupId&amp;gt;  &amp;lt;artifactId&amp;gt;zookeeper&amp;lt;/artifactId&amp;gt;  &amp;lt;version&amp;gt;3.4.13&amp;lt;/version&amp;gt;&amp;lt;/dependency&amp;gt;">
 
 
 
@@ -122,13 +122,13 @@
 
 
 
-  <link rel="canonical" href="http://guangfei.win/2013/09/21/命令模式/"/>
+  <link rel="canonical" href="http://guangfei.win/2019/03/19/Zookeeper原生java客户端/"/>
 
 
 
 
 
-  <title>命令模式 | 越是憧憬 越要风雨兼程</title>
+  <title>Zookeeper原生java客户端 | 越是憧憬 越要风雨兼程</title>
   
 
 
@@ -294,7 +294,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://guangfei.win/2013/09/21/命令模式/">
+    <link itemprop="mainEntityOfPage" href="http://guangfei.win/2019/03/19/Zookeeper原生java客户端/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="sky">
@@ -311,7 +311,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">命令模式</h1>
+          <h1 class="post-title" itemprop="name headline">Zookeeper原生java客户端</h1>
         
 
         <div class="post-meta">
@@ -323,8 +323,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2013-09-21T20:33:34+08:00">
-                2013-09-21
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-03-19T16:11:48+08:00">
+                2019-03-19
               </time>
             
 
@@ -346,8 +346,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/design-pattern/" itemprop="url" rel="index">
-                    <span itemprop="name">design pattern</span>
+                  <a href="/categories/分布式/" itemprop="url" rel="index">
+                    <span itemprop="name">分布式</span>
                   </a>
                 </span>
 
@@ -364,9 +364,9 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2013/09/21/命令模式/#comments" itemprop="discussionUrl">
+                <a href="/2019/03/19/Zookeeper原生java客户端/#comments" itemprop="discussionUrl">
                   <span class="post-comments-count disqus-comment-count"
-                        data-disqus-identifier="2013/09/21/命令模式/" itemprop="commentCount"></span>
+                        data-disqus-identifier="2019/03/19/Zookeeper原生java客户端/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -374,7 +374,7 @@
 
           
           
-             <span id="/2013/09/21/命令模式/" class="leancloud_visitors" data-flag-title="命令模式">
+             <span id="/2019/03/19/Zookeeper原生java客户端/" class="leancloud_visitors" data-flag-title="Zookeeper原生java客户端">
                <span class="post-meta-divider">|</span>
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -406,24 +406,36 @@
 
       
         <ul>
-<li>定义<br>命令模式，属于行为模式，将一个请求封装成对象，从而让你使用不同的请求把客户端参数化，对请求排队或者记录请求日志，可以提供命令的撤销和恢复功能。将命令的请求者与执行者解耦，请求者不需要知道执行的细节。<a id="more"></a></li>
-<li>角色<ol>
-<li>命令接口</li>
-<li>命令子类</li>
-<li>调用者</li>
-<li>执行者</li>
-</ol>
+<li>maven依赖<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&lt;dependency&gt;</span><br><span class="line">  &lt;groupId&gt;org.apache.zookeeper&lt;/groupId&gt;</span><br><span class="line">  &lt;artifactId&gt;zookeeper&lt;/artifactId&gt;</span><br><span class="line">  &lt;version&gt;3.4.13&lt;/version&gt;</span><br><span class="line">&lt;/dependency&gt;</span><br></pre></td></tr></table></figure>
 </li>
-<li>概括<br>命令接口定义一个简单的方法execute，命令的子类包含一个执行者的实例，execute中调用执行者相应的方法来完成某个功能或动作，调用者包含一个命令子类的实例，只需执行命令子类的execute方法即可。执行者与命令一起被封装为对象，此对象可以被传递、存储</li>
-<li>适用场景<br>对于大多数请求-响应模式的功能，比较适合使用命令模式，命令模式对实现记录日志、撤销操作等功能比较方便。</li>
-<li>优点<br>将命令的请求者与执行者解耦，请求者不需要知道执行的细节，并且可以方便的对命令执行撤销等操作（在命令子类中添加已执行的命令列表属性）</li>
-<li>缺点<br>使代码变的复杂，有时候几行代码可以完成的任务需要用几个类来完成</li>
-<li>扩展<br>还可以使用宏命令，即命令子类中保存的不是单个执行者，而是一个执行者的列表，并在execute方法中逐个调用。</li>
-<li><p>代码模板</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br></pre></td><td class="code"><pre><span class="line">/**</span><br><span class="line"> * 命令接口</span><br><span class="line"> * @author sky</span><br><span class="line"> *</span><br><span class="line"> */</span><br><span class="line">public interface Command &#123;</span><br><span class="line">	public void execute();</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">/**</span><br><span class="line"> * 命令子类</span><br><span class="line"> * @author sky</span><br><span class="line"> *</span><br><span class="line"> */</span><br><span class="line">public class ConcreteCommand implements Command &#123;</span><br><span class="line">	</span><br><span class="line">	private Receiver receiver;</span><br><span class="line">	</span><br><span class="line">	public ConcreteCommand(Receiver r)&#123;</span><br><span class="line">		receiver = r;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	@Override</span><br><span class="line">	public void execute() &#123;</span><br><span class="line">		receiver.doSomething();</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">/**</span><br><span class="line"> * 命令的结束者，及执行者</span><br><span class="line"> * @author sky</span><br><span class="line"> *</span><br><span class="line"> */</span><br><span class="line">public class Receiver &#123;</span><br><span class="line">	</span><br><span class="line">	public void doSomething()&#123;</span><br><span class="line">		System.out.println(&quot;do someting&quot;);</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">/**</span><br><span class="line"> * 命令调用者</span><br><span class="line"> * @author sky</span><br><span class="line"> *</span><br><span class="line"> */</span><br><span class="line">public class Invoker &#123;</span><br><span class="line">	</span><br><span class="line">	private Command command;</span><br><span class="line">	</span><br><span class="line">	public void setCommand(Command c)&#123;</span><br><span class="line">		command = c;</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	public void handleCommand()&#123;</span><br><span class="line">		command.execute();</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">/**</span><br><span class="line"> * 测试类</span><br><span class="line"> * @author sky</span><br><span class="line"> *</span><br><span class="line"> */</span><br><span class="line">public class Test &#123;</span><br><span class="line"></span><br><span class="line">	public static void main(String[] args) &#123;</span><br><span class="line">		Receiver receiver = new Receiver();</span><br><span class="line">		Command command = new ConcreteCommand(receiver);</span><br><span class="line">		Invoker invoker = new Invoker();</span><br><span class="line">		invoker.setCommand(command);</span><br><span class="line">		invoker.handleCommand();</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</ul>
+<a id="more"></a>
+<ul>
+<li><p>创建<code>Zookeeper</code>对象</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">ZooKeeper zooKeeper = new ZooKeeper(&quot;localhost:2187&quot;, 5000, watch);</span><br><span class="line">//集群</span><br><span class="line">ZooKeeper zooKeeper = new ZooKeeper(&quot;localhost:2187,localhost:2188,localhost:2189&quot;, 5000,</span><br><span class="line">         watch);</span><br><span class="line">//指定跟路径，操作/test时，其真实路径为/root/test</span><br><span class="line">ZooKeeper zooKeeper = new ZooKeeper(&quot;localhost:2187,localhost:2188,localhost:2189/root&quot;, 5000,</span><br><span class="line">            totalWatch);</span><br></pre></td></tr></table></figure>
 </li>
-<li><p>输出</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">do someting</span><br></pre></td></tr></table></figure>
+<li><p>Watcher<br>实现<code>Watcher</code>接口</p>
+</li>
+<li><p>检查节点是否存在</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">//使用默认watch，即构建Zookeeper中的watch</span><br><span class="line">Stat exists = zooKeeper.exists(TOTAL_PATH, true);</span><br><span class="line">//使用新的watch</span><br><span class="line">Stat exists = zooKeeper.exists(TOTAL_PATH, new XxxWatch());</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>创建节点</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">String createdPath = zooKeeper.create(PATH, &quot;TEST&quot;.getBytes(Charsets.UTF_8), Ids.CREATOR_ALL_ACL,</span><br><span class="line">                    CreateMode.EPHEMERAL);</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>获取节点数据</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Stat stat = new Stat();</span><br><span class="line">byte[] dataBytes = zooKeeper.getData(PATH, true, stat);</span><br><span class="line">//byte[] dataBytes = zooKeeper.getData(PATH, new XxxWatch(), stat);</span><br><span class="line">String data = new String(dataBytes, Charsets.UTF_8);</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>删除节点</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">zooKeeper.delete(PATH, stat.getVersion());</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>修改节点数据</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">zooKeeper.setData(PATH, &quot;UPDATE&quot;.getBytes(Charsets.UTF_8), stat.getVersion());</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>获取子节点</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">List&lt;String&gt; children = zooKeeper.getChildren(&quot;/&quot;, false);</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>完整实例</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br></pre></td><td class="code"><pre><span class="line">package com.fei.curator;</span><br><span class="line"></span><br><span class="line">import com.google.common.base.Charsets;</span><br><span class="line">import java.util.ArrayList;</span><br><span class="line">import java.util.List;</span><br><span class="line">import org.apache.zookeeper.CreateMode;</span><br><span class="line">import org.apache.zookeeper.WatchedEvent;</span><br><span class="line">import org.apache.zookeeper.Watcher;</span><br><span class="line">import org.apache.zookeeper.ZooDefs.Ids;</span><br><span class="line">import org.apache.zookeeper.ZooDefs.Perms;</span><br><span class="line">import org.apache.zookeeper.ZooKeeper;</span><br><span class="line">import org.apache.zookeeper.data.ACL;</span><br><span class="line">import org.apache.zookeeper.data.Id;</span><br><span class="line">import org.apache.zookeeper.data.Stat;</span><br><span class="line">import org.apache.zookeeper.server.auth.DigestAuthenticationProvider;</span><br><span class="line"></span><br><span class="line">/**</span><br><span class="line"> * ZookeeperTest</span><br><span class="line"> *</span><br><span class="line"> * @author fei</span><br><span class="line"> */</span><br><span class="line">public class ZookeeperTest implements Watcher &#123;</span><br><span class="line"></span><br><span class="line">    private static final String PATH = &quot;/test&quot;;</span><br><span class="line">    private static final String PATH2 = &quot;/test2&quot;;</span><br><span class="line"></span><br><span class="line">    public static void main(String[] args) throws Exception &#123;</span><br><span class="line">        ZookeeperTest watch = new ZookeeperTest();</span><br><span class="line">        //构建Zookeeper，以/root为根路径</span><br><span class="line">        ZooKeeper zooKeeper = new ZooKeeper(&quot;localhost:2187,localhost:2188,localhost:2189/root&quot;,</span><br><span class="line">            5000, watch);</span><br><span class="line">        //ACL验证信息</span><br><span class="line">        zooKeeper.addAuthInfo(&quot;digest&quot;, &quot;root:123&quot;.getBytes(Charsets.UTF_8));</span><br><span class="line">        //检查是否存在</span><br><span class="line">        Stat exists = zooKeeper.exists(PATH, true);</span><br><span class="line">        System.out.println(PATH + &quot; 是否存在：&quot; + (exists != null));</span><br><span class="line">        if (exists == null) &#123;</span><br><span class="line">            String createdPath = zooKeeper.create(PATH, &quot;TEST&quot;.getBytes(Charsets.UTF_8),</span><br><span class="line">                Ids.CREATOR_ALL_ACL, CreateMode.PERSISTENT);</span><br><span class="line">            System.out.println(&quot;创建节点：&quot; + createdPath);</span><br><span class="line">        &#125;</span><br><span class="line">        //获取节点数据</span><br><span class="line">        Stat stat = new Stat();</span><br><span class="line">        byte[] dataBytes = zooKeeper.getData(PATH, true, stat);</span><br><span class="line">        String data = new String(dataBytes, Charsets.UTF_8);</span><br><span class="line">        System.out.println(&quot;节点数据为：&quot; + data);</span><br><span class="line">        System.out.println(&quot;节点版本号：&quot; + stat.getVersion() + &quot; ,状态为：&quot; + stat);</span><br><span class="line">        //更新节点数据</span><br><span class="line">        zooKeeper.setData(PATH, &quot;UPDATE&quot;.getBytes(Charsets.UTF_8), stat.getVersion());</span><br><span class="line">        dataBytes = zooKeeper.getData(PATH, true, stat);</span><br><span class="line">        data = new String(dataBytes, Charsets.UTF_8);</span><br><span class="line">        System.out.println(&quot;更新后节点数据为：&quot; + data);</span><br><span class="line">        System.out.println(&quot;更新后节点版本号：&quot; + stat.getVersion() + &quot; ,状态为：&quot; + stat);</span><br><span class="line"></span><br><span class="line">        // 自定义权限</span><br><span class="line">        List&lt;ACL&gt; acls = new ArrayList&lt;&gt;(1);</span><br><span class="line">        Id digest = new Id(&quot;digest&quot;, DigestAuthenticationProvider.generateDigest(&quot;root:123&quot;));</span><br><span class="line">        acls.add(new ACL(Perms.READ | Perms.WRITE, digest));</span><br><span class="line">        //创建/test2为顺序节点，对root可读可写.</span><br><span class="line">        String node2 = zooKeeper.create(PATH2, &quot;TEST2&quot;.getBytes(Charsets.UTF_8), acls,</span><br><span class="line">            CreateMode.PERSISTENT_SEQUENTIAL);</span><br><span class="line">        //获取子节点</span><br><span class="line">        List&lt;String&gt; children = zooKeeper.getChildren(&quot;/&quot;, false);</span><br><span class="line">        System.out.println(&quot;children: &quot; + children);</span><br><span class="line">        //删除节点</span><br><span class="line">        zooKeeper.delete(PATH, stat.getVersion());</span><br><span class="line">        zooKeeper.getData(node2, false, stat);</span><br><span class="line">        zooKeeper.delete(node2, stat.getVersion());</span><br><span class="line"></span><br><span class="line">        //验证是否删除成功</span><br><span class="line">        exists = zooKeeper.exists(PATH, false);</span><br><span class="line">        System.out.println(PATH + &quot; 是否删除成功：&quot; + (exists == null));</span><br><span class="line">        exists = zooKeeper.exists(node2, false);</span><br><span class="line">        System.out.println(node2 + &quot; 是否删除成功：&quot; + (exists == null));</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    public void process(WatchedEvent event) &#123;</span><br><span class="line">        System.out.println(event.toString());</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 </li>
 </ul>
 
@@ -443,7 +455,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/design-pattern/" rel="tag"># design pattern</a>
+            <a href="/tags/Zookeeper/" rel="tag"># Zookeeper</a>
           
         </div>
       
@@ -456,8 +468,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2013/09/21/工厂模式/" rel="next" title="工厂模式">
-                <i class="fa fa-chevron-left"></i> 工厂模式
+              <a href="/2019/03/14/Zookeeper/" rel="next" title="Zookeeper">
+                <i class="fa fa-chevron-left"></i> Zookeeper
               </a>
             
           </div>
@@ -466,8 +478,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2013/09/22/适配器模式/" rel="prev" title="适配器模式">
-                适配器模式 <i class="fa fa-chevron-right"></i>
+              <a href="/2019/03/19/Zookeeper客户端Curator/" rel="prev" title="Zookeeper客户端Curator">
+                Zookeeper客户端Curator <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -754,9 +766,9 @@
     
       <script type="text/javascript">
         var disqus_config = function () {
-          this.page.url = 'http://guangfei.win/2013/09/21/命令模式/';
-          this.page.identifier = '2013/09/21/命令模式/';
-          this.page.title = '命令模式';
+          this.page.url = 'http://guangfei.win/2019/03/19/Zookeeper原生java客户端/';
+          this.page.identifier = '2019/03/19/Zookeeper原生java客户端/';
+          this.page.title = 'Zookeeper原生java客户端';
         };
         var d = document, s = d.createElement('script');
         s.src = 'https://guangfei-win.disqus.com/embed.js';

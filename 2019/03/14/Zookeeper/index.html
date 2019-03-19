@@ -1,0 +1,1065 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+  <meta name="google-site-verification" content="OAeiZ6vZCyps787WfUEpIIXbI8QSFpvcVMkYppQF9lE" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Zookeeper," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="什么时zookeeper ZooKeeper is a distributed, open-source coordination service for distributed applications. It exposes a simple set of primitives that distributed applications can build upon to implement">
+<meta name="keywords" content="Zookeeper">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Zookeeper">
+<meta property="og:url" content="http://guangfei.win/2019/03/14/Zookeeper/index.html">
+<meta property="og:site_name" content="越是憧憬 越要风雨兼程">
+<meta property="og:description" content="什么时zookeeper ZooKeeper is a distributed, open-source coordination service for distributed applications. It exposes a simple set of primitives that distributed applications can build upon to implement">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="https://zookeeper.apache.org/doc/current/images/zkservice.jpg">
+<meta property="og:image" content="https://zookeeper.apache.org/doc/current/images/zknamespace.jpg">
+<meta property="og:image" content="https://user-gold-cdn.xitu.io/2018/9/11/165c68aae5befdae?imageView2/0/w/1280/h/960/format/webp/ignore-error/1">
+<meta property="og:updated_time" content="2019-03-14T03:14:38.970Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Zookeeper">
+<meta name="twitter:description" content="什么时zookeeper ZooKeeper is a distributed, open-source coordination service for distributed applications. It exposes a simple set of primitives that distributed applications can build upon to implement">
+<meta name="twitter:image" content="https://zookeeper.apache.org/doc/current/images/zkservice.jpg">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://guangfei.win/2019/03/14/Zookeeper/"/>
+
+
+
+
+
+  <title>Zookeeper | 越是憧憬 越要风雨兼程</title>
+  
+
+
+
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+            (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+          m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+  ga('create', 'UA-136104336-1', 'auto');
+  ga('send', 'pageview');
+</script>
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?ad71352593277eb86975d6d08cc565dc";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+  <!-- Google AdSense start -->
+  <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<script>
+  (adsbygoogle = window.adsbygoogle || []).push({
+    google_ad_client: "ca-pub-3981244273476587",
+    enable_page_level_ads: true
+  });
+</script>
+
+  <!-- Google AdSense end -->
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">越是憧憬 越要风雨兼程</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://guangfei.win/2019/03/14/Zookeeper/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="sky">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="越是憧憬 越要风雨兼程">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Zookeeper</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-03-14T11:10:03+08:00">
+                2019-03-14
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/分布式/" itemprop="url" rel="index">
+                    <span itemprop="name">分布式</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2019/03/14/Zookeeper/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="2019/03/14/Zookeeper/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+             <span id="/2019/03/14/Zookeeper/" class="leancloud_visitors" data-flag-title="Zookeeper">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数&#58;</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h3 id="什么时zookeeper"><a href="#什么时zookeeper" class="headerlink" title="什么时zookeeper"></a>什么时zookeeper</h3><blockquote>
+<p>ZooKeeper is a distributed, open-source coordination service for distributed applications. It exposes a simple set of primitives that distributed applications can build upon to implement higher level services for synchronization, configuration maintenance, and groups and naming.</p>
+</blockquote>
+<p>ZooKeeper 是一个开源的分布式协调服务。它实现了一组原语集，在此基础上，分布式应用可以构建更高级别的服务，如同步、配置维护、命名服务等。<br><a id="more"></a><br>ZooKeeper 是一个典型的分布式数据一致性解决方案，分布式应用程序可以基于 ZooKeeper 实现诸如数据发布/订阅、负载均衡、命名服务、分布式协调/通知、集群管理、Master 选举、分布式锁和分布式队列等功能。Zookeeper 一个最常用的使用场景就是用于担任服务生产者和服务消费者的注册中心。 服务生产者将自己提供的服务注册到Zookeeper中心，服务的消费者在进行服务调用的时候先到Zookeeper中查找服务，获取到服务生产者的详细信息之后，再去调用服务生产者的内容与数据。<br>Zookeeper本身是高可用的，集群中超过半数的服务存活即可提供服务。<br><img src="https://zookeeper.apache.org/doc/current/images/zkservice.jpg" alt=""><br>ZooKeeper 是有序的。所有事物操作都有一个反应顺序的数字编号。<br>Zookeeper时快速的。尤其是在以读为主的系统中。</p>
+<h3 id="数据模型"><a href="#数据模型" class="headerlink" title="数据模型"></a>数据模型</h3><p>Zookeeper使用了一种类似与文件系统的命名空间。每个节点称为<code>znode</code>。<br><img src="https://zookeeper.apache.org/doc/current/images/zknamespace.jpg" alt=""></p>
+<h4 id="Zookeeper中的时间"><a href="#Zookeeper中的时间" class="headerlink" title="Zookeeper中的时间"></a>Zookeeper中的时间</h4><p>ZooKeeper记录时间有多种方式：</p>
+<ol>
+<li>Zxid<br>Zookeeper中每个改变stat都会收到一个zxid（ZooKeeper Transaction Id）格式的时间戳。这个时间戳时全局有序的。如果zxid1小于zxid2，说明zxid1发生早于zxid2.</li>
+<li>Version number<br>节点每次改变时，版本号中的一个就会自动增长。有三种版本号：version 节点数据版本号、cversion 子节点版本号、aversion ACL版本号。</li>
+<li>Ticks<br>Zookeeper使用ticks定义server间如状态上传、回话过期、连接超时等事件的时间。</li>
+<li>Real time<br>Zookeeper会把节点创建、修改的时间戳放入到stat结构中，除此之外，不使用真实事件。<h4 id="节点结构"><a href="#节点结构" class="headerlink" title="节点结构"></a>节点结构</h4>与文件系统不同的是，Zookeeper中每个节点都有与自己关联的数据。节点被设计来存储协调数据：状态信息、配置，位置信息等，这些信息通常比较小，最大为1M。每个节点包含以下数据：</li>
+<li><p>stat<br>包含节点的版本信息，ACL信息，时间戳等，具体如下：</p>
+<ul>
+<li>czxid 节点创建的zxid</li>
+<li>mzxid 节点最后被修改的zxid</li>
+<li>pzxid 子节点最后被修改的zxid</li>
+<li>ctime 从新纪元开始到节点被创建的时间，单位为毫秒</li>
+<li>mtime 从新纪元开始到节点被修改的时间，单位为毫秒</li>
+<li>version 节点数据版本号</li>
+<li>cversion 子节点版本号</li>
+<li>aversion 节点ACL版本号</li>
+<li>ephemeralOwner 当节点为临时节点时，为节点所有者会话id，否则为0.</li>
+<li>dataLength 节点数据长度</li>
+<li>numChildren 子节点个数<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">cZxid = 0x300000002</span><br><span class="line">ctime = Wed Mar 13 10:29:45 CST 2019</span><br><span class="line">mZxid = 0x300000004</span><br><span class="line">mtime = Wed Mar 13 10:30:46 CST 2019</span><br><span class="line">pZxid = 0x30000000b</span><br><span class="line">cversion = 5</span><br><span class="line">dataVersion = 2</span><br><span class="line">aclVersion = 0</span><br><span class="line">ephemeralOwner = 0x0</span><br><span class="line">dataLength = 3</span><br><span class="line">numChildren = 1</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+<li><p>data<br>与节点关联的数据。节点数据的读、写都具有原子性。读获取节点关联的所有数据，写替换所有数据。每个节点都有Access Control List (ACL)来控制谁可以做什么。</p>
+</li>
+<li>children 子节点</li>
+</ol>
+<h4 id="节点类型"><a href="#节点类型" class="headerlink" title="节点类型"></a>节点类型</h4><p>按照时效分类有两种节点：</p>
+<ol>
+<li>永久节点。创建后除非删除，否则节点一直存在。</li>
+<li>临时节点。该类节点的生命周期依赖于创建它的session。session过期后，临时节点就会被删除。临时节点不能有子节点。</li>
+</ol>
+<p>按照顺序分类也有两种节点：</p>
+<ol>
+<li>正常节点。</li>
+<li>顺序节点。Zookeeper在创建顺序节点时会在节点路径后拼接一个递增的计数。对应父节点来说，这个计数时唯一的。计数格式为<code>%010d</code>，10位数字，没有则补0，例如：<path></path>0000000001。计数最大为<code>2147483647</code>，超出后将溢出。</li>
+</ol>
+<p>这样，Zookeeper就一共有4种节点。</p>
+<h3 id="Watches"><a href="#Watches" class="headerlink" title="Watches"></a>Watches</h3><p>客户端可以在节点上注册<code>watches</code>，当节点有变化时会触发watch，通知客户端，并清空watch，即watch是一次性的。<br>Zookeeper中所有的读取操作<code>getData()</code>、<code>getChildren()</code>、<code>exists()</code>都可以通过设置是否watch。关于watch有三个关键点需要考虑：</p>
+<ol>
+<li>watch只会触发一次。当客户端收到watch事件后，触发重新设置一个新的watch，否则不会收到任何watch事件。</li>
+<li>watch事件是异步发送给客户端的。Zookeeper提供一个关于顺序的保证：如果一个客户端已经注册了watch，在收到watch事件前不会看到任何的改变。</li>
+<li><code>getData()</code>、<code>exists()</code> 设置的时数据的wathc，<code>getChildren()</code>设置的时子节点的wathc。</li>
+</ol>
+<p>watches是有Zookeeper server在本地管理。当客户端与服务器断开连接后，不会收到任何的watch事件。当客户端重连后，之后注册的watch将会被重新注册、触发。有一种情况会导致wathc被丢失：节点是否存在的watch在客户端离线期间被创建、删除。</p>
+<h4 id="watch触发的事件与操作"><a href="#watch触发的事件与操作" class="headerlink" title="watch触发的事件与操作"></a>watch触发的事件与操作</h4><ol>
+<li>创建事件 <code>exists</code></li>
+<li>删除事件 <code>exists</code>、<code>getData</code>、<code>getChildren</code></li>
+<li>改变事件 <code>exists</code>、<code>getData</code></li>
+<li>子节点事件 <code>getChildren</code></li>
+</ol>
+<h3 id="ACL"><a href="#ACL" class="headerlink" title="ACL"></a>ACL</h3><p>ZooKeeper通过ACL控制节点的访问，ACL提供一组ids。ACL从属于特定的节点，并且没有递归性。例如，<code>/app</code>只能被ip:172.16.16.1读取，但<code>/app/status</code>可以被所有客户端读。<br>ZooKeeper支持可插拔的身份验证方案。Ids使用<code>scheme:id</code>的格式,<code>scheme</code>是验证方案。例如<code>ip:172.16.16.1</code>。ACL由成对的<code>scheme:expression, perms</code>组成，例如:<code>ip:19.22.0.0/16, READ</code>。</p>
+<h4 id="ACL权限"><a href="#ACL权限" class="headerlink" title="ACL权限"></a>ACL权限</h4><ul>
+<li>CREATE 创建子节点</li>
+<li>READ 可以获取节点数据，子节点列表</li>
+<li>WRITE 写入节点数据</li>
+<li>DELETE 删除子节点</li>
+<li>ADMIN 设置节点权限</li>
+</ul>
+<h4 id="ACL内置方案"><a href="#ACL内置方案" class="headerlink" title="ACL内置方案"></a>ACL内置方案</h4><ul>
+<li>world 所有人</li>
+<li>auth 已经通过人证的用户</li>
+<li>digest username:password</li>
+<li>ip 客户端ip，格式为<code>addr/bits</code></li>
+</ul>
+<h4 id="设置acl"><a href="#设置acl" class="headerlink" title="设置acl"></a>设置acl</h4><ol>
+<li>world<br>setAcl <path></path> world:anyone:<acl><br><code>setAcl /acl world:anyone:cdrwa</code></acl></li>
+<li><p>auth<br>addauth digest <user>:<password> #添加认证用户<br>setAcl <path></path> auth:<user>:<acl></acl></user></password></user></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">addauth digest root:123456</span><br><span class="line">setAcl /acl auth:root:cdrwa</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>digest<br>setAcl <path></path> digest:<user>:<password>:<acl><br>其中<code>pass</code>需要对<code>用户名:密码</code>进行SHA1、BASE64运算后得出，可以通过指令：<br><code>echo -n user:password | openssl dgst -binary -sha1 | openssl base64</code></acl></password></user></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">setAcl /acl digest:root:dqFD4/T6OaSbifsDlGaqTwLweYE=:cdrwa</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>ip<br>setAcl <path></path> ip:<ip>:<acl><br><code>setAcl /acl ip:192.168.1.1:cdrwa</code></acl></ip></p>
+</li>
+</ol>
+<h4 id="java客户端相关"><a href="#java客户端相关" class="headerlink" title="java客户端相关"></a>java客户端相关</h4><h5 id="创建带有ACL的节点"><a href="#创建带有ACL的节点" class="headerlink" title="创建带有ACL的节点"></a>创建带有ACL的节点</h5><p>ZooDefs.Ids中提供了几种ACL:<br><code>OPEN_ACL_UNSAFE</code> 对所有人开放<br><code>CREATOR_ALL_ACL</code> 节点创建者有全部权限<br><code>READ_ACL_UNSAFE</code> 所有人可读<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">zooKeeper.create(&quot;/acl&quot;, &quot;acl&quot;.getBytes(), ZooDefs.Ids.OPEN_ACL_UNSAFE, CreateMode.PERSISTENT);</span><br></pre></td></tr></table></figure></p>
+<p>自定义：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">List&lt;ACL&gt; acls = new ArrayList&lt;ACL&gt;();  // 权限列表</span><br><span class="line">// 第一个参数是权限scheme，第二个参数是加密后的用户名和密码</span><br><span class="line">Id root = new Id(&quot;digest&quot;, DigestAuthenticationProvider.generateDigest(&quot;root:123&quot;));</span><br><span class="line">Id user = new Id(&quot;digest&quot;, DigestAuthenticationProvider.generateDigest(&quot;user:456&quot;));</span><br><span class="line">// 所有权限</span><br><span class="line">acls.add(new ACL(ZooDefs.Perms.ALL, user1));  </span><br><span class="line">// 读权限</span><br><span class="line">acls.add(new ACL(ZooDefs.Perms.READ, user2));</span><br></pre></td></tr></table></figure></p>
+<p>权限验证：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">zooKeeper.addAuthInfo(&quot;digest&quot;, &quot;root:123&quot;.getBytes());</span><br></pre></td></tr></table></figure></p>
+<h3 id="一致性保证"><a href="#一致性保证" class="headerlink" title="一致性保证"></a>一致性保证</h3><p>ZooKeeper时一个高性能、可伸缩的服务。读写都非常快，但读比写快，因为读可以使用旧数据。其提供以下一致性保证：</p>
+<ol>
+<li>顺序一致性<br>客户端更新的顺序与发送的顺序一致</li>
+<li>原子性<br>更新不是成功就是失败，没有部分结果</li>
+<li>单一系统镜像<br>不论客户端连接到集群中的哪一个服务器，都能看到同样的视图</li>
+<li>可靠性<br>一旦更新被执行，其结果将会被持久化，直到有客户端重写了更新。这个保证有两个结论：<ul>
+<li>如果一个客户端收到成功更新的返回，说明更新已经被执行；</li>
+<li>Any updates that are seen by the client, through a read request or successful update, will never be rolled back when recovering from server failures.</li>
+</ul>
+</li>
+<li>及时性<br>客户端看到的系统视图在一定时间（大约几十秒）会更新。在这个时间边界内，客户端要么看到更新，要么失去连接。</li>
+</ol>
+<h3 id="指令"><a href="#指令" class="headerlink" title="指令"></a>指令</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">stat path [watch]</span><br><span class="line">set path data [version]</span><br><span class="line">ls path [watch]</span><br><span class="line">delquota [-n|-b] path</span><br><span class="line">ls2 path [watch]</span><br><span class="line">setAcl path acl</span><br><span class="line">setquota -n|-b val path</span><br><span class="line">history</span><br><span class="line">redo cmdno</span><br><span class="line">printwatches on|off</span><br><span class="line">delete path [version]</span><br><span class="line">sync path</span><br><span class="line">listquota path</span><br><span class="line">rmr path</span><br><span class="line">get path [watch]</span><br><span class="line">create [-s] [-e] path data acl</span><br><span class="line">addauth scheme auth</span><br><span class="line">quit</span><br><span class="line">getAcl path</span><br><span class="line">close</span><br><span class="line">connect host:port</span><br></pre></td></tr></table></figure>
+<h3 id="配置参数"><a href="#配置参数" class="headerlink" title="配置参数"></a>配置参数</h3><ul>
+<li><code>tickTime</code> zookeeper中的基础时间单元，单位为毫秒。</li>
+<li><code>dataDir</code> 存储内存数据快照的位置。除非另外指定，则数据更新的事物日志也存放在这里。</li>
+<li><code>clientPort</code> 客户端连接端口。</li>
+<li><code>initLimit</code> follower连接到leader初始化的超时时间，以为<code>tickTime</code>为单位。</li>
+<li><code>syncLimit</code> leader与follower之间请求、应答超时时间，以为<code>tickTime</code>为单位。</li>
+<li><code>server.A=B:C:D</code><ul>
+<li><code>A</code> 服务器编号，与<code>dataDir</code>下<code>myid</code>文件中的编号保持一致。</li>
+<li><code>B</code> ip</li>
+<li><code>C</code> 服务器之间通信端口</li>
+<li><code>D</code> Leader选举端口</li>
+</ul>
+</li>
+</ul>
+<h4 id="其他配置"><a href="#其他配置" class="headerlink" title="其他配置"></a>其他配置</h4><ul>
+<li><code>myid</code><br>集群模式下处理<code>zoo.cnf</code>还需要在<code>dataDir</code>下定义<code>myid</code>文件，在<code>myid</code>中会写入server编号。这样，server在启动时会搜索<code>myid</code>文件，从而确定自己属于哪个server。</li>
+</ul>
+<h3 id="zookeeper搭建"><a href="#zookeeper搭建" class="headerlink" title="zookeeper搭建"></a>zookeeper搭建</h3><p>zookeeper有三种模式</p>
+<ul>
+<li>单机模式 只运行一个实例</li>
+<li>伪集群模式 在一台设备上运行多个实例</li>
+<li>集群模式 运行于集群上，所有实例公用统一的配置文件。</li>
+</ul>
+<h4 id="伪集群"><a href="#伪集群" class="headerlink" title="伪集群"></a>伪集群</h4><p>伪集群即在一台服务器上模拟集群运行。<br>在一台服务器上部署3个zookeeper server。每台server需要设置不同的<code>dataDir</code>，<code>dataLogDir</code>、<code>clientPort</code>。</p>
+<h5 id="配置"><a href="#配置" class="headerlink" title="配置"></a>配置</h5><p>在zookeeper/conf下新建三个conf，分别为<code>zoo1.cnf</code>,<code>zoo2.cnf</code>,<code>zoo3.cnf</code>.<code>zoo1.cnf</code>如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">tickTime=2000</span><br><span class="line">initLimit=10</span><br><span class="line">syncLimit=5</span><br><span class="line">dataDir=/home/fei/dbFile/zookeeper/1</span><br><span class="line">dataLogDir=/home/fei/temp/logs/zookeeper/1</span><br><span class="line">clientPort=2187</span><br><span class="line"></span><br><span class="line">server.1=localhost:2287:3387</span><br><span class="line">server.2=localhost:2288:3388</span><br><span class="line">server.3=localhost:2289:3389</span><br></pre></td></tr></table></figure></p>
+<p>在conf1的data目录下创建<code>myid</code>文件，并写入自身编号，即<code>server.x</code>对应的<code>x</code>。<br>依次创建<code>zoo2.cnf</code>,<code>zoo3.cnf</code>，并修改相关配置。</p>
+<h5 id="启动"><a href="#启动" class="headerlink" title="启动"></a>启动</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">zkServer.sh start zoo1.cnf</span><br><span class="line">zkServer.sh start zoo2.cnf</span><br><span class="line">zkServer.sh start zoo3.cnf</span><br></pre></td></tr></table></figure>
+<h3 id="集群"><a href="#集群" class="headerlink" title="集群"></a>集群</h3><p>与伪集群类似，但可以使用相同的配置文件</p>
+<h3 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h3><h4 id="集群内服务器数量"><a href="#集群内服务器数量" class="headerlink" title="集群内服务器数量"></a>集群内服务器数量</h4><p>ZooKeeper通过复制来实现高可用性，只要集合体中半数以上的机器处于可用状态，它就能够提供服务。所以集群内最好使用&gt;=3的奇数台服务器。例如3台、4台server情况下，都最多允许1台server挂掉，可靠性一致。</p>
+<h4 id="集群角色"><a href="#集群角色" class="headerlink" title="集群角色"></a>集群角色</h4><p>zookeeper中集群分为<code>Leader</code>、<code>Follower</code>、<code>Observer</code>三种角色<br><img src="https://user-gold-cdn.xitu.io/2018/9/11/165c68aae5befdae?imageView2/0/w/1280/h/960/format/webp/ignore-error/1" alt=""><br>集群中所有的写操作都有Leader执行，Follower、Observer可以提供读操作。Follower参与Leader的选举过程，写操作的<code>写过半成功</code>过程，而Observer不参与。引入Observer是为了提供集群的读性能。</p>
+<h4 id="Zookeeper原理"><a href="#Zookeeper原理" class="headerlink" title="Zookeeper原理"></a>Zookeeper原理</h4><p>Zookeeper核心时原子广播机制，这个机制保证了各个server之间的同步。实现这个机制的协议叫做Zab协议，其核心内容为：<br>所有的事务请求必须由Leader来协调处理。Leader服务器负责将一个客户端请求转化为事务提议（Proposal），并将该proposal分发给集群所有的follower服务器。之后Leader服务器需要等待所有的follower服务器的反馈，一旦超过了半数的follower服务器进行了正确反馈后，那么Leader服务器就会再次向所有的follower服务器分发commit消息，要求其将前一个proposal进行提交。</p>
+<p>Zab协议有两种模式，它们分别是恢复模式和广播模式。</p>
+<ol>
+<li><p>恢复模式<br>当服务启动或者在领导者崩溃后，Zab就进入了恢复模式，当领导者被选举出来，且大多数server完成了和leader的状态同步以后，恢复模式就结束了。状态同步保证了leader和server具有相同的系统状态。</p>
+</li>
+<li><p>广播模式<br>一旦Leader已经和多数的Follower进行了状态同步后，他就可以开始广播消息了，即进入广播状态。这时候当一个Server加入ZooKeeper服务中，它会在恢复模式下启动，发现Leader，并和Leader进行状态同步。待到同步结束，它也参与消息广播。ZooKeeper服务一直维持在Broadcast状态，直到Leader崩溃了或者Leader失去了大部分的Followers支持。<br>Broadcast模式极其类似于分布式事务中的2pc（two-phrase commit 两阶段提交）：即Leader提起一个决议，由Followers进行投票，Leader对投票结果进行计算决定是否通过该决议，如果通过执行该决议（事务），否则什么也不做。<br>在广播模式ZooKeeper Server会接受Client请求，所有的写请求都被转发给领导者，再由领导者将更新广播给跟随者。当半数以上的跟随者已经将修改持久化之后，领导者才会提交这个更新，然后客户端才会收到一个更新成功的响应。这个用来达成共识的协议被设计成具有原子性，因此每个修改要么成功要么失败。</p>
+</li>
+</ol>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Zookeeper/" rel="tag"># Zookeeper</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/03/07/spring-注解/" rel="next" title="spring 注解">
+                <i class="fa fa-chevron-left"></i> spring 注解
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/03/19/Zookeeper原生java客户端/" rel="prev" title="Zookeeper原生java客户端">
+                Zookeeper原生java客户端 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        
+<script>
+  with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='//bdimg.share.baidu.com/static/api/js/share.js?cdnversion='+~(-new Date()/36e5)];
+</script>
+
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">sky</p>
+              <p class="site-description motion-element" itemprop="description">keep going</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">30</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">6</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">10</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#什么时zookeeper"><span class="nav-number">1.</span> <span class="nav-text">什么时zookeeper</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#数据模型"><span class="nav-number">2.</span> <span class="nav-text">数据模型</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Zookeeper中的时间"><span class="nav-number">2.1.</span> <span class="nav-text">Zookeeper中的时间</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#节点结构"><span class="nav-number">2.2.</span> <span class="nav-text">节点结构</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#节点类型"><span class="nav-number">2.3.</span> <span class="nav-text">节点类型</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Watches"><span class="nav-number">3.</span> <span class="nav-text">Watches</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#watch触发的事件与操作"><span class="nav-number">3.1.</span> <span class="nav-text">watch触发的事件与操作</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ACL"><span class="nav-number">4.</span> <span class="nav-text">ACL</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#ACL权限"><span class="nav-number">4.1.</span> <span class="nav-text">ACL权限</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#ACL内置方案"><span class="nav-number">4.2.</span> <span class="nav-text">ACL内置方案</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#设置acl"><span class="nav-number">4.3.</span> <span class="nav-text">设置acl</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#java客户端相关"><span class="nav-number">4.4.</span> <span class="nav-text">java客户端相关</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#创建带有ACL的节点"><span class="nav-number">4.4.1.</span> <span class="nav-text">创建带有ACL的节点</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#一致性保证"><span class="nav-number">5.</span> <span class="nav-text">一致性保证</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#指令"><span class="nav-number">6.</span> <span class="nav-text">指令</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#配置参数"><span class="nav-number">7.</span> <span class="nav-text">配置参数</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#其他配置"><span class="nav-number">7.1.</span> <span class="nav-text">其他配置</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#zookeeper搭建"><span class="nav-number">8.</span> <span class="nav-text">zookeeper搭建</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#伪集群"><span class="nav-number">8.1.</span> <span class="nav-text">伪集群</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#配置"><span class="nav-number">8.1.1.</span> <span class="nav-text">配置</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#启动"><span class="nav-number">8.1.2.</span> <span class="nav-text">启动</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#集群"><span class="nav-number">9.</span> <span class="nav-text">集群</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#其他"><span class="nav-number">10.</span> <span class="nav-text">其他</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#集群内服务器数量"><span class="nav-number">10.1.</span> <span class="nav-text">集群内服务器数量</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#集群角色"><span class="nav-number">10.2.</span> <span class="nav-text">集群角色</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Zookeeper原理"><span class="nav-number">10.3.</span> <span class="nav-text">Zookeeper原理</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2015 &mdash; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">sky</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Mist</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+    
+      <script id="dsq-count-scr" src="https://guangfei-win.disqus.com/count.js" async></script>
+    
+
+    
+      <script type="text/javascript">
+        var disqus_config = function () {
+          this.page.url = 'http://guangfei.win/2019/03/14/Zookeeper/';
+          this.page.identifier = '2019/03/14/Zookeeper/';
+          this.page.title = 'Zookeeper';
+        };
+        var d = document, s = d.createElement('script');
+        s.src = 'https://guangfei-win.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', '' + +new Date());
+        (d.head || d.body).appendChild(s);
+      </script>
+    
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.4.js"></script>
+  <script>AV.initialize("JhJQHbjn7uinA1k70nNSCqys-gzGzoHsz", "OdTTinqgVB1mkIAMgwB38zH2");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
